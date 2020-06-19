@@ -285,5 +285,8 @@ public class Making_Quiz extends JFrame{
 		APanel.add(btnAnswer_4);
 		
 		
+		this.setResizable(false);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
