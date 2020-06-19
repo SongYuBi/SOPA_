@@ -7,6 +7,6 @@ public class Run {
 	public static void main(String[] args) {
 //		²ó¸µ
 //		new Main_Frame(); 
+		//powerseunghun
 	}
-
 }
