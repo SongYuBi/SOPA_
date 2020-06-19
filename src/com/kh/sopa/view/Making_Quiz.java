@@ -26,21 +26,6 @@ public class Making_Quiz extends JFrame{
 	private JTextField tfPeoNum;
 	private JTextField tfCooNum;
 
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Making_Quiz frame = new Making_Quiz();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-
 	public Making_Quiz() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
