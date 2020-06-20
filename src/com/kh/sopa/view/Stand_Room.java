@@ -19,7 +19,7 @@ import com.kh.sopa.controller.Client_Contorller;
 public class Stand_Room extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-	private JTextArea jta = new JTextArea(25, 25);
+	private JTextArea jta = new JTextArea(14, 25);
 	private JTextField jtf = new JTextField(25);
 	private Client_Contorller client = new  Client_Contorller();
 	private String user_id;
@@ -31,6 +31,7 @@ public class Stand_Room extends JFrame implements ActionListener{
 	public Stand_Room(String user_id) {
 		this.user_id = user_id;
 		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		contentPane = new JPanel();
@@ -54,23 +55,27 @@ public class Stand_Room extends JFrame implements ActionListener{
 		JPanel panel_south_menu = new JPanel();			//¹Ø¿¡ ¸Þ´º ÆÐ³Î
 		
 		panel_south_menu.setBackground(Color.gray);
-		panel_south_menu.setBounds(0, 0, 800, 400);
+		panel_south_menu.setBounds(96, 261, 800, 400);
 		panel_south_menu.setLocation(100, 400);
-
-		JPanel panel_south_menu_chat = new JPanel();
+		panel_south_menu.setLayout(null);
 		
+		getContentPane().add(panel_stand_room);
+		panel_stand_room.add(panel_south_menu);
+		
+		
+		JPanel panel_south_menu_chat = new JPanel();
+		panel_south_menu_chat.setBounds(0, 0, 337, 340);
+		panel_south_menu.add(panel_south_menu_chat);
+		panel_south_menu_chat.setLayout(null);
+		jta.setBounds(14, 12, 304, 284);
+		panel_south_menu_chat.add(jta);
 		
 		jta.setEditable(false);
 		jta.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 14));
 		jta.setBackground(new Color(230, 255, 230));
+		jtf.setBounds(14, 293, 304, 24);
+		panel_south_menu_chat.add(jtf);
 		jtf.addActionListener(this);
-		
-		panel_south_menu.add(panel_south_menu_chat);
-		panel_south_menu_chat.add(jta, BorderLayout.CENTER);
-		panel_south_menu_chat.add(jtf, BorderLayout.SOUTH);
-		
-		this.add(panel_stand_room);
-		panel_stand_room.add(panel_south_menu);
 		
 		
 		this.setResizable(false);
