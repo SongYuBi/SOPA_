@@ -10,10 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class solvingQuiz extends JFrame {
+public class SolvingQuiz extends JFrame {
 	private JPanel contentPane;
 	
-	public solvingQuiz() {
+	public SolvingQuiz() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
@@ -110,7 +110,7 @@ public class solvingQuiz extends JFrame {
 
 	
 	public static void main(String[] args) {
-		new solvingQuiz();	
+		new SolvingQuiz();	
 	}
 	}
 	
