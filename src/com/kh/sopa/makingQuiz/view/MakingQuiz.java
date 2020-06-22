@@ -39,6 +39,7 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 	private JPanel answer_2;
 	private JPanel answer_3;
 	private JPanel answer_4;
+
 	
 	private JTextField title;
 	private JTextField cookie;
@@ -47,10 +48,17 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 	private JTextField ansText_3;
 	private JTextField ansText_4;
 	
-	private ToggleSwitch ansSwitch_1;
-	private ToggleSwitch ansSwitch_2;
-	private ToggleSwitch ansSwitch_3;
-	private ToggleSwitch ansSwitch_4;
+	private JRadioButton ansRadio_1;
+	private JRadioButton ansRadio_2;
+	private JRadioButton ansRadio_3;
+	private JRadioButton ansRadio_4;
+	private JRadioButton ansRadio_5; //ansRadio_5는 선택 해제용
+	
+//	2차 스위치
+//	private ToggleSwitch ansSwitch_1;
+//	private ToggleSwitch ansSwitch_2;
+//	private ToggleSwitch ansSwitch_3;
+//	private ToggleSwitch ansSwitch_4;
 	
 	private JTextField titleSet;
 	private JTextField categorySet;
@@ -68,9 +76,12 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 	private JButton button_4;
 	
 	//난이도를 라디오버튼 클릭시 값 저장
+	private String finalAnswer = null;
 	private int levelResult = 0;
-	ArrayList<String> aResult = new ArrayList<>();
+//	ArrayList<String> aResult = new ArrayList<>();
 //	private String [] answerResult = new String [4];
+	
+	
 	
 
 	public MakingQuiz() {
@@ -240,7 +251,7 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		//라디오 버튼 선택 해제용
 		level_4 = new JRadioButton();
 
-//		그룹화 라디오 버튼
+//		난이도, 그룹화 라디오 버튼
 		ButtonGroup levelGroup = new ButtonGroup();
 		levelGroup.add(level_1);
 		levelGroup.add(level_2);
@@ -268,11 +279,15 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		ansText_1.setColumns(10);
 		ansText_1.setBounds(73, 38, 400, 50);
 		
-//		스위치, 1번 답의 정답 여부를 체크합니다
-		ansSwitch_1 = new ToggleSwitch();
-		ansSwitch_1.setBounds(432, 7, 41, 21);
-
-
+////	2차	스위치, 1번 답의 정답 여부를 체크합니다
+//		ansSwitch_1 = new ToggleSwitch();
+//		ansSwitch_1.setBounds(432, 7, 41, 21);
+		
+		ansRadio_1 = new JRadioButton("정답");
+		ansRadio_1.setFont(new Font("굴림", Font.PLAIN, 17));
+		ansRadio_1.setBounds(412, 5, 60, 30);
+//		ansRadio_1.setBackground(Color.RED);
+		ansRadio_1.addItemListener(this);
 
 		
 //		2번 패널 입니다
@@ -286,10 +301,15 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		ansText_2.setColumns(10);
 		ansText_2.setBounds(73, 38, 400, 50);
 		
-//		스위치, 2번 답의 정답 여부를 체크합니다
-		ansSwitch_2 = new ToggleSwitch();
-		ansSwitch_2.setBounds(432, 7, 41, 21);
-
+////	2차	스위치, 2번 답의 정답 여부를 체크합니다
+//		ansSwitch_2 = new ToggleSwitch();
+//		ansSwitch_2.setBounds(432, 7, 41, 21);
+		
+		ansRadio_2 = new JRadioButton("정답");
+		ansRadio_2.setFont(new Font("굴림", Font.PLAIN, 17));
+		ansRadio_2.setBounds(412, 5, 60, 30);
+//		ansRadio_2.setBackground(Color.ORANGE);
+		ansRadio_2.addItemListener(this);
 
 			
 //		3번 패널 입니다
@@ -303,10 +323,15 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		ansText_3.setColumns(10);
 		ansText_3.setBounds(73, 38, 400, 50);
 		
-//		스위치, 3번 답의 정답 여부를 체크합니다
-		ansSwitch_3 = new ToggleSwitch();
-		ansSwitch_3.setBounds(432, 7, 41, 21);
+////	2차	스위치, 3번 답의 정답 여부를 체크합니다
+//		ansSwitch_3 = new ToggleSwitch();
+//		ansSwitch_3.setBounds(432, 7, 41, 21);
 		
+		ansRadio_3 = new JRadioButton("정답");
+		ansRadio_3.setFont(new Font("굴림", Font.PLAIN, 17));
+		ansRadio_3.setBounds(412, 5, 60, 30);
+//		ansRadio_3.setBackground(Color.CYAN);
+		ansRadio_3.addItemListener(this);
 		
 //		4번 패널 입니다
 		answer_4 = new JPanel();
@@ -319,9 +344,30 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		ansText_4.setColumns(10);
 		ansText_4.setBounds(73, 38, 400, 50);
 		
-//		스위치, 4번 답의 정답 여부를 체크합니다
-		ansSwitch_4 = new ToggleSwitch();
-		ansSwitch_4.setBounds(432, 7, 41, 21);
+////	2차	스위치, 4번 답의 정답 여부를 체크합니다
+//		ansSwitch_4 = new ToggleSwitch();
+//		ansSwitch_4.setBounds(432, 7, 41, 21);
+		
+		ansRadio_4 = new JRadioButton("정답");
+		ansRadio_4.setFont(new Font("굴림", Font.PLAIN, 17));
+		ansRadio_4.setBounds(412, 5, 60, 30);
+//		ansRadio_4.setBackground(Color.GREEN);
+		ansRadio_4.addItemListener(this);
+		
+		//라디오 버튼 선택 해제용
+		ansRadio_5 = new JRadioButton();
+
+		
+		
+//		정답, 그룹화 라디오 버튼
+		ButtonGroup ansGroup = new ButtonGroup();
+		ansGroup.add(ansRadio_1);
+		ansGroup.add(ansRadio_2);
+		ansGroup.add(ansRadio_3);
+		ansGroup.add(ansRadio_4);
+		ansGroup.add(ansRadio_5);
+		this.add(ansRadio_5);
+		
 
 	
 //		이미지추가 패널
@@ -371,26 +417,31 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 
 
 //		답 패널에 올라가는 패널과 텍스트 필드 입니다
+//		스위치 2차 구현
 		answerPanel.add(answer_1);
 				answer_1.add(ansText_1);
-				answer_1.add(ansSwitch_1);
+//				answer_1.add(ansSwitch_1);
+				answer_1.add(ansRadio_1);
 		answerPanel.add(answer_2);
 				answer_2.add(ansText_2);
-				answer_2.add(ansSwitch_2);
+//				answer_2.add(ansSwitch_2);
+				answer_2.add(ansRadio_2);
 		answerPanel.add(answer_3);
 				answer_3.add(ansText_3);
-				answer_3.add(ansSwitch_3);
+//				answer_3.add(ansSwitch_3);
+				answer_3.add(ansRadio_3);
 		answerPanel.add(answer_4);
 				answer_4.add(ansText_4);
-				answer_4.add(ansSwitch_4);
+//				answer_4.add(ansSwitch_4);
+				answer_4.add(ansRadio_4);
 		
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
-	
-	//선택한 라디오 버튼에 따라 변수에 값 저장
+
+	//난이도, 선택한 라디오 버튼에 따라 변수에 값 저장
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getSource()==level_1) {
@@ -399,13 +450,27 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 			levelResult = 20;
 		} else if(e.getSource()==level_3) {
 			levelResult = 30;
-		}	
+		}
+		
+	//정답, 선택한 라디오 버튼에 따라 변수에 값 저장
+		if(e.getSource()==ansRadio_1) {
+			finalAnswer = ansText_1.getText();
+		} else if(e.getSource()==ansRadio_2) {
+			finalAnswer = ansText_2.getText();
+		} else if(e.getSource()==ansRadio_3) {
+			finalAnswer = ansText_3.getText();
+		} else if(e.getSource()==ansRadio_4) {
+			finalAnswer = ansText_4.getText();
+		}
+
 	}	
 	
 	
 	//리스트에 추가해요 버튼을 누르면 Quiz_added_VO에 setter값으로 저장
 	@Override	
 	public void actionPerformed(ActionEvent a) {
+		
+			
 		if(a.getSource()==button_3) {
 			
 		qav.setAdded_title(title.getText());
@@ -415,31 +480,31 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		qav.setAdded_answer_2(ansText_2.getText());
 		qav.setAdded_answer_3(ansText_3.getText());
 		qav.setAdded_answer_4(ansText_4.getText());
-		
+		qav.setAdded_final_answer(finalAnswer);
 		qav.setAdded_subject(null);
 		qav.setAdded_image(null);
 		qav.setAdded_people(0);
 		
-
-			if(ansSwitch_1.isActivated()) {
-				aResult.add("ans1");
-			}
-			
-			if(ansSwitch_2.isActivated()) {
-				aResult.add("ans2");
-			}
-			
-			if(ansSwitch_3.isActivated()) {
-				aResult.add("ans3");
-			}
-			
-			if(ansSwitch_4.isActivated()) {
-				aResult.add("ans4");
-			}
-
-			String listString = String.join(", ", aResult);
-			
-			qav.setAdded_final_answer(listString);
+//			2차 스위치
+//			if(ansSwitch_1.isActivated()) {
+//				aResult.add("ans1");
+//			}
+//			
+//			if(ansSwitch_2.isActivated()) {
+//				aResult.add("ans2");
+//			}
+//			
+//			if(ansSwitch_3.isActivated()) {
+//				aResult.add("ans3");
+//			}
+//			
+//			if(ansSwitch_4.isActivated()) {
+//				aResult.add("ans4");
+//			}
+//
+//			String listString = String.join(", ", aResult);
+//			
+//			qav.setAdded_final_answer(listString);
 
 		}
 		
@@ -451,24 +516,18 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		title.setText(null);
 		cookie.setText(null);
 		level_4.setSelected(true);
+		ansRadio_5.setSelected(true);
 		ansText_1.setText(null);
 		ansText_2.setText(null);
 		ansText_3.setText(null);
 		ansText_4.setText(null);
-		aResult.clear();
+//		aResult.clear();
 
 		
 		//읽어오는 테스트 코드
 		mqm.selectAllQuiz();
 
 	}
-	
-
-//출력 테스트
-public static void main(String[]args) {
-	new MakingQuiz();
-}
-	
 }
 
 

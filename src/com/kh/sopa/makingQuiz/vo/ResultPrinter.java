@@ -13,8 +13,7 @@ public class ResultPrinter {
 				System.out.println(list.get(i));
 			}
 		}else {
-			System.out.println("게시물이 없어요.");
+			System.out.println("문제가 없어요");
 		}
 	}
-
 }
