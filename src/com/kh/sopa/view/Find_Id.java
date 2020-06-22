@@ -14,7 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class Find_Id extends JFrame{
-	private JPanel contentPane;
+	private JPanel contentPane, find_id;
+	private JLabel sopa, text;
+	private JTextField phone;
+	private JButton back, check;
 	private Login_Panel lp;
 	
 	// 아이디 찾기
@@ -30,27 +33,36 @@ public class Find_Id extends JFrame{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		//좌표 다시해야함. 동일한 곳에서 시작함
+		//아이디 찾기 패널
+		find_id = new JPanel();
+		find_id.setBounds(0, 0, 1024, 768);
+		find_id.setBackground(new Color(252, 228, 167)); 
+		find_id.setLayout(null);
+		super.add(find_id);
 
 		//sopa 라벨
-		JLabel sopa = new JLabel("S.O.P.A");
+		sopa = new JLabel("S.O.P.A");
 		sopa.setBounds(390, 250, 124, 78);
 		sopa.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_id.add(sopa);
 		
 		//아이디를 찾고 싶어요 라벨
-		JLabel text = new JLabel("아이디를 찾고 싶어요");
+		text = new JLabel("아이디를 찾고 싶어요");
 		text.setBounds(390, 400, 124, 78);
 		text.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_id.add(text);
 		
 		//전화번호 입력창
-		JTextField phone = new JTextField(20);
+		phone = new JTextField(20);
 		phone.setBounds(390, 480, 124, 78);
 		phone.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_id.add(phone);
 		
 		//뒤로가요 버튼
-		JButton back = new JButton("뒤로가요");
+		back = new JButton("뒤로가요");
 		back.setBounds(390, 550, 124, 78);
 		back.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_id.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			
 			// 1.클릭 -> 로그인화면
@@ -58,16 +70,17 @@ public class Find_Id extends JFrame{
 			public void mouseClicked(MouseEvent arg0) {
 				
 				lp = new Login_Panel();
-				
+				dispose();
 				super.mouseClicked(arg0);
 			}
 		});
 		
 		
 		//확인 버튼
-		JButton check = new JButton("확인");
+		check = new JButton("확인");
 		check.setBounds(600, 550, 124, 78);
 		check.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_id.add(check);
 		check.addMouseListener(new MouseAdapter() {
 			
 			
@@ -80,30 +93,11 @@ public class Find_Id extends JFrame{
 
 
 				lp = new Login_Panel();
+				dispose();
 				super.mouseClicked(arg0);
 			}
 		});
 
-		
-		
-		//아이디 찾기 패널
-		JPanel find_id = new JPanel();
-		find_id.setBounds(0, 0, 1024, 768);
-		find_id.setBackground(new Color(252, 228, 167)); 
-		find_id.setLayout(null);
-		
-		
-		
-		//합치기
-		super.add(find_id);
-		find_id.add(sopa);
-		find_id.add(text);
-		find_id.add(phone);
-		find_id.add(back);
-		find_id.add(check);
-		
-		
-		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);

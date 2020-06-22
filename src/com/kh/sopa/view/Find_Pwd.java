@@ -14,7 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class Find_Pwd extends JFrame{
-	private JPanel contentPane;
+	private JPanel contentPane, find_pwd;
+	private JLabel sopa, text;
+	private JTextField user_id, user_phone;
+	private JButton back, check;
 	private Login_Panel lp;
 	
 	public Find_Pwd() {
@@ -28,34 +31,46 @@ public class Find_Pwd extends JFrame{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
+		//비밀번호 찾기 패널
+		find_pwd = new JPanel();
+		find_pwd.setBounds(0, 0, 1024, 768);
+		find_pwd.setBackground(new Color(252, 228, 167));  
+		find_pwd.setLayout(null);
+		super.add(find_pwd);
+		
 		//sopa 라벨
-		JLabel sopa = new JLabel("S.O.P.A");
+		sopa = new JLabel("S.O.P.A");
 		sopa.setBounds(390, 250, 124, 78);
 		sopa.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_pwd.add(sopa);
 		
 		
 		//비밀번호를 바꾸고 싶어요 라벨
-		JLabel text = new JLabel("비밀번호를 바꾸고 싶어요");
+		text = new JLabel("비밀번호를 바꾸고 싶어요");
 		text.setBounds(390, 300, 124, 78);
 		sopa.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_pwd.add(text);
 		
 		
 		//아이디 입력창
-		JTextField user_id = new JTextField(10);
+		user_id = new JTextField(10);
 		user_id.setBounds(390, 420, 124, 78);
 		user_id.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_pwd.add(user_id);
 		
 		
 		//전화번호 입력창
-		JTextField user_phone = new JTextField(10);
+		user_phone = new JTextField(10);
 		user_phone.setBounds(390, 460, 124, 78);
+		find_pwd.add(user_phone);
 		user_phone.setFont(new Font("바탕", Font.ITALIC, 10));
 		
 		
 		//뒤로가요 버튼
-		JButton back = new JButton("뒤로가기");
+		back = new JButton("뒤로가기");
 		back.setBounds(390, 500, 124, 78);
 		sopa.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_pwd.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			
 			// 1.클릭 -> 로그인 화면
@@ -70,9 +85,10 @@ public class Find_Pwd extends JFrame{
 		
 		
 		//확인 버튼
-		JButton check = new JButton("확인");
+		check = new JButton("확인");
 		check.setBounds(600, 500, 124, 78);
 		check.setFont(new Font("바탕", Font.ITALIC, 10));
+		find_pwd.add(check);
 		check.addMouseListener(new MouseAdapter() {
 			
 			
@@ -93,25 +109,7 @@ public class Find_Pwd extends JFrame{
 			}
 		});
 
-		
-		//비밀번호 찾기 패널
-		JPanel find_pwd = new JPanel();
-		find_pwd.setBounds(0, 0, 1024, 768);
-		find_pwd.setBackground(new Color(252, 228, 167));  
-		find_pwd.setLayout(null);
-		
-		
-		//합치기
-		super.add(find_pwd);
-		find_pwd.add(sopa);
-		find_pwd.add(text);
-		find_pwd.add(user_id);
-		find_pwd.add(user_phone);
-		find_pwd.add(back);
-		find_pwd.add(check);
-		
-		
-		
+	
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
