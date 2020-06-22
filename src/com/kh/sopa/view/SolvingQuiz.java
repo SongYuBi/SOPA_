@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.kh.sopa.model.DAO.SolvingQuizDao;
-import com.kh.sopa.model.vo.Solving_Quiz_VO;
+import com.kh.sopa.model.vo.Quiz_VO;
 
 public class SolvingQuiz extends JFrame {
 	
@@ -179,7 +179,7 @@ public class SolvingQuiz extends JFrame {
 		
 		//문제 배열
 		SolvingQuizDao qd = new SolvingQuizDao();
-		ArrayList<Solving_Quiz_VO> quizList2 = qd.readQuizList();
+		ArrayList<Quiz_VO> quizList2 = qd.readQuizList();
 
 		// split[0] = 문제
 		// split[1] = 1번 보기
@@ -188,12 +188,12 @@ public class SolvingQuiz extends JFrame {
 		// split[4] = 4번 보기
 		// split[5] = 정답
 
-		String str1 = quizList2.get(i).toString();
-		String[] split = str1.split(", ", 6);
-		btn_quiz_answer_1.setText(split[1]);
-		btn_quiz_answer_2.setText(split[2]);
-		btn_quiz_answer_3.setText(split[3]);
-		btn_quiz_answer_4.setText(split[4]);
+
+		btn_quiz_answer_1.setText(quizList2.get(i).getQuiz_answer_1());
+		btn_quiz_answer_2.setText(quizList2.get(i).getQuiz_answer_2());
+		btn_quiz_answer_3.setText(quizList2.get(i).getQuiz_answer_3());
+		btn_quiz_answer_4.setText(quizList2.get(i).getQuiz_answer_4());
+
 
 		// 문제출제 라벨에도 문제 넣어주기
 		quizLabel.setText(split[0]);
@@ -206,7 +206,7 @@ public class SolvingQuiz extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (btn_quiz_answer_1.getText().equals(split[5])) {
+				if (btn_quiz_answer_1.getText().equals(quizList2.get(1).getQuiz_final_answer())) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -224,7 +224,7 @@ public class SolvingQuiz extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (btn_quiz_answer_2.getText().equals(split[5])) {
+				if (btn_quiz_answer_2.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -243,7 +243,7 @@ public class SolvingQuiz extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (btn_quiz_answer_3.getText().equals(split[5])) {
+				if (btn_quiz_answer_3.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -262,7 +262,7 @@ public class SolvingQuiz extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (btn_quiz_answer_4.getText().equals(split[5])) {
+				if (btn_quiz_answer_4.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -274,6 +274,25 @@ public class SolvingQuiz extends JFrame {
 			}
 		});
 
+		/*		//타이머
+		while(true) {
+			timeLabel.setText("" + count.S + "초 남았습니다");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			count.S--;
+			if(count.S == 0) {
+				count.S = 10;
+				
+				
+				
+			}
+			
+		}
+	*/
 	}
 	
 	public static void main(String[] args) {

@@ -17,14 +17,14 @@ public class SolvingQuizDao {
 	
 	
 	//문제, 정답 파일 읽어오기 클래스
-	public ArrayList<Solving_Quiz_VO> readQuizList() {
+	public ArrayList<Quiz_VO> readQuizList() {
 
 		InputStream in = null;
 		BufferedInputStream bin = null;
 		ObjectInputStream ois = null;
 		
 		//읽어온 파일을 다시 담을 배열 생성
-		ArrayList<Solving_Quiz_VO> quizList2 = null;
+		ArrayList<Quiz_VO> quizList2 = null;
 		
 		try {
 
@@ -32,10 +32,10 @@ public class SolvingQuizDao {
 			bin = new BufferedInputStream(in);
 			ois = new ObjectInputStream(bin);
 
-			quizList2 = (ArrayList<Solving_Quiz_VO>) ois.readObject();
+			quizList2 = (ArrayList<Quiz_VO>) ois.readObject();
 
 			//파일의 내용이 배열에 잘 저장됐는지 확인용 for문
-			for (Solving_Quiz_VO obj : quizList2) {
+			for (Quiz_VO obj : quizList2) {
 				System.out.println(obj);
 			}
 
@@ -57,13 +57,15 @@ public class SolvingQuizDao {
 	public void fileSave() {
 
 		//문제와 정답을 입력할  ArrayList<Quiz> 생성
-		ArrayList<Solving_Quiz_VO> quizList = new ArrayList<Solving_Quiz_VO>();
+		ArrayList<Quiz_VO> quizList = new ArrayList<Quiz_VO>();
 
-		quizList.add(new Solving_Quiz_VO("H2O란?", "주스", "물", "커피", "콜라", "물"));
-		quizList.add(new Solving_Quiz_VO("객체지향 프로그램이 아닌 것은?", "자바", "파이썬", "c#", "c언어", "c언어"));
-		quizList.add(new Solving_Quiz_VO("다음 중 과일은?", "사과", "당근", "스마트폰", "감자", "사과"));
+		quizList.add(new Quiz_VO("H2O란?", "주스", "물", "커피", "콜라", "물"));
+		quizList.add(new Quiz_VO("객체지향 프로그램이 아닌 것은?", "자바", "파이썬", "c#", "c언어", "c언어"));
+		quizList.add(new Quiz_VO("다음 중 과일은?", "사과", "당근", "스마트폰", "감자", "사과"));
 
-
+		System.out.println(quizList);
+		
+		
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 
@@ -82,8 +84,8 @@ public class SolvingQuizDao {
 	
 	public static void main(String[] args) {
 		SolvingQuizDao qd = new SolvingQuizDao();
-		qd.readQuizList();
 		qd.fileSave();
+		qd.readQuizList();
  
 	}
 	
