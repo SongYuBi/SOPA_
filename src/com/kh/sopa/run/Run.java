@@ -1,7 +1,16 @@
+
 package com.kh.sopa.run;
 
+public class Run {
 
-import com.kh.sopa.view.ResultPage;
+	public static void main(String[] args) {
+
+	}
+
+}
+
+package com.kh.sopa.run;
+
 
 public class Run {
 
@@ -10,3 +19,4 @@ public class Run {
     
 	}
 }
+

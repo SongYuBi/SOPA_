@@ -3,6 +3,7 @@ package com.kh.sopa.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,8 +14,9 @@ import javax.swing.border.EmptyBorder;
 public class Main_Frame extends JFrame {
 
 	public Main_Frame() {
-		 new Stand_Room();
 		
+	
+		new Stand_Room("user_id");
 	}
 
 }
