@@ -1,18 +1,18 @@
 package com.kh.sopa.model.vo;
 
-public class Quiz_added_VO {
+public class Quiz_added_VO implements java.io.Serializable {
 
-	private String added_title;			//¹®Á¦ Á¦¸ñ
-	private String added_subject;		//¹®Á¦ ÁÖÁ¦
-	private String added_answer_1;		//´ä 1¹ø
-	private String added_answer_2;		//´ä 2¹ø
-	private String added_answer_3;		//´ä 3¹ø
-	private String added_answer_4;		//´ä 4¹ø
-	private String added_final_answer;	//¹®Á¦¿¡¼­ÀÇ Á¤´ä 
-	private int added_difficulty;		//³­ÀÌµµ (10ÃÊ 20ÃÊ 30ÃÊ ´ÜÀ§·Î µé¾î°¡´Ï±î ÀÏ´Ü Á¤¼öÇüÀ¸·Î ³Ö¾ú½À´Ï´Ù.)
-	private int added_cookie;			//°ÔÀÓ ³»¿¡¼­ÀÇ ÀçÈ­
-	private String added_image;			//ÀÌ¹ÌÁö °æ·Î
-	private int added_people;			//ÀÎ¿ø ¼ö
+	private String added_title;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String added_subject;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String added_answer_1;		//ï¿½ï¿½ 1ï¿½ï¿½
+	private String added_answer_2;		//ï¿½ï¿½ 2ï¿½ï¿½
+	private String added_answer_3;		//ï¿½ï¿½ 3ï¿½ï¿½
+	private String added_answer_4;		//ï¿½ï¿½ 4ï¿½ï¿½
+	private String added_final_answer;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+	private int added_difficulty;		//ï¿½ï¿½ï¿½Ìµï¿½ (10ï¿½ï¿½ 20ï¿½ï¿½ 30ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½Ï±ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.)
+	private int added_cookie;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­
+	private String added_image;			//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	private int added_people;			//ï¿½Î¿ï¿½ ï¿½ï¿½
  
 	
 	public Quiz_added_VO() {

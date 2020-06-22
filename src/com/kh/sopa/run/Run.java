@@ -1,13 +1,12 @@
 package com.kh.sopa.run;
 
 
-import com.kh.sopa.view.Main_Frame;
+import com.kh.sopa.view.ResultPage;
 
 public class Run {
 
 	public static void main(String[] args) {
 
-		new Main_Frame(); 
-		//powerseunghun
+    
 	}
 }
