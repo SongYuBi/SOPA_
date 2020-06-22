@@ -154,7 +154,7 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 
 		
 		
-//		문제 패널의 주제 패널, 주제를 입력합니다
+//		문제 패널의 주제 패널, 주제관련 패널입니다
 		JPanel categoryPanel = new JPanel();
 		categoryPanel.setBounds(498, 90, 153, 78);
 		categoryPanel.setLayout(null);
@@ -415,11 +415,6 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		qav.setAdded_answer_2(ansText_2.getText());
 		qav.setAdded_answer_3(ansText_3.getText());
 		qav.setAdded_answer_4(ansText_4.getText());
-		
-		qav.setAdded_subject(null);
-		qav.setAdded_image(null);
-		qav.setAdded_people(0);
-		
 
 			if(ansSwitch_1.isActivated()) {
 				aResult.add("ans1");
@@ -439,8 +434,12 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 
 			String listString = String.join(", ", aResult);
 			
-			qav.setAdded_final_answer(listString);
+		qav.setAdded_final_answer(listString);
 
+		qav.setAdded_subject(categorySet.getText());
+		qav.setAdded_image("");
+		qav.setAdded_people(Integer.parseInt(peopleSet.getText()));
+		
 		}
 		
 		//위에서 setter 삽입 후 출력 클래스로 넘김
@@ -462,13 +461,7 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		mqm.selectAllQuiz();
 
 	}
-	
 
-//출력 테스트
-public static void main(String[]args) {
-	new MakingQuiz();
-}
-	
 }
 
 

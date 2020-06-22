@@ -20,13 +20,10 @@ public class Quiz_added_DAO {
 		ObjectInputStream ois = null;
 		ArrayList<Quiz_added_VO> list = null;
 	
-		
 		try {
 			ois = new ObjectInputStream(new FileInputStream("Quiz.dat"));
 			
 			list = (ArrayList<Quiz_added_VO>)ois.readObject();
-			
-			
 			
 		}catch(FileNotFoundException e){
 			System.out.println("파일이 없습니다.");

@@ -1,4 +1,11 @@
 package com.kh.sopa.view;
+//삭제예정
+//삭제예정
+//삭제예정
+//삭제예정
+//삭제예정
+//삭제예정
+//삭제예정
 
 import java.awt.BorderLayout;
 import java.awt.Color;

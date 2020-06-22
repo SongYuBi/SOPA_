@@ -17,18 +17,13 @@ public class MakingQuizManager {
 		if(list == null) {
 			list = new ArrayList<Quiz_added_VO>();
 		}else {
-			list.get(list.size());
+			list.add();
 		}
-		
-		int result = qad.writeQuiz(list);
+		qad.writeQuiz(list);
 	}
 
-	
 //	텍스트 파일에서 읽어오는 테스트 코드
 	public void selectAllQuiz() {
-		rp.printAllQuiz(qad.readQuizList());
-		
-		
+		rp.printAllQuiz(qad.readQuizList());	
 	}
-
 }
