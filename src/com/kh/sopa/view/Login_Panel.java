@@ -1,109 +1,139 @@
 package com.kh.sopa.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
-public class Login_Panel extends JFrame{
-	private JPanel contentPane, login;
+import com.kh.sopa.controller.ObjectIO;
+import com.kh.sopa.model.vo.User_VO;
+import com.kh.sopa.test.StandRoomPanelTest;
+import com.kh.sopa.test.TestMainFrame;
+
+public class Login_Panel extends JPanel{
+	private JPanel contentPane;
 	private JLabel sopa, id_label, pw_label;
-	private JTextField login_id, login_pw;
+	private JTextField login_id;
+	private JPasswordField login_pw;
 	private JButton login_quiz, sign_up, find_id, find_pw;
+	JFrame mainFrame;
+	JPanel thisPage;
+	public Login_Panel() {}
 	
-	public Login_Panel() {
+	public Login_Panel(JFrame mf) {
+		System.out.println("Log");
+		this.mainFrame = mf;
+//		mainFrame.setVisible(true);
+		this.thisPage = this;
 		
+		//ë¡œê·¸ì¸ í˜ì´ì§€ íŒ¨ë„
+		this.setBounds(0, 0, 1024, 768);
+		this.setBackground(new Color(252, 228, 167));  
+		this.setLayout(null);
 		
-		super();
-		JPanel contentPane;
-		setTitle("·Î±×ÀÎ È­¸é");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1024, 768);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		
-		//·Î±×ÀÎ ÆäÀÌÁö ÆĞ³Î
-		login = new JPanel();
-		login.setBounds(0, 0, 1024, 768);
-		login.setBackground(new Color(252, 228, 167));  
-		login.setLayout(null);
-		super.add(login);
-		
-		//·Î±×ÀÎ Ã¢ sopa ¶óº§
+		//ë¡œê·¸ì¸ ì°½ sopa ë¼ë²¨
 		sopa = new JLabel("S.O.P.A");
 		sopa.setBounds(430, 100, 300, 200);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 50));
-		login.add(sopa);
+		sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 50));
+		this.add(sopa);
 		
-		//·Î±×ÀÎ Ã¢ ¾ÆÀÌµğ ÀÔ·Â ¶óº§
-		id_label = new JLabel("¾ÆÀÌµğ ÀÔ·Â");
+		// ë¡œê·¸ì¸ ì°½ ì•„ì´ë”” ì…ë ¥ ë¼ë²¨
+		id_label = new JLabel("ì•„ì´ë”” ì…ë ¥");
 		id_label.setBounds(280, 350, 100, 50);
-		id_label.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
-		login.add(id_label);
+		id_label.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
+		this.add(id_label);
 		
-		//·Î±×ÀÎ Ã¢ ¾ÆÀÌµğ ÀÔ·Â ÆĞ³Î
+		//ë¡œê·¸ì¸ ì°½ ì•„ì´ë”” ì…ë ¥ íŒ¨ë„
 		login_id = new JTextField(20);
 		login_id.setBounds(380, 350, 200, 40);
-		login_id.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
-		login.add(login_id);
+		login_id.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
+		this.add(login_id);
 		
 		
-		//·Î±×ÀÎ Ã¢ ºñ¹Ğ¹øÈ£ ÀÔ·Â ¶óº§
-		pw_label = new JLabel("ºñ¹Ğ¹øÈ£ ÀÔ·Â");
+		//ë¡œê·¸ì¸ ì°½ ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ ë¼ë²¨
+		pw_label = new JLabel("ë¹„ë°€ë²ˆí˜¸ ì…ë ¥");
 		pw_label.setBounds(280, 400, 100, 50);
-		pw_label.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
-		login.add(pw_label);
+		pw_label.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
+		this.add(pw_label);
 		
 		
-		//·Î±×ÀÎ Ã¢ ºñ¹Ğ¹øÈ£ ÀÔ·Â ÆĞ³Î
-		login_pw = new JTextField(20);
+		//ë¡œê·¸ì¸ ì°½ ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ íŒ¨ë„
+		login_pw = new JPasswordField(20);
 		login_pw.setBounds(380, 400, 200, 40);
-		login_pw.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
-		login.add(login_pw);
+		login_pw.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
+		this.add(login_pw);
 		
 	
 		
-		//·Î±×ÀÎ Ã¢ ·Î±×ÀÎ ¹öÆ°
-		login_quiz = new JButton("·Î±×ÀÎ");
+		//ë¡œê·¸ì¸ ì°½ ë¡œê·¸ì¸ ë²„íŠ¼
+		login_quiz = new JButton("ë¡œê·¸ì¸");
 		login_quiz.setBounds(640, 340, 80, 120);
-		login.add(login_quiz);
+		this.add(login_quiz);
 		login_quiz.addMouseListener(new MouseAdapter() {
 			
-			// 1.Å¬¸¯ -> ´ë±â½Ç
-			// 2.Å¬¸¯ -> ¾ÆÀÌµğ, ºñ¹ø Ã¼Å© -> °´Ã¼ ¼ÒÈ¯?
+			// 1.í´ë¦­ -> ëŒ€ê¸°
+			// 2.í´ë¦­ -> ì•„ì´ë””, ë¹„ë²ˆ ì²´í¬ -> ê°ì²´ ì†Œí™˜?
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("ë¡œê·¸ì¸ ë²„íŠ¼ í´ë¦­");
 				
-				dispose();
-
+				// ì•„ì´ë”” ê²€ì¦ ì¶”ê°€í•´ì•¼í•¨. ì•„ì´ë””ëŠ” íŒŒì¼ì—ì„œ ì°¾ì•„ì„œ.
+				
+				ArrayList<User_VO> userList = new ObjectIO().UserReadToFile();
+//				System.out.println(login_id.getText());
+				
+				String loginUser = login_id.getText();
+				String userPw = login_pw.getText();
+				
+				boolean checkUser = false;
+				for (int i = 0; i < userList.size(); i++) {
+					if (loginUser.equals(userList.get(i).getUser_id())) {
+						// ë¹„ë°€ë²ˆí˜¸ ì²´í¬ ì¶”ê°€í•´ì•¼í•¨ ê·¸ í›„ì— true
+						if (userPw.equals(userList.get(i).getUser_pw())) {
+							System.out.println("ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜");
+							checkUser = true;
+						}
+						else {
+							System.out.println("ë¹„ë°€ë²ˆí˜¸ ë¶ˆì¼ì¹˜");
+						}
+						break;
+					}
+				}
+				// ë¡œê·¸ì¸ ì„±ê³µ 
+				if(checkUser) {
+					System.out.println("ë¡œê·¸ì¸ ì„±ê³µ");
+					mainFrame.remove(thisPage);
+					StandRoomPanelTest srpt = new StandRoomPanelTest(loginUser);
+					mainFrame.add(srpt);
+//					srpt.setVisible(true);
+					mainFrame.repaint();
+//					mainFrame.setVisible(true);
+				}
+				
 				super.mouseClicked(arg0);
 			}
 		});
 		
-		//·Î±×ÀÎ Ã¢ È¸¿ø°¡ÀÔ ¹öÆ°
-		sign_up = new JButton("È¸¿ø°¡ÀÔ");
+		//ë¡œê·¸ì¸ ì°½ ì•„ì´ë”” ì°¾ê¸° ë²„íŠ¼
+		sign_up = new JButton("ì•„ì´ë”” ì°¾ê¸°");
 		sign_up.setBounds(350, 500, 100, 20);
-		sign_up.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
-		login.add(sign_up);
+		sign_up.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
+		this.add(sign_up);
 		sign_up.addMouseListener(new MouseAdapter() { 
 			
-			//Å¬¸¯ -> È¸¿ø°¡ÀÔ ÆĞ³Î
+			//í´ë¦­ -> íšŒì›ê°€ì… íŒ¨ë„
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
 				Sign_Up su = new Sign_Up();
-				dispose();
 
 				super.mouseClicked(arg0);
 			}
@@ -111,50 +141,49 @@ public class Login_Panel extends JFrame{
 		});
 
 		
-		//·Î±×ÀÎ Ã¢ ¾ÆÀÌµğ Ã£±â ¹öÆ°
-		find_id = new JButton("¾ÆÀÌµğ Ã£±â");
+		//ë¡œê·¸ì¸ ì°½ ì•„ì´ë”” ì°¾ê¸° ë²„íŠ¼
+		find_id = new JButton("ì•„ì´ë”” ì°¾ê¸°");
 		find_id.setBounds(450, 500, 100, 20);
-		find_id.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
-		login.add(find_id);
+		find_id.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
+		this.add(find_id);
 		find_id.addMouseListener(new MouseAdapter() { 
 			
-			//Å¬¸¯ -> ¾ÆÀÌµğ Ã£±â ÆĞ³Î
+			//í´ë¦­ -> ì•„ì´ë”” ì°¾ê¸° íŒ¨ë„
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
 				Find_Id fi = new Find_Id();
-				dispose();
 				
 				super.mouseClicked(arg0);
 			}
 			
 		});
 	
-		//·Î±×ÀÎ Ã¢ ºñ¹Ğ¹øÈ£ Ã£±â
-		find_pw = new JButton("ºñ¹Ğ¹øÈ£ Ã£±â");
+		//ë¡œê·¸ì¸ ì°½ ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
+		find_pw = new JButton("ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°");
 		find_pw.setBounds(550, 500, 100, 20);
-		find_pw.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
-		login.add(find_pw);
+		find_pw.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
+		this.add(find_pw);
 		find_pw.addMouseListener(new MouseAdapter() { 
 			
-			//Å¬¸¯ -> ºñ¹Ğ¹øÈ£ Ã£±â ÆĞ³Î
+			//í´ë¦­ -> ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° íŒ¨ë„
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
 				Find_Pwd fp = new Find_Pwd();
-				dispose();
 
 				super.mouseClicked(arg0);
 			}
-			
 		});
-		
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-		
 	}
-	public static void main(String[] args) {
-		Login_Panel lp = new Login_Panel();
-	}
+	
+	
+//	public static void main(String[] args) {
+//		JFrame f = new JFrame();
+//		f.setTitle("ë¡œê·¸ì¸ í™”ë©´ í…ŒìŠ¤íŠ¸");
+//		f.setSize(1024, 768);
+//		f.add(new Login_Panel(f));
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);
+//	}
 }
