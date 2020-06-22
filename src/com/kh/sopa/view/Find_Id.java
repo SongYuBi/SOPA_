@@ -20,12 +20,12 @@ public class Find_Id extends JFrame{
 	private JButton back, check;
 	private Login_Panel lp;
 	
-	// ¾ÆÀÌµð Ã£±â
+	// ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	
 	public Find_Id() {
 		super();
 		JPanel contentPane;
-		setTitle("¾ÆÀÌµð Ã£±â");
+		setTitle("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		contentPane = new JPanel();
@@ -33,39 +33,39 @@ public class Find_Id extends JFrame{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		//¾ÆÀÌµð Ã£±â ÆÐ³Î
+		//ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½Ð³ï¿½
 		find_id = new JPanel();
 		find_id.setBounds(0, 0, 1024, 768);
 		find_id.setBackground(new Color(252, 228, 167)); 
 		find_id.setLayout(null);
 		super.add(find_id);
 
-		//sopa ¶óº§
+		//sopa ï¿½ï¿½
 		sopa = new JLabel("S.O.P.A");
 		sopa.setBounds(390, 250, 124, 78);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		sopa.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.ITALIC, 10));
 		find_id.add(sopa);
 		
-		//¾ÆÀÌµð¸¦ Ã£°í ½Í¾î¿ä ¶óº§
-		text = new JLabel("¾ÆÀÌµð¸¦ Ã£°í ½Í¾î¿ä");
+		//ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½Í¾ï¿½ï¿½ ï¿½ï¿½
+		text = new JLabel("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½Í¾ï¿½ï¿½");
 		text.setBounds(390, 400, 124, 78);
-		text.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		text.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.ITALIC, 10));
 		find_id.add(text);
 		
-		//ÀüÈ­¹øÈ£ ÀÔ·ÂÃ¢
+		//ï¿½ï¿½È­ï¿½ï¿½È£ ï¿½Ô·ï¿½Ã¢
 		phone = new JTextField(20);
 		phone.setBounds(390, 480, 124, 78);
-		phone.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		phone.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.ITALIC, 10));
 		find_id.add(phone);
 		
-		//µÚ·Î°¡¿ä ¹öÆ°
-		back = new JButton("µÚ·Î°¡¿ä");
+		//ï¿½Ú·Î°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
+		back = new JButton("ï¿½Ú·Î°ï¿½ï¿½ï¿½");
 		back.setBounds(390, 550, 124, 78);
-		back.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		back.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.ITALIC, 10));
 		find_id.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			
-			// 1.Å¬¸¯ -> ·Î±×ÀÎÈ­¸é
+			// 1.Å¬ï¿½ï¿½ -> ï¿½Î±ï¿½ï¿½ï¿½È­ï¿½ï¿½
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
 				
@@ -76,18 +76,18 @@ public class Find_Id extends JFrame{
 		});
 		
 		
-		//È®ÀÎ ¹öÆ°
-		check = new JButton("È®ÀÎ");
+		//È®ï¿½ï¿½ ï¿½ï¿½Æ°
+		check = new JButton("È®ï¿½ï¿½");
 		check.setBounds(600, 550, 124, 78);
-		check.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		check.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.ITALIC, 10));
 		find_id.add(check);
 		check.addMouseListener(new MouseAdapter() {
 			
 			
-			//1. ÀüÈ­¹øÈ£ µ¿ÀÏ ¿©ºÎ Ã¼Å© 
-			//1-1. ¾øÀ½ : Àü¹ø ¾ø´Ù ¶ç¿ò
-			//1-2. ÀÖÀ½ : ¾ÆÀÌµð ¶ì¿ò
-			//2. ·Î±×ÀÎÀ¸·Î µ¹¾Æ°¡±â
+			//1. ï¿½ï¿½È­ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© 
+			//1-1. ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//1-2. ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½
+			//2. ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
 

@@ -14,25 +14,25 @@ import javax.swing.JTextField;
 
 import com.kh.sopa.model.vo.Quiz_VO;
 import com.kh.sopa.model.vo.User_VO;
+import com.kh.sopa.view.Main_Frame;
+import com.kh.sopa.controller.ObjectIO;
 
-public class StandRoomPanelTest extends JFrame {
-	public StandRoomPanelTest() {
-		this.setSize(800, 800);
-		this.setLocation(600, 200);
+public class StandRoomPanelTest extends JPanel{
+	String user = "";
+	public StandRoomPanelTest() { }
+	public StandRoomPanelTest(String user) {
+		this.user = user;
+		
+		this.setBackground(Color.YELLOW);
+		this.setBounds(0, 0, 1024, 450);
 		this.setLayout(null);
-		
-		JPanel mainPanel = new JPanel();
-		mainPanel.setBackground(Color.YELLOW);
-		mainPanel.setBounds(0, 0, 800, 450);
-		mainPanel.setLayout(null);
-		
 		
 		// room Panel 
 		JPanel roomPanel = new JPanel();
 		roomPanel.setBackground(Color.BLUE);
-		roomPanel.setBounds(0, 0, 800, 250);
+		roomPanel.setBounds(0, 0, 1024, 250);
 		roomPanel.setLayout(null);
-		
+
 		
 		JButton[] rooms = new JButton[5];
 		
@@ -51,25 +51,25 @@ public class StandRoomPanelTest extends JFrame {
 			else rooms[i].setBackground(Color.PINK);
 			rooms[i].setOpaque(true);
 			rooms[i].setBorderPainted(false);
-			rooms[i].setBounds(x, y, 800, 40);
+			rooms[i].setBounds(x, y, 1024, 40);
 			y += 50;
 			rooms[i].setVisible(false);
 			roomPanel.add(rooms[i]);
 		}
-		mainPanel.add(roomPanel);
+		this.add(roomPanel);
 		
 		
 		// userPanel;
 		JPanel userPanel = new JPanel();
 		userPanel.setBackground(Color.GREEN);
-		userPanel.setBounds(500, 200, 300, 250);
+		userPanel.setBounds(724, 200, 300, 250);
 		userPanel.setLayout(null);
 		
 		JPanel userIdPanel = new JPanel();
 		JLabel userIdLabel = new JLabel();
 		userIdPanel.setBackground(Color.RED);
-		
 		userIdPanel.add(userIdLabel);
+		
 		userPanel.add(userIdPanel);
 		userIdPanel.setBounds(0, 50, 150, 30);
 		
@@ -77,8 +77,8 @@ public class StandRoomPanelTest extends JFrame {
 		JPanel userCookiePanel = new JPanel();
 		JLabel userCookieLabel = new JLabel();
 		userCookiePanel.setBackground(Color.BLUE);
-		
 		userCookiePanel.add(userCookieLabel);
+		
 		userPanel.add(userCookiePanel);
 		userCookiePanel.setBounds(0, 100, 150, 30);
 		
@@ -88,15 +88,13 @@ public class StandRoomPanelTest extends JFrame {
 		userPanel.add(userEmoPanel);
 		userEmoPanel.setBounds(150, 0, 150, 130);
 		
-		mainPanel.add(userPanel);
+		
 		
 		// user load from file to list
-		ArrayList<User_VO> userList = new ObjectIOTest().UserReadToFile();
-//		System.out.println(userList.size());
+		ArrayList<User_VO> userList = new ObjectIO().UserReadToFile();
 		
-		
-		// access user = "weakman"
-		String findUserId = "weakman";
+		String findUserId = this.user;
+		System.out.println(findUserId);
 		User_VO tmp = new User_VO();
 		
 		// copy user_info
@@ -113,6 +111,7 @@ public class StandRoomPanelTest extends JFrame {
 				tmp.setUser_correct_quiz(userList.get(i).getUser_correct_quiz());
 			}
 		}
+		
 		// show user info to panel
 		userIdLabel.setText(tmp.getUser_id());
 		userCookieLabel.setText(tmp.getUser_cookie() + "");
@@ -123,6 +122,8 @@ public class StandRoomPanelTest extends JFrame {
 		myInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("label : " + userIdLabel.getText());
+				System.out.println("cookie : " + userCookieLabel.getText());
 				System.out.println(((JButton) e.getSource()).getText());
 			}
 		});
@@ -134,6 +135,7 @@ public class StandRoomPanelTest extends JFrame {
 		logOut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				System.out.println(((JButton) e.getSource()).getText());
 			}
 		});
@@ -162,19 +164,20 @@ public class StandRoomPanelTest extends JFrame {
 		userPanel.add(quit);
 		quit.setBounds(150, 200, 150, 40);
 		
+		this.add(userPanel);
+		
 		
 		// chat area 
 		JTextArea chatArea = new JTextArea(50, 50);
-		mainPanel.add(chatArea);
-		chatArea.setBounds(170, 250, 300, 150);
+		this.add(chatArea);
+		chatArea.setBounds(350, 250, 300, 150);
 		
 		JTextField messageArea = new JTextField();
-		mainPanel.add(messageArea);
-		messageArea.setBounds(165, 400, 310, 50);
-		
+		this.add(messageArea);
+		messageArea.setBounds(345, 400, 310, 50);
 		
 		//show room's info
-		ArrayList<Quiz_VO> quizList = new ObjectIOTest().QuizReadTest();
+		ArrayList<Quiz_VO> quizList = new ObjectIO().QuizReadTest();
 		
 		// check quiz's count,
 		System.out.println("quiz 갯수 : " + quizList.size());
@@ -183,10 +186,14 @@ public class StandRoomPanelTest extends JFrame {
 			rooms[i].setText(quizList.get(i).getQuiz_title());
 			rooms[i].setVisible(true);
 		}
-		
-		this.add(mainPanel);
-		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(true);
+	}
+	
+	public void panelTest() {
+		JFrame f = new JFrame();
+		f.setSize(1024, 768);
+		f.setLayout(null);
+		f.add(this);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
 	}
 }
