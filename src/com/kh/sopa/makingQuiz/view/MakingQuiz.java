@@ -357,7 +357,7 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		//라디오 버튼 선택 해제용
 		ansRadio_5 = new JRadioButton();
 
-		
+//		ㄹㄹㄹㄹㄹ
 		
 //		정답, 그룹화 라디오 버튼
 		ButtonGroup ansGroup = new ButtonGroup();
