@@ -1,6 +1,6 @@
 package com.kh.sopa.view;
 
-
+//
 //전진희 그만해요 버튼 화면 전환용 임시 클래스
 import java.awt.Color;
 

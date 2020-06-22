@@ -1,5 +1,5 @@
 package com.kh.sopa.model.vo;
-
+//
 public class Quiz_VO {
 	private String quiz_set_info;		//巩力 技飘 沥焊
 	private String quiz_title;			//巩力 力格
