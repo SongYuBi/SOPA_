@@ -1,24 +1,24 @@
 package com.kh.sopa.model.vo;
 
+
 public class Quiz_added_VO implements java.io.Serializable {
 
-	private String added_title;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	private String added_subject;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	private String added_answer_1;		//ï¿½ï¿½ 1ï¿½ï¿½
-	private String added_answer_2;		//ï¿½ï¿½ 2ï¿½ï¿½
-	private String added_answer_3;		//ï¿½ï¿½ 3ï¿½ï¿½
-	private String added_answer_4;		//ï¿½ï¿½ 4ï¿½ï¿½
-	private String added_final_answer;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
-	private int added_difficulty;		//ï¿½ï¿½ï¿½Ìµï¿½ (10ï¿½ï¿½ 20ï¿½ï¿½ 30ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½Ï±ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.)
-	private int added_cookie;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­
-	private String added_image;			//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-	private int added_people;			//ï¿½Î¿ï¿½ ï¿½ï¿½
+	private String added_title;			//¹®Á¦ÀÌ¸§
+	private String added_subject;		//ÁÖÁ¦
+	private String added_answer_1;		//1¹ø´ä
+	private String added_answer_2;		//2¹ø´ä
+	private String added_answer_3;		//3¹ø´ä
+	private String added_answer_4;		//4¹ø´ä
+	private String added_final_answer;		//ÃÖÁ¾ Á¤´äÀ» int·Î ¹Þ½À´Ï´Ù 1,2,3,4 ÁÖ¼®°ª ¿À·ù repositories¿¡¼­ ±úÁü
+	private int added_difficulty;		//³­ÀÌµµ »ó±Þ10 Áß±Þ20 ÇÏ±Þ30
+	private int added_cookie;			//¹®Á¦´ç Áö±Þ ÄíÅ°
+	private String added_image;			//¹®Á¦¿¡ Ãß°¡ÇÒ ÀÌ¹ÌÁö
+	private int added_people;			//Âü¿©ÀÎ¿ø
  
 	
 	public Quiz_added_VO() {
 		// TODO Auto-generated constructor stub
 	}
-	
 
 
 	public Quiz_added_VO(String added_title, String added_subject, String added_answer_1, String added_answer_2,
@@ -38,94 +38,115 @@ public class Quiz_added_VO implements java.io.Serializable {
 		this.added_people = added_people;
 	}
 
+
 	public String getAdded_title() {
 		return added_title;
 	}
+
 
 	public void setAdded_title(String added_title) {
 		this.added_title = added_title;
 	}
 
+
 	public String getAdded_subject() {
 		return added_subject;
 	}
+
 
 	public void setAdded_subject(String added_subject) {
 		this.added_subject = added_subject;
 	}
 
+
 	public String getAdded_answer_1() {
 		return added_answer_1;
 	}
+
 
 	public void setAdded_answer_1(String added_answer_1) {
 		this.added_answer_1 = added_answer_1;
 	}
 
+
 	public String getAdded_answer_2() {
 		return added_answer_2;
 	}
+
 
 	public void setAdded_answer_2(String added_answer_2) {
 		this.added_answer_2 = added_answer_2;
 	}
 
+
 	public String getAdded_answer_3() {
 		return added_answer_3;
 	}
+
 
 	public void setAdded_answer_3(String added_answer_3) {
 		this.added_answer_3 = added_answer_3;
 	}
 
+
 	public String getAdded_answer_4() {
 		return added_answer_4;
 	}
+
 
 	public void setAdded_answer_4(String added_answer_4) {
 		this.added_answer_4 = added_answer_4;
 	}
 
+
 	public String getAdded_final_answer() {
 		return added_final_answer;
 	}
+
 
 	public void setAdded_final_answer(String added_final_answer) {
 		this.added_final_answer = added_final_answer;
 	}
 
+
 	public int getAdded_difficulty() {
 		return added_difficulty;
 	}
+
 
 	public void setAdded_difficulty(int added_difficulty) {
 		this.added_difficulty = added_difficulty;
 	}
 
+
 	public int getAdded_cookie() {
 		return added_cookie;
 	}
+
 
 	public void setAdded_cookie(int added_cookie) {
 		this.added_cookie = added_cookie;
 	}
 
+
 	public String getAdded_image() {
 		return added_image;
 	}
+
 
 	public void setAdded_image(String added_image) {
 		this.added_image = added_image;
 	}
 
+
 	public int getAdded_people() {
 		return added_people;
 	}
 
+
 	public void setAdded_people(int added_people) {
 		this.added_people = added_people;
 	}
-
 
 
 	@Override
@@ -137,6 +158,7 @@ public class Quiz_added_VO implements java.io.Serializable {
 				+ added_image + ", added_people=" + added_people + "]";
 	}
 	
-	
+
+
 	
 }

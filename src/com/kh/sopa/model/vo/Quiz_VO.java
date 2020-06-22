@@ -1,23 +1,23 @@
 package com.kh.sopa.model.vo;
 
 public class Quiz_VO implements java.io.Serializable {
-	private String quiz_set_info;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
-	private String quiz_title;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	private String quiz_subject;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	private String quiz_answer_1;		//ï¿½ï¿½ 1ï¿½ï¿½
-	private String quiz_answer_2;		//ï¿½ï¿½ 2ï¿½ï¿½
-	private String quiz_answer_3;		//ï¿½ï¿½ 3ï¿½ï¿½
-	private String quiz_answer_4;		//ï¿½ï¿½ 4ï¿½ï¿½
-	private String quiz_final_answer;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
-	private int quiz_difficulty;		//ï¿½ï¿½ï¿½Ìµï¿½ (10ï¿½ï¿½ 20ï¿½ï¿½ 30ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½Ï±ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.)
-	private int quiz_cookie;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­
-	private String quiz_image;			//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-	private int quiz_people;			//ï¿½Î¿ï¿½ ï¿½ï¿½
+	private String quiz_set_info;		//¼¼Æ®ÀÌ¸§
+	private String quiz_title;			//¹®Á¦ÀÌ¸§
+	private String quiz_subject;		//ÁÖÁ¦
+	private String quiz_answer_1;		//1¹ø´ä
+	private String quiz_answer_2;		//2¹ø´ä
+	private String quiz_answer_3;		//3¹ø´ä
+	private String quiz_answer_4;		//4¹ø´ä
+	private String quiz_final_answer;		//¼±ÅÃÇÑ ÃÖÁ¾ Á¤´ä
+	private int quiz_difficulty;		//³­ÀÌµµ »ó±Þ10 Áß±Þ20 ÇÏ±Þ30
+	private int quiz_cookie;			//¹®Á¦´çÁö±ÞÄíÅ°
+	private String quiz_image;			//¹®Á¦¿¡ Ãß°¡ÇÒ ÀÌ¹ÌÁö
+	private int quiz_people;			//Âü¿©ÀÎ¿ø
 	
 	public Quiz_VO(){
 		
 	}
-	
+
 	public Quiz_VO(String quiz_set_info, String quiz_title, String quiz_subject, String quiz_answer_1,
 			String quiz_answer_2, String quiz_answer_3, String quiz_answer_4, String quiz_final_answer,
 			int quiz_difficulty, int quiz_cookie, String quiz_image, int quiz_people) {
@@ -36,8 +36,6 @@ public class Quiz_VO implements java.io.Serializable {
 		this.quiz_people = quiz_people;
 	}
 
-	
-	
 	public String getQuiz_set_info() {
 		return quiz_set_info;
 	}
@@ -142,6 +140,7 @@ public class Quiz_VO implements java.io.Serializable {
 				+ quiz_final_answer + ", quiz_difficulty=" + quiz_difficulty + ", quiz_cookie=" + quiz_cookie
 				+ ", quiz_image=" + quiz_image + ", quiz_people=" + quiz_people + "]";
 	}
+	
 	
 	
 }

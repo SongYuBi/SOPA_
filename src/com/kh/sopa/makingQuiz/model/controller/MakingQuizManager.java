@@ -15,20 +15,16 @@ public class MakingQuizManager {
 		ArrayList<Quiz_added_VO> list = qad.readQuizList();
 		
 		if(list == null) {
-			list = new ArrayList<Quiz_added_VO>();
-		}else {
-			list.get(list.size());
+			list = new ArrayList<Quiz_added_VO>();	
+			
 		}
 		
-		int result = qad.writeQuiz(list);
+		list.add(q);
+		
+		qad.writeQuiz(list);
 	}
-
 	
-//	텍스트 파일에서 읽어오는 테스트 코드
 	public void selectAllQuiz() {
 		rp.printAllQuiz(qad.readQuizList());
-		
-		
 	}
-
 }
