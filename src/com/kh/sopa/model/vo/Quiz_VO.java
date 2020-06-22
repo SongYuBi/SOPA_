@@ -18,6 +18,18 @@ public class Quiz_VO {
 		
 	}
 	
+	public Quiz_VO(String quiz_title, String quiz_answer_1, String quiz_answer_2, String quiz_answer_3,
+			String quiz_answer_4, String quiz_final_answer) {
+		super();
+		this.quiz_title = quiz_title;
+		this.quiz_answer_1 = quiz_answer_1;
+		this.quiz_answer_2 = quiz_answer_2;
+		this.quiz_answer_3 = quiz_answer_3;
+		this.quiz_answer_4 = quiz_answer_4;
+		this.quiz_final_answer = quiz_final_answer;
+	}
+	
+	
 	public Quiz_VO(String quiz_set_info, String quiz_title, String quiz_subject, String quiz_answer_1,
 			String quiz_answer_2, String quiz_answer_3, String quiz_answer_4, String quiz_final_answer,
 			int quiz_difficulty, int quiz_cookie, String quiz_image, int quiz_people) {
@@ -133,7 +145,17 @@ public class Quiz_VO {
 	public void setQuiz_people(int quiz_people) {
 		this.quiz_people = quiz_people;
 	}
-
+	
+	
+	//문제 + 보기 + 정답용
+	public String SolvingQuiz(String quiz_title, String quiz_answer_1, String quiz_answer_2, String quiz_answer_3,
+			String quiz_answer_4, String quiz_final_answer) {
+		return quiz_title + ", " + quiz_answer_1 + ", "
+				+ quiz_answer_2 + ", " + quiz_answer_3 + ", " + quiz_answer_4
+				+ ", " + quiz_final_answer;	
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Quiz_VO [quiz_set_info=" + quiz_set_info + ", quiz_title=" + quiz_title + ", quiz_subject="
