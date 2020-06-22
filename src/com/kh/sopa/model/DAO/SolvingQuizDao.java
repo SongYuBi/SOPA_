@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import com.kh.sopa.model.vo.Solving_Quiz_VO;
+import com.kh.sopa.model.vo.Quiz_VO;
 
 
 //문제 풀기 용 입출력 파일 클래스

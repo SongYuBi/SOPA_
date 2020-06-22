@@ -1,5 +1,6 @@
 package com.kh.sopa.view;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -12,15 +13,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
+import com.kh.sopa.controller.Counter;
 import com.kh.sopa.model.DAO.SolvingQuizDao;
 import com.kh.sopa.model.vo.Quiz_VO;
 
 public class SolvingQuiz extends JFrame {
 	
+	//시작전에 SolvingQuizDao(파일 입출력 클래스) 한 번 실행 시킨 후 실행
+	
 	private JPanel contentPane;
 	//한 게임에서 푼 문제 수와 맞춘 문제 수 필드로 선언
 	static int add_quiz_num = 0;
 	static int add_correct_num = 0;
+	static Counter count = new Counter();
 	
 	//문제, 정답 등이 담긴 객체 배열을 반복문 돌릴 초기값
 	private int i = 0;
@@ -108,17 +114,17 @@ public class SolvingQuiz extends JFrame {
 		//문제버튼 2
 		JButton btn_quiz_answer_2 = new JButton();
 		btn_quiz_answer_2.setBorderPainted(false);
-		btn_quiz_answer_2.setBounds(40, 600, 455, 110);
-		btn_quiz_answer_2.setBackground(new Color(137, 213, 201));
-		btn_quiz_answer_2.setFont(new Font("맑은 고딕", Font.BOLD, 25));
-				
+		btn_quiz_answer_2.setBounds(525, 475, 455, 110);
+		btn_quiz_answer_2.setBackground(new Color(225, 131, 87));
+		btn_quiz_answer_2.setFont(new Font("맑은 고딕", Font.BOLD, 25));	
+		
 		//문제버튼 3
 		JButton btn_quiz_answer_3 = new JButton();
 		btn_quiz_answer_3.setBorderPainted(false);
-		btn_quiz_answer_3.setBounds(525, 475, 455, 110);
-		btn_quiz_answer_3.setBackground(new Color(225, 131, 87));
-		btn_quiz_answer_3.setFont(new Font("맑은 고딕", Font.BOLD, 25));	
-		
+		btn_quiz_answer_3.setBounds(40, 600, 455, 110);
+		btn_quiz_answer_3.setBackground(new Color(137, 213, 201));
+		btn_quiz_answer_3.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+				
 		//문제버튼 4
 		JButton btn_quiz_answer_4 = new JButton();
 		btn_quiz_answer_4.setBorderPainted(false);
@@ -146,21 +152,20 @@ public class SolvingQuiz extends JFrame {
 		
 		
 		
-	/*	//타이머 불러오기
-		Timer1 t1 = new Timer1(timeLabel);
-		t1.run();
-		*/
-		
-		
-		
-		
-		
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		
+		//타이머 불러오기
+	/*	Timer1 t1 = new Timer1(timeLabel);
+		t1.run();*/
+		
+	
+		
+		
 
 		
-		
+	
 
 		//그만해요 버튼 누르면 화면 전환
 		stopBtn.addActionListener(new ActionListener() {
@@ -179,7 +184,9 @@ public class SolvingQuiz extends JFrame {
 		
 		//문제 배열
 		SolvingQuizDao qd = new SolvingQuizDao();
+		
 		ArrayList<Quiz_VO> quizList2 = qd.readQuizList();
+
 
 		// split[0] = 문제
 		// split[1] = 1번 보기
@@ -187,22 +194,27 @@ public class SolvingQuiz extends JFrame {
 		// split[3] = 3번 보기
 		// split[4] = 4번 보기
 		// split[5] = 정답
-
-
+/*
+		String str1 = quizList2.get(1).toString();
+		String[] split = str1.split(", ", 6);
+		*/
+		
+		///////////
+		/*for( int i = 0; i < quizList2.size(); i++) {*/
+		
 		btn_quiz_answer_1.setText(quizList2.get(i).getQuiz_answer_1());
 		btn_quiz_answer_2.setText(quizList2.get(i).getQuiz_answer_2());
 		btn_quiz_answer_3.setText(quizList2.get(i).getQuiz_answer_3());
 		btn_quiz_answer_4.setText(quizList2.get(i).getQuiz_answer_4());
 
-
 		// 문제출제 라벨에도 문제 넣어주기
-		quizLabel.setText(split[0]);
+		
+		quizLabel.setText(quizList2.get(i).getQuiz_title());
 
 		// 문제버튼 별 클릭 시 액션
-
 		// 보기 1번
+	
 		btn_quiz_answer_1.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -224,7 +236,7 @@ public class SolvingQuiz extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (btn_quiz_answer_2.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
+				if (btn_quiz_answer_2.getText().equals(quizList2.get(1).getQuiz_final_answer())) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -243,7 +255,7 @@ public class SolvingQuiz extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (btn_quiz_answer_3.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
+				if (btn_quiz_answer_3.getText().equals(quizList2.get(1).getQuiz_final_answer())) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -262,7 +274,7 @@ public class SolvingQuiz extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (btn_quiz_answer_4.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
+				if (btn_quiz_answer_4.getText().equals(quizList2.get(1).getQuiz_final_answer())) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -273,8 +285,8 @@ public class SolvingQuiz extends JFrame {
 
 			}
 		});
-
-		/*		//타이머
+		
+		//타이머
 		while(true) {
 			timeLabel.setText("" + count.S + "초 남았습니다");
 			try {
@@ -292,13 +304,16 @@ public class SolvingQuiz extends JFrame {
 			}
 			
 		}
-	*/
+	
 	}
 	
 	public static void main(String[] args) {
-		new SolvingQuiz();	
-	}
+		new SolvingQuiz();
 	}
 	
+}
+	
+
+
 	
 

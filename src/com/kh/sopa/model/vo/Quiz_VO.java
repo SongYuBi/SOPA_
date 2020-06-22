@@ -1,6 +1,9 @@
 package com.kh.sopa.model.vo;
+
+import java.io.Serializable;
+
 //
-public class Quiz_VO {
+public class Quiz_VO implements Serializable {
 	private String quiz_set_info;		//巩力 技飘 沥焊
 	private String quiz_title;			//巩力 力格
 	private String quiz_subject;		//巩力 林力
