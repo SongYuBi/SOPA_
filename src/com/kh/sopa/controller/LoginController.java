@@ -26,30 +26,39 @@ public class LoginController {
 		
 
 	//회원 가입 객체 생성
-	public void user_make() {
-		
-		
+	public void user_make(User_VO vo) {
+
+		 ud = new User_DAO();
+		 ud.userOutput(vo);
 		//기록조회
-				ArrayList<User_VO> list = ud.userInput();
-				//내역확인
-				if(list == null) {
-					list = new ArrayList<User_VO>();
-					
-				}
-				
-				//추가
-				list.add(uv);
-				
-				ud.userOutput(list);
-				
+		}
+	
+	
+	//아이디 찾기
+	public void fine_user(User_VO vo) {
+		String num;
+		ud.userInput(null);
+		
+		num = vo.getUser_phone_number();
+		
+		System.out.println(num);
 		
 		
+		
+		System.out.println(ud);
+		
+//		if(fp == num) {
+//			System.out.println("같음");
+//			System.out.println(ud);//ud로 반환
+//		} else if (fp != num) {
+//			System.out.println("다름");
+//		}
+		
+		
+	
+	
 	}
 	
-	
-	
-	
-	//회원 아이디 찾기
 	
 	
 	//회원 비밀번호 찾기

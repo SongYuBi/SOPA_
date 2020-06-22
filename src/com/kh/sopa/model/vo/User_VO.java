@@ -1,6 +1,8 @@
 package com.kh.sopa.model.vo;
 
-public class User_VO {
+import java.io.Serializable;
+
+public class User_VO implements Serializable {
 
 	private String user_id;				//유저의 아이디
 	private String user_pw;				//유저의 비밀번호

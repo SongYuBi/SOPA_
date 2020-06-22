@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,12 +14,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.kh.sopa.controller.LoginController;
+import com.kh.sopa.model.DAO.User_DAO;
+import com.kh.sopa.model.vo.User_VO;
+
 public class Find_Id extends JFrame{
 	private JPanel contentPane, find_id;
 	private JLabel sopa, text;
 	private JTextField phone;
 	private JButton back, check;
 	private Login_Panel lp;
+	private User_VO uv;
+	private User_DAO ud;
+	private LoginController lc;
+	private ArrayList<User_VO> al;
 	
 	// 아이디 찾기
 	
@@ -69,7 +78,16 @@ public class Find_Id extends JFrame{
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
 				
-				lp = new Login_Panel();
+				uv = new User_VO();
+				uv.setUser_phone_number(phone.getText());
+				System.out.println(phone.getText());
+				al = new ArrayList();
+				al.add(uv);
+				
+
+				lc = new LoginController();
+				lc.fine_user(uv);
+				new Login_Panel();
 				dispose();
 				super.mouseClicked(arg0);
 			}

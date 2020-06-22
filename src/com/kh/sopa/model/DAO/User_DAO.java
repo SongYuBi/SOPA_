@@ -13,73 +13,85 @@ import com.kh.sopa.model.vo.User_VO;
 
 //유저관련 데이터 액세스 오브젝트 
 public class User_DAO {
+	private ObjectInputStream oip = null;
+	private ObjectOutputStream uoo = null;
+	private ArrayList<User_VO> al;
 	
-	//회원 가입 객체 생성
-	
-	public ArrayList<User_VO> userOutput(ArrayList<User_VO> out) {
-		
-		ObjectOutputStream uoo = null;
-		
-		
-		
-		try {
-			uoo = new ObjectOutputStream(new FileOutputStream("User.tat"));
+	//파일 기록
+		public void userOutput(User_VO out) {
 			
-			uoo.writeObject(out);
-			
-			uoo.flush();
+//			ObjectOutputStream uoo = null;
+			al = new ArrayList();
 			
 			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
 			try {
-				uoo.close();
+				
+				FileOutputStream fo = new FileOutputStream("User.txt", true);
+				uoo = new ObjectOutputStream(fo);
+				System.out.println(out);
+				al.add(out);
+				
+				uoo.writeObject(out);
+				
+				for(int i = 0; i < al.size(); i++) {
+				
+					System.out.println(al.get(i) + "아웃푹 저장" + i);
+				}
+			
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
-		}
-		return out;
-		
-	
-	}
-	
-	//파일 읽기
-	public ArrayList<User_VO> userInput() {
-		ObjectInputStream oip = null;
-		ArrayList<User_VO> list = null;
-		
-		try {
-			oip = new ObjectInputStream(new FileInputStream("User.dat"));
-			
-			list = (ArrayList<User_VO>)oip.readObject();
-		} catch (FileNotFoundException e) {
-			System.out.println("에러");
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			if(oip != null) {
+			} finally {
 				try {
-					oip.close();
+					uoo.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
+				
+		
 		}
 		
+		//파일 읽기
+		public void userInput(User_VO out) {
+//			ObjectInputStream oip = null;
+			
+			
+			try {
+				oip = new ObjectInputStream(new FileInputStream("User.txt"));
+				
+				al = (ArrayList<User_VO>) oip.readObject();
+				
+				String read = (String) oip.readObject();
+				
+					System.out.println("불러옴");
+					
+					//list.add(i, al)
+			
+			} catch (FileNotFoundException e) {
+				
+				
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				if(oip != null) {
+					try {
+						oip.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+						
 		
-		return list;
-		
-	}
 		
 		//회원 아이디 찾기
 		
-		
-		//회원 비밀번호 찾기
 
+}
 }
