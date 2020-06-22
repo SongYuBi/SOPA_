@@ -14,11 +14,16 @@ public class MakingQuizManager {
 	public void insertQuiz(Quiz_added_VO q) {
 		ArrayList<Quiz_added_VO> list = qad.readQuizList();
 		
-		if(list == null) {
-			list = new ArrayList<Quiz_added_VO>();
-		}else {
-			list.add();
-		}
+//		if(list == null) {
+//			
+//			list = new ArrayList<Quiz_added_VO>();
+//		
+//		}else {
+//			
+//			list.add();
+//		
+//		}
+		
 		qad.writeQuiz(list);
 	}
 
