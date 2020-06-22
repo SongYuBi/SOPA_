@@ -24,10 +24,10 @@ public class Stand_Room extends JFrame implements ActionListener{
 	private Client_Contorller client = new  Client_Contorller();
 	private String user_id;
 	private JLabel user_label = new JLabel(); 
-	//panel_stand_room -> ´ë±â½Ç ±âº»À¸·ÎµÈ ÆĞ³Î
-	//panel_south_menu -> ÇÏ´Ü¿¡ ¸Ş´º¹Ù 
-	//panel_south_menu_chat -> ÇÏ´Ü¿¡ ¸Ş´º¹Ù ¾È¿¡ Ã¤ÆÃ¸¸ µé¾î°¡°ÔÇØ³õÀº °÷
-	//panel_north_userhi(¶óº§) -> À¯Àú°¡ µé¾î¿À¸é µé¾î¿Â À¯Àú¸¦ ¾Ë¸®´Â °÷.
+	//panel_stand_room -> ëŒ€ê¸°ì‹¤ ê¸°ë³¸ìœ¼ë¡œëœ íŒ¨ë„
+	//panel_south_menu -> í•˜ë‹¨ì— ë©”ë‰´ë°” 
+	//panel_south_menu_chat -> í•˜ë‹¨ì— ë©”ë‰´ë°” ì•ˆì— ì±„íŒ…ë§Œ ë“¤ì–´ê°€ê²Œí•´ë†“ì€ ê³³
+	//panel_north_userhi(ë¼ë²¨) -> ìœ ì €ê°€ ë“¤ì–´ì˜¤ë©´ ë“¤ì–´ì˜¨ ìœ ì €ë¥¼ ì•Œë¦¬ëŠ” ê³³.
 	public Stand_Room(String user_id) {
 		this.user_id = user_id;
 		
@@ -39,20 +39,20 @@ public class Stand_Room extends JFrame implements ActionListener{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		// View½ÃÀÛÀº ¿©±â¼­ºÎÅÍ
-		setTitle("´ë±â½Ç");
+		// Viewì‹œì‘ì€ ì—¬ê¸°ì„œë¶€í„°
+		setTitle("ëŒ€ê¸°ì‹¤");
 		JPanel panel_stand_room = new JPanel();
 		panel_stand_room.setLayout(null);
 		panel_stand_room.setBounds(0, 0, 1024, 768);
 		panel_stand_room.setBackground(Color.white);
 
-		user_label.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 30));
+		user_label.setFont(new Font("ë§‘ì€ ê³ ë”•", Font.PLAIN, 30));
 		user_label.setBackground(Color.YELLOW);
 		user_label.setBounds(0, 0, 1024, 100);
 		
 		panel_stand_room.add(user_label,BorderLayout.NORTH);
 		
-		JPanel panel_south_menu = new JPanel();			//¹Ø¿¡ ¸Ş´º ÆĞ³Î
+		JPanel panel_south_menu = new JPanel();			//ë°‘ì— ë©”ë‰´ íŒ¨ë„
 		
 		panel_south_menu.setBackground(Color.gray);
 		panel_south_menu.setBounds(96, 261, 800, 400);
@@ -71,7 +71,7 @@ public class Stand_Room extends JFrame implements ActionListener{
 		panel_south_menu_chat.add(jta);
 		
 		jta.setEditable(false);
-		jta.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 14));
+		jta.setFont(new Font("ë§‘ì€ ê³ ë”•", Font.PLAIN, 14));
 		jta.setBackground(new Color(230, 255, 230));
 		jtf.setBounds(14, 293, 304, 24);
 		panel_south_menu_chat.add(jtf);
@@ -87,25 +87,27 @@ public class Stand_Room extends JFrame implements ActionListener{
 		client.connect(user_id);
 	}
 	
-	// Ã¤ÆÃÇÊµå ÀÌº¥Æ®
+	// ì±„íŒ…í•„ë“œ ì´ë²¤íŠ¸
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//¹®ÀÚ ÀÔ·Â Ã¢¿¡ ±ÛÀ» ÀÔ·Â ½Ã ±¸µ¿ÇÒ ÀÌº¥Æ® ¼³Á¤
-		//½ºÆ®¸µ º¯¼ö msdg¿¡ ´Ğ³×ÀÓ : ÅØ½ºÆ®ÇÊµåÀÇ ³»¿ë°ú ¹ØÁÙ·Î ³»·Á°¡±â¸¦ ´ã¾Æ
+		//ë¬¸ì ì…ë ¥ ì°½ì— ê¸€ì„ ì…ë ¥ ì‹œ êµ¬ë™í•  ì´ë²¤íŠ¸ ì„¤ì •
+		//ìŠ¤íŠ¸ë§ ë³€ìˆ˜ msdgì— ë‹‰ë„¤ì„ : í…ìŠ¤íŠ¸í•„ë“œì˜ ë‚´ìš©ê³¼ ë°‘ì¤„ë¡œ ë‚´ë ¤ê°€ê¸°ë¥¼ ë‹´ì•„
 		String msg = user_id + ": " + jtf.getText() +"\n";
-		//¸Ş¼Òµå¿¡ ³»¿ëÀ» º¸³½´Ù
+		//ë©”ì†Œë“œì— ë‚´ìš©ì„ ë³´ë‚¸ë‹¤
 		client.sendMessage(msg);
-		//ÅØ½ºÆ®¿¡¸®¾î ºñ¿ì±â
+		//í…ìŠ¤íŠ¸ì—ë¦¬ì–´ ë¹„ìš°ê¸°
 		jtf.setText("");
 	}
 
-	//Ã¤ÆÃÃ¢¿¡ À¯Àú°¡ º¸³½ ¸Ş½ÃÁö Ãß°¡
+
+	//ì±„íŒ…ì°½ì— ìœ ì €ê°€ ë³´ë‚¸ ë©”ì‹œì§€ ì¶”ê°€
 	public void appendMsg(String msg) {
 		jta.append(msg);
 		
 	}
-	//À¯Àú°¡ Á¢¼ÓÇÏ¸é À¯Àú¾ÆÀÌµğ·Î ÀÎ»ç.
+	//ìœ ì €ê°€ ì ‘ì†í•˜ë©´ ìœ ì €ì•„ì´ë””ë¡œ ì¸ì‚¬.
 	public void label_userid(String user_id) {
-		user_label.setText(user_id+"´Ô È¯¿µÇÕ´Ï´Ù.!!!");
+		user_label.setText(user_id+"ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.!!!");
 	}
+
 }

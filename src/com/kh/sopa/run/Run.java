@@ -1,10 +1,22 @@
+
 package com.kh.sopa.run;
 
 public class Run {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 
 }
+
+package com.kh.sopa.run;
+
+
+public class Run {
+
+	public static void main(String[] args) {
+
+    
+	}
+}
+

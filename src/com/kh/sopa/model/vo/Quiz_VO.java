@@ -1,18 +1,18 @@
 package com.kh.sopa.model.vo;
 
-public class Quiz_VO {
-	private String quiz_set_info;		//¹®Á¦ ¼¼Æ® Á¤º¸
-	private String quiz_title;			//¹®Á¦ Á¦¸ñ
-	private String quiz_subject;		//¹®Á¦ ÁÖÁ¦
-	private String quiz_answer_1;		//´ä 1¹ø
-	private String quiz_answer_2;		//´ä 2¹ø
-	private String quiz_answer_3;		//´ä 3¹ø
-	private String quiz_answer_4;		//´ä 4¹ø
-	private String quiz_final_answer;	//¹®Á¦¿¡¼­ÀÇ Á¤´ä 
-	private int quiz_difficulty;		//³­ÀÌµµ (10ÃÊ 20ÃÊ 30ÃÊ ´ÜÀ§·Î µé¾î°¡´Ï±î ÀÏ´Ü Á¤¼öÇüÀ¸·Î ³Ö¾ú½À´Ï´Ù.)
-	private int quiz_cookie;			//°ÔÀÓ ³»¿¡¼­ÀÇ ÀçÈ­
-	private String quiz_image;			//ÀÌ¹ÌÁö °æ·Î
-	private int quiz_people;			//ÀÎ¿ø ¼ö
+public class Quiz_VO implements java.io.Serializable {
+	private String quiz_set_info;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+	private String quiz_title;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String quiz_subject;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String quiz_answer_1;		//ï¿½ï¿½ 1ï¿½ï¿½
+	private String quiz_answer_2;		//ï¿½ï¿½ 2ï¿½ï¿½
+	private String quiz_answer_3;		//ï¿½ï¿½ 3ï¿½ï¿½
+	private String quiz_answer_4;		//ï¿½ï¿½ 4ï¿½ï¿½
+	private String quiz_final_answer;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+	private int quiz_difficulty;		//ï¿½ï¿½ï¿½Ìµï¿½ (10ï¿½ï¿½ 20ï¿½ï¿½ 30ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½Ï±ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.)
+	private int quiz_cookie;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­
+	private String quiz_image;			//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	private int quiz_people;			//ï¿½Î¿ï¿½ ï¿½ï¿½
 	
 	public Quiz_VO(){
 		

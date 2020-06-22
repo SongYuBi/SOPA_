@@ -1,16 +1,16 @@
 package com.kh.sopa.model.vo;
 
-public class User_VO {
+public class User_VO implements java.io.Serializable {
 
-	private String user_id;				//À¯ÀúÀÇ ¾ÆÀÌµð
-	private String user_pw;				//À¯ÀúÀÇ ºñ¹Ð¹øÈ£
-	private String user_phone_number;	//À¯ÀúÀÇ ÇÚµåÆù ¹øÈ£
-	private int user_cookie;			//À¯ÀúÀÇ ÀçÈ­ Á¤º¸
-	private int user_1st;				//À¯ÀúÀÇ 1µî È½¼ö
-	private int user_2nd;				//À¯ÀúÀÇ 2µî È½¼ö
-	private int user_3rd;				//À¯ÀúÀÇ 3µî È½¼ö
-	private int user_all_quiz;			//À¯Àú°¡Ç¬ ÀüÃ¼ ¹®Á¦ °³¼ö
-	private int user_correct_quiz;		//À¯Àú°¡ ¸ÂÀº ¹®Ç× °³¼ö
+	private String user_id;				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+	private String user_pw;				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£
+	private String user_phone_number;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	private int user_cookie;			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½
+	private int user_1st;				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ È½ï¿½ï¿½
+	private int user_2nd;				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ È½ï¿½ï¿½
+	private int user_3rd;				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ È½ï¿½ï¿½
+	private int user_all_quiz;			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¬ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private int user_correct_quiz;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	public User_VO() {
 		
