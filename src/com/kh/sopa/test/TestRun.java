@@ -1,5 +1,7 @@
 package com.kh.sopa.test;
 
+import com.kh.sopa.view.Login_Panel;
+
 public class TestRun {
 
 	public static void main(String[] args) {
@@ -11,8 +13,8 @@ public class TestRun {
 //		oiot.QuizWriteTest();
 //		oiot.QuizReadTest();
 		
-		StandRoomPanelTest srpt = new StandRoomPanelTest();
-		
+//		StandRoomPanelTest srpt = new StandRoomPanelTest();
+		new Login_Panel();
 	}
 
 }

@@ -24,7 +24,7 @@ public class Login_Panel extends JFrame{
 		
 		super();
 		JPanel contentPane;
-		setTitle("·Î±×ÀÎ È­¸é");
+		setTitle("ë¡œê·¸ì¸ í™”ë©´");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		contentPane = new JPanel();
@@ -33,55 +33,55 @@ public class Login_Panel extends JFrame{
 		setContentPane(contentPane);
 		
 		
-		//·Î±×ÀÎ ÆäÀÌÁö ÆĞ³Î
+		//ë¡œê·¸ì¸ í˜ì´ì§€ íŒ¨
 		login = new JPanel();
 		login.setBounds(0, 0, 1024, 768);
 		login.setBackground(new Color(252, 228, 167));  
 		login.setLayout(null);
 		super.add(login);
 		
-		//·Î±×ÀÎ Ã¢ sopa ¶óº§
+		//ë¡œê·¸ì¸ ì°½ sopaë¼ë²¨
 		sopa = new JLabel("S.O.P.A");
 		sopa.setBounds(430, 100, 300, 200);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 50));
+		sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 50));
 		login.add(sopa);
 		
-		//·Î±×ÀÎ Ã¢ ¾ÆÀÌµğ ÀÔ·Â ¶óº§
-		id_label = new JLabel("¾ÆÀÌµğ ÀÔ·Â");
+		// ë¡œê·¸ì¸ ì°½ ì•„ì´ë”” ì…ë ¥ ë¼ë²¨
+		id_label = new JLabel("ì•„ì´ë”” ì…ë ¥");
 		id_label.setBounds(280, 350, 100, 50);
-		id_label.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		id_label.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		login.add(id_label);
 		
-		//·Î±×ÀÎ Ã¢ ¾ÆÀÌµğ ÀÔ·Â ÆĞ³Î
+		//ë¡œê·¸ì¸ ì°½ ì•„ì´ë”” ì…ë ¥ íŒ¨ë„
 		login_id = new JTextField(20);
 		login_id.setBounds(380, 350, 200, 40);
-		login_id.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		login_id.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		login.add(login_id);
 		
 		
-		//·Î±×ÀÎ Ã¢ ºñ¹Ğ¹øÈ£ ÀÔ·Â ¶óº§
-		pw_label = new JLabel("ºñ¹Ğ¹øÈ£ ÀÔ·Â");
+		//ë¡œê·¸ì¸ ì°½ ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ ë¼ë²¨
+		pw_label = new JLabel("ë¹„ë°€ë²ˆí˜¸ ì…ë ¥");
 		pw_label.setBounds(280, 400, 100, 50);
-		pw_label.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		pw_label.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		login.add(pw_label);
 		
 		
-		//·Î±×ÀÎ Ã¢ ºñ¹Ğ¹øÈ£ ÀÔ·Â ÆĞ³Î
+		//ë¡œê·¸ì¸ ì°½ ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ íŒ¨ë„
 		login_pw = new JTextField(20);
 		login_pw.setBounds(380, 400, 200, 40);
-		login_pw.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		login_pw.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		login.add(login_pw);
 		
 	
 		
-		//·Î±×ÀÎ Ã¢ ·Î±×ÀÎ ¹öÆ°
-		login_quiz = new JButton("·Î±×ÀÎ");
+		//ë¡œê·¸ì¸ ì°½ ë¡œê·¸ì¸ ë²„íŠ¼
+		login_quiz = new JButton("ë¡œê·¸ì¸");
 		login_quiz.setBounds(640, 340, 80, 120);
 		login.add(login_quiz);
 		login_quiz.addMouseListener(new MouseAdapter() {
 			
-			// 1.Å¬¸¯ -> ´ë±â½Ç
-			// 2.Å¬¸¯ -> ¾ÆÀÌµğ, ºñ¹ø Ã¼Å© -> °´Ã¼ ¼ÒÈ¯?
+			// 1.í´ë¦­ -> ëŒ€ê¸°
+			// 2.í´ë¦­ -> ì•„ì´ë””, ë¹„ë²ˆ ì²´í¬ -> ê°ì²´ ì†Œí™˜?
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
 				
@@ -91,14 +91,14 @@ public class Login_Panel extends JFrame{
 			}
 		});
 		
-		//·Î±×ÀÎ Ã¢ È¸¿ø°¡ÀÔ ¹öÆ°
-		sign_up = new JButton("È¸¿ø°¡ÀÔ");
+		//ë¡œê·¸ì¸ ì°½ ì•„ì´ë”” ì°¾ê¸° ë²„
+		sign_up = new JButton("ì•„ì´ë”” ì°¾");
 		sign_up.setBounds(350, 500, 100, 20);
-		sign_up.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		sign_up.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		login.add(sign_up);
 		sign_up.addMouseListener(new MouseAdapter() { 
 			
-			//Å¬¸¯ -> È¸¿ø°¡ÀÔ ÆĞ³Î
+			//í´ë¦­ -> íšŒì›ê°€ì… íŒ¨ë„
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
@@ -111,14 +111,14 @@ public class Login_Panel extends JFrame{
 		});
 
 		
-		//·Î±×ÀÎ Ã¢ ¾ÆÀÌµğ Ã£±â ¹öÆ°
-		find_id = new JButton("¾ÆÀÌµğ Ã£±â");
+		//ë¡œê·¸ì¸ ì°½ ì•„ì´ë”” ì°¾ê¸° ë²„íŠ¼
+		find_id = new JButton("ì•„ì´ë”” ì°¾ê¸°");
 		find_id.setBounds(450, 500, 100, 20);
-		find_id.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		find_id.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		login.add(find_id);
 		find_id.addMouseListener(new MouseAdapter() { 
 			
-			//Å¬¸¯ -> ¾ÆÀÌµğ Ã£±â ÆĞ³Î
+			//í´ë¦­ -> ì•„ì´ë”” ì°¾ê¸° íŒ¨ë„
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
@@ -130,14 +130,14 @@ public class Login_Panel extends JFrame{
 			
 		});
 	
-		//·Î±×ÀÎ Ã¢ ºñ¹Ğ¹øÈ£ Ã£±â
-		find_pw = new JButton("ºñ¹Ğ¹øÈ£ Ã£±â");
+		//ë¡œê·¸ì¸ ì°½ ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
+		find_pw = new JButton("ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°");
 		find_pw.setBounds(550, 500, 100, 20);
-		find_pw.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		find_pw.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		login.add(find_pw);
 		find_pw.addMouseListener(new MouseAdapter() { 
 			
-			//Å¬¸¯ -> ºñ¹Ğ¹øÈ£ Ã£±â ÆĞ³Î
+			//í´ë¦­ -> ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° íŒ¨ë„
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
