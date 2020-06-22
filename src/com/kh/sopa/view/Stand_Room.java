@@ -55,5 +55,7 @@ public class Stand_Room extends JFrame{
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+public static void main(String[] args) {
+	Stand_Room sr = new Stand_Room();
+}
 }
