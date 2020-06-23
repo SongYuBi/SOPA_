@@ -11,19 +11,18 @@ import java.util.ArrayList;
 
 import com.kh.sopa.model.vo.Quiz_VO;
 
-
-//¹®Á¦ Ç®±â ¿ë ÀÔÃâ·Â ÆÄÀÏ Å¬·¡½º
+//ï¿½ï¿½ï¿½ï¿½ Ç®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
 public class SolvingQuizDao {
 	
 	
-	//¹®Á¦, Á¤´ä ÆÄÀÏ ÀÐ¾î¿À±â Å¬·¡½º
+	//ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
 	public ArrayList<Quiz_VO> readQuizList() {
 
 		InputStream in = null;
 		BufferedInputStream bin = null;
 		ObjectInputStream ois = null;
 		
-		//ÀÐ¾î¿Â ÆÄÀÏÀ» ´Ù½Ã ´ãÀ» ¹è¿­ »ý¼º
+		//ï¿½Ð¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½
 		ArrayList<Quiz_VO> quizList2 = null;
 		
 		try {
@@ -34,7 +33,7 @@ public class SolvingQuizDao {
 
 			quizList2 = (ArrayList<Quiz_VO>) ois.readObject();
 
-			//ÆÄÀÏÀÇ ³»¿ëÀÌ ¹è¿­¿¡ Àß ÀúÀåµÆ´ÂÁö È®ÀÎ¿ë for¹®
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½ È®ï¿½Î¿ï¿½ forï¿½ï¿½
 			for (Quiz_VO obj : quizList2) {
 				System.out.println(obj);
 			}
@@ -53,15 +52,15 @@ public class SolvingQuizDao {
 		return quizList2;
 	}
 	
-	//¹®Á¦ Ç®±â È®ÀÎ¿ë ÆÄÀÏ ÀúÀå Å¬·¡½º
+	//ï¿½ï¿½ï¿½ï¿½ Ç®ï¿½ï¿½ È®ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
 	public void fileSave() {
 
-		//¹®Á¦¿Í Á¤´äÀ» ÀÔ·ÂÇÒ  ArrayList<Quiz> »ý¼º
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½  ArrayList<Quiz> ï¿½ï¿½ï¿½ï¿½
 		ArrayList<Quiz_VO> quizList = new ArrayList<Quiz_VO>();
 
-		quizList.add(new Quiz_VO("H2O¶õ?", "ÁÖ½º", "¹°", "Ä¿ÇÇ", "ÄÝ¶ó", "¹°"));
-		quizList.add(new Quiz_VO("°´Ã¼ÁöÇâ ÇÁ·Î±×·¥ÀÌ ¾Æ´Ñ °ÍÀº?", "ÀÚ¹Ù", "ÆÄÀÌ½ã", "c#", "c¾ð¾î", "c¾ð¾î"));
-		quizList.add(new Quiz_VO("´ÙÀ½ Áß °úÀÏÀº?", "»ç°ú", "´ç±Ù", "½º¸¶Æ®Æù", "°¨ÀÚ", "»ç°ú"));
+		quizList.add(new Quiz_VO("H2Oï¿½ï¿½?", "ï¿½Ö½ï¿½", "ï¿½ï¿½", "Ä¿ï¿½ï¿½", "ï¿½Ý¶ï¿½", "ï¿½ï¿½"));
+		quizList.add(new Quiz_VO("ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½?", "ï¿½Ú¹ï¿½", "ï¿½ï¿½ï¿½Ì½ï¿½", "c#", "cï¿½ï¿½ï¿½", "cï¿½ï¿½ï¿½"));
+		quizList.add(new Quiz_VO("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?", "ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½"));
 
 		System.out.println(quizList);
 		

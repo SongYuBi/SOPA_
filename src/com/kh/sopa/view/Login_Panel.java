@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -16,7 +17,6 @@ import javax.swing.JTextField;
 import com.kh.sopa.controller.ObjectIO;
 import com.kh.sopa.model.vo.User_VO;
 import com.kh.sopa.test.StandRoomPanelTest;
-import com.kh.sopa.test.TestMainFrame;
 
 public class Login_Panel extends JPanel{
 	private JPanel contentPane;
@@ -98,11 +98,12 @@ public class Login_Panel extends JPanel{
 					if (loginUser.equals(userList.get(i).getUser_id())) {
 						// 비밀번호 체크 추가해야함 그 후에 true
 						if (userPw.equals(userList.get(i).getUser_pw())) {
-							System.out.println("비밀번호 일치");
+							JOptionPane.showMessageDialog(null, loginUser + "님 환영합니다!");
 							checkUser = true;
 						}
 						else {
-							System.out.println("비밀번호 불일치");
+							JOptionPane.showMessageDialog(null, "비밀번호가 틀렸습니다.", "비밀번호 불일치", 
+									JOptionPane.WARNING_MESSAGE);
 						}
 						break;
 					}
@@ -111,11 +112,11 @@ public class Login_Panel extends JPanel{
 				if(checkUser) {
 					System.out.println("로그인 성공");
 					mainFrame.remove(thisPage);
-					StandRoomPanelTest srpt = new StandRoomPanelTest(loginUser);
+					StandRoomPanelTest srpt = new StandRoomPanelTest(mainFrame, loginUser);
 					mainFrame.add(srpt);
 //					srpt.setVisible(true);
 					mainFrame.repaint();
-//					mainFrame.setVisible(true);
+					mainFrame.setVisible(true);
 				}
 				
 				super.mouseClicked(arg0);

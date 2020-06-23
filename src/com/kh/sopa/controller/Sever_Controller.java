@@ -31,18 +31,18 @@ public class Sever_Controller {
 			serverSocket = new ServerSocket(8080);
 			
 			while(true) {
-				System.out.println("Á¢¼ÓÀÚ ´ë±âÁß");
+				System.out.println("ì ‘ì†ì ëŒ€ê¸°");
 				
 				socket = serverSocket.accept();
 				
-				System.out.println(socket.getInetAddress()+ "¿¡¼­ Á¢¼ÓÇß½À´Ï´Ù.");
+				System.out.println(socket.getInetAddress()+ "ì—ì„œ ì ‘ì†í–ˆìŠµë‹ˆë‹¤.");
 				
 				Receiver receiver = new Receiver(socket);
 				receiver.start();
 			}
 		}catch(IOException e) {
 			e.printStackTrace();
-			System.out.println("¼­¹ö ¼ÒÄÏ ¿¡·¯");
+			System.out.println("ì„œë²„ ì†Œì¼“ ì—");
 		}
 	}
 	
@@ -61,10 +61,10 @@ public class Sever_Controller {
 			}
 		}
 	}
-	// nickÀº ID ,
+	// nickï¿½ï¿½ ID ,
 	public void addClient(String nick,DataOutputStream out) throws IOException{
-		String message = nick + "´ÔÀÌ Á¢¼ÓÇÏ¼Ì½À´Ï´Ù. \n";
-		//¿©±â¼­ Å¬¶óÀÌ¾ğÆ®°¡ Á¢¼ÓÇÏ¸é ÇØ´ç È­¸é¿¡ À¯Àú¸¦ »Ñ·ÁÁÖ´Â°É·Î?
+		String message = nick + "ë‹˜ì´ ì ‘ì†í•˜ì…¨ìŠµë‹ˆë‹¤. \n";
+		//ì—¬ê¸°ì„œ í´ë¼ì´ì–¸íŠ¸ê°€ ì ‘ì†í•˜ë©´ í•´ë‹¹ í™”ë©´ì— ìœ ì €ë¥¼ ë¿Œë ¤ì£¼ëŠ”ê±¸ë¡œ?
 		clientMap.put(nick,out);
 		sendMessage(message);
 		
@@ -105,7 +105,7 @@ public class Sever_Controller {
 	}
 	
 	public void removeClient(String user_id) {
-		String message= user_id + "´ÔÀÌ ³ª°¡¼Ì½À´Ï´Ù. \n";
+		String message= user_id + "ë‹˜ì´ ë‚˜ê°€ì…¨ìŠµë‹ˆë‹¤. \n";
 		sendMessage(message);
 		clientMap.remove(user_id);
 	}
