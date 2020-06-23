@@ -196,7 +196,7 @@ public class SolvingQuiz extends JFrame {
 
 
 		// 문제출제 라벨에도 문제 넣어주기
-		quizLabel.setText(split[0]);
+		quizLabel.setText("");
 
 		// 문제버튼 별 클릭 시 액션
 
@@ -224,7 +224,7 @@ public class SolvingQuiz extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (btn_quiz_answer_2.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
+				if (btn_quiz_answer_2.getText().equals(quizList2.get(1).getQuiz_final_answer())) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -243,7 +243,7 @@ public class SolvingQuiz extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (btn_quiz_answer_3.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
+				if (btn_quiz_answer_3.getText().equals(quizList2.get(1).getQuiz_final_answer())) {
 					add_quiz_num++;
 					add_correct_num++;
 
@@ -262,7 +262,7 @@ public class SolvingQuiz extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (btn_quiz_answer_4.getText().equals(quizList2.get(1).getQuiz_final_answer()))) {
+				if (btn_quiz_answer_4.getText().equals(quizList2.get(1).getQuiz_final_answer())) {
 					add_quiz_num++;
 					add_correct_num++;
 

@@ -24,7 +24,7 @@ public class MakingQuizManager {
 		qad.writeQuiz(list);
 	}
 	
-	public void selectAllQuiz() {
-		rp.printAllQuiz(qad.readQuizList());
-	}
+//	public void selectAllQuiz() {
+//		rp.printAllQuiz(qad.readQuizList());
+//	}
 }
