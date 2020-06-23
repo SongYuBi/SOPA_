@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 import SOPA.model.DAO.Quiz_Dao;
 import SOPA.model.vo.Test_QuizRoom;
 */
-//°á°úÆäÀÌÁö  Å¬·¡½º
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  Å¬ï¿½ï¿½ï¿½ï¿½
 public class ResultPage extends JFrame {
 	private JPanel contentPane;
 	
@@ -35,21 +35,20 @@ public class ResultPage extends JFrame {
 		setContentPane(contentPane);		
 		
 		
-		
-		//»ó´Ü¹Ù ÆÐ³Î
+		//ï¿½ï¿½Ü¹ï¿½ ï¿½Ð³ï¿½
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setLocation(40, 10);
 		panel.setSize(940, 50);
 		panel.setBackground(Color.WHITE);
 		
-		//»ó´Ü ¿À¸¥ÂÊÀÇ µÚ·Î°¡±â ¹öÆ° 
-		JButton panel_stopBtn = new JButton("µÚ·Î°¡±â");
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·Î°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° 
+		JButton panel_stopBtn = new JButton("ï¿½Ú·Î°ï¿½ï¿½ï¿½");
 		 panel_stopBtn.setBounds(840, 0, 100, 50);
 		 panel_stopBtn.setBackground(Color.yellow);
 		
-		 //¹öÆ°À§ ±×¸¸ÇØ¿ä ¶óº§
-		//JLabel stopLabel = new JLabel("µÚ·Î°¡±â");
+		 //ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½×¸ï¿½ï¿½Ø¿ï¿½ ï¿½ï¿½
+		//JLabel stopLabel = new JLabel("ï¿½Ú·Î°ï¿½ï¿½ï¿½");
 		
 		
 		panel.add( panel_stopBtn);
@@ -57,14 +56,14 @@ public class ResultPage extends JFrame {
 	
 		
 		
-		//123 ¼øÀ§ °á°ú(rankÆÐ³Î)Ãâ·Â ÆÐ³Î
+		//123 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(rankï¿½Ð³ï¿½)ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½
 		JPanel rankPanel = new JPanel();
 		rankPanel.setLayout(null);
 		rankPanel.setBounds(40, 70, 940, 460);
 		rankPanel.setBackground(Color.WHITE);
 		
 	
-		//rankÆÐ³Î¾È_ÀÌ¹ÌÁö
+		//rankï¿½Ð³Î¾ï¿½_ï¿½Ì¹ï¿½ï¿½ï¿½
 
 		Image rank_ima = new ImageIcon("image/rank.PNG").getImage().getScaledInstance(400, 400, 0);;
 		JLabel rank_Ima = new JLabel(new ImageIcon (rank_ima));
@@ -74,41 +73,41 @@ public class ResultPage extends JFrame {
 		
 		
 		
-		//¶óº§ 1µî ¾ÆÀÌµð
+		//ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
 		JLabel firstL = new JLabel();
 		firstL.setSize(50,50);
-		firstL.setText(/*QuizRoom1.get(0).toString()*/);
+//		firstL.setText(QuizRoom1.get(0).toString());
 		
-		//¶óº§ 2µî ¾ÆÀÌµð
+		//ï¿½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
 		JLabel secondL = new JLabel();
 		secondL.setSize(50,50);
-		secondL.setText(/*QuizRoom1.get(1).toString()*/);
+//		secondL.setText(/*QuizRoom1.get(1).toString()*/);
 		
-		//¶óº§ 3µî ¾ÆÀÌµð
+		//ï¿½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
 		JLabel thirdL = new JLabel();
 		thirdL.setSize(50,50);
-		thirdL.setText(/*QuizRoom1.get(2).toString()*/);
+//		thirdL.setText(/*QuizRoom1.get(2).toString()*/);
 		
 		
 		
-		//rankÆÐ³Î_ µî¼öÆÐ³Î
+		//rankï¿½Ð³ï¿½_ ï¿½ï¿½ï¿½ï¿½Ð³ï¿½
 		JPanel rank_RPanel = new JPanel();
 		rank_RPanel.setLayout(null);
 		rank_RPanel.setBounds(50, 40 ,150, 90);
 		rank_RPanel.setBackground(Color.BLUE);
 		
-		//ÀÚ½ÅÀÇ µî¼ö ¶óº§
+		//ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 		
 		
 		
 		
-		//rankÆÐ³Î_ ÄíÅ°ÆÐ³Î
+		//rankï¿½Ð³ï¿½_ ï¿½ï¿½Å°ï¿½Ð³ï¿½
 		JPanel rank_CPanel = new JPanel();
 		rank_CPanel.setLayout(null);
 		rank_CPanel.setBounds(50, 150, 150, 90);
 		rank_CPanel.setBackground(Color.RED);
 		
-		//ÀÚ½ÅÀÌ ¾òÀ» ÄíÅ°¶óº§
+		//ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½
 		
 		
 		
@@ -125,20 +124,20 @@ public class ResultPage extends JFrame {
 		
 		
 		
-		//4µîrank ÆÐ³Î
+		//4ï¿½ï¿½rank ï¿½Ð³ï¿½
 		JPanel four = new JPanel();
 		 four.setBounds(40, 540, 940, 50);
 		 four.setBackground(Color.WHITE);
 		 
-		JLabel four_Label = new JLabel("4 µî");
+		JLabel four_Label = new JLabel("4 ï¿½ï¿½");
 		 four_Label.setBounds(40, 540, 40, 50);
-         four_Label.setFont(new Font("¹ÙÅÁ", Font.BOLD, 35));
+         four_Label.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 35));
 	
 		
-		//4µî ¾ÆÀÌµð ¶óº§e
+		//4ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½e
 		JLabel fourL = new JLabel();
 		fourL.setSize (50,50);
-		fourL.setText(/*QuizRoom1.get(3).toString()*/);
+//		fourL.setText(/*QuizRoom1.get(3).toString()*/);
 		
 
 		four.add(four_Label/*,"West"*/);
@@ -147,22 +146,20 @@ public class ResultPage extends JFrame {
 		
 		
 		
-		//5µîrank ÆÐ³Î
+		//5ï¿½ï¿½rank ï¿½Ð³ï¿½
 		JPanel  five = new JPanel();
-		 five.setBounds(40, 600 , 940, 50);
-		 five.setBackground(Color.WHITE);
+		five.setBounds(40, 600 , 940, 50);
+		five.setBackground(Color.WHITE);
 	   
-		JLabel five_Label = new JLabel("5 µî");
-		  five_Label.setBounds(50, 600, 40, 50);
-	     five_Label.setFont(new Font("¹ÙÅÁ", Font.BOLD, 35));
-	     
+		JLabel five_Label = new JLabel("5 ï¿½ï¿½");
+		five_Label.setBounds(50, 600, 40, 50);
+	    five_Label.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 35));
 	     
 		
-		
-		//5µî ¾ÆÀÌµð¶óº§
+		//5ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½
 		JLabel fiveL = new JLabel();
 		fiveL.setSize(50,50);
-		fiveL.setText(/*QuizRoom1.get(4).toString()*/);
+//		fiveL.setText(/*QuizRoom1.get(4).toString()*/);
 		
 		 five.add(five_Label);
 	     five.add(fiveL);
@@ -174,10 +171,7 @@ public class ResultPage extends JFrame {
 	
 	public static void main(String[] args) {
 		new ResultPage();	
-	
 	}
-
-
 
 
 

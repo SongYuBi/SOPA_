@@ -2,18 +2,19 @@ package com.kh.sopa.test;
 
 import javax.swing.JFrame;
 
+import com.kh.sopa.controller.ObjectIO;
 import com.kh.sopa.view.Login_Panel;
 
 public class TestRun {
 
 	public static void main(String[] args) {
-//		ObjectIOTest oiot = new ObjectIOTest();s
+		ObjectIO oio = new ObjectIO();
 		
-//		oiot.UserWriteToFile();
-//		oiot.UserReadToFile();
+//		oio.UserWriteToFile();
+//		oio.UserReadToFile();
 		
-//		oiot.QuizWriteTest();
-//		oiot.QuizReadTest();
+//		oio.QuizWriteTest();
+//		oio.QuizReadTest();
 		
 //		StandRoomPanelTest srpt = new StandRoomPanelTest("powerman");
 //		srpt.panelTest();
@@ -23,6 +24,7 @@ public class TestRun {
 //		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
 //		f.add(new Login_Panel(f));
 //		f.setVisible(true);
+		
 	}
 
 }

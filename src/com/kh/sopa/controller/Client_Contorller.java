@@ -29,18 +29,18 @@ public class Client_Contorller {
 		int port = 8080;
 		try {
 			socket = new Socket(ip, port);
-			System.out.println("¼­¹ö¿¡ ¿¬°á‰Î ");
+			System.out.println("ì„œë²„ì— ì—°ê²°  ");
 
 			out = new DataOutputStream(socket.getOutputStream());
 			in = new DataInputStream(socket.getInputStream());
 
 			out.writeUTF(client_id);
-			System.out.println("Client : ID Àü¼Û ¿Ï·á");
+			System.out.println("Client : ID ì „ì†¡ ì™„ë£Œ");
 			gui.label_userid(client_id);
 			String line;
 			
 			while (in != null) {
-				System.out.println("Å¬¶óÀÌ¾ğÆ®¿¡¼­ ¹Ş¾Æ " + msg);
+				System.out.println("í´ë¼ì´ì–¸íŠ¸ì—ì„œ ë°›ì•„ " + msg);
 				msg = in.readUTF();
 				gui.appendMsg(msg);
 			}
@@ -49,21 +49,21 @@ public class Client_Contorller {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("¼­¹ö¿¡ ¿¬°áÇÒ ¼ö ¾ø½À´Ï´Ù.");
+			System.out.println("ì„œë²„ì— ì—°ê²°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 
 	public void sendMessage(String msg) {
 		try {
 			out.writeUTF(msg);
-			System.out.println("Å¬¶óÀÌ¾ğÆ®¿¡¼­ ¼­¹ö·Î "+msg);
+			System.out.println("í´ë¼ì´ì–¸íŠ¸ì—ì„œ ì„œë²„ë¡œ "+msg);
 		} catch (IOException e) {
-			System.out.println("¸Ş½ÃÁö Àü¼Û ¿À·ù");
+			System.out.println("ë©”ì‹œì§€ ì „ì†¡ ì˜¤ë¥˜");
 			e.printStackTrace();
 		}
 	}
 	
-	//´Ğ³×ÀÓ setter
+	//ë‹‰ë„¤ setter
 		public void setNicknames(String client_id) {
 			this.client_id = client_id;
 		}
