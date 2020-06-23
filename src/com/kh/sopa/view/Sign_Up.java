@@ -1,3 +1,4 @@
+
 package com.kh.sopa.view;
 
 import java.awt.BorderLayout;
@@ -103,7 +104,7 @@ public class Sign_Up extends JFrame{
 		
 		//전화번호 입력창
 		sign_phone = new JTextField(10);
-		sign_phone.setBounds(390, 420, 200, 40);
+		sign_phone.setBounds(390, 460, 200, 40);
 		sign_phone.setFont(new Font("바탕", Font.ITALIC, 12));
 		sign_phone.setText("" + uv.getUser_phone_number());
 		sign.add(sign_phone);
@@ -139,15 +140,34 @@ public class Sign_Up extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-				if(sign_pw != check_pw) {
-					JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 재 입력을 다시 입력해주세요");
+				uv = new User_VO();
+				uv.setUser_id(sign_id.getText());
+				System.out.println(uv.getUser_id());
+				uv.setUser_pw(sign_pw.getText());
+				System.out.println(uv.getUser_pw());
+				uv.setUser_phone_number(sign_phone.getText());
+				System.out.println(uv.getUser_phone_number());
 
-				} 
+
+				al = new ArrayList();
+				al.add(uv);
 				
+				
+				
+						
+				for(int i = 0; i < al.size(); i++) {
+					al.get(i);
+					System.out.println(i);
+				//기록조회
+				}
+				
+				lc = new LoginController();
+				lc.user_make(uv);
 				new Login_Panel();
 				dispose();
 							
 			}
+			
 		});
 		
 	
