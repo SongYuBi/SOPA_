@@ -1,4 +1,7 @@
 package com.kh.sopa.model.vo;
+
+import java.io.Serializable;
+
 //
 public class Quiz_VO implements java.io.Serializable {
 	private String quiz_set_info;		//문제 세트 정보
@@ -19,7 +22,7 @@ public class Quiz_VO implements java.io.Serializable {
 	}
 	
 	public Quiz_VO(String quiz_title, String quiz_answer_1, String quiz_answer_2, String quiz_answer_3,
-			String quiz_answer_4, String quiz_final_answer) {
+			String quiz_answer_4, String quiz_final_answer, int quiz_difficulty ) {
 		super();
 		this.quiz_title = quiz_title;
 		this.quiz_answer_1 = quiz_answer_1;
@@ -27,6 +30,7 @@ public class Quiz_VO implements java.io.Serializable {
 		this.quiz_answer_3 = quiz_answer_3;
 		this.quiz_answer_4 = quiz_answer_4;
 		this.quiz_final_answer = quiz_final_answer;
+		this.quiz_difficulty = quiz_difficulty; 
 	}
 	
 	
@@ -147,13 +151,15 @@ public class Quiz_VO implements java.io.Serializable {
 	}
 	
 	
-	//���� + ���� + �����
+	//���� + ���� + ����� + ���� ���̵�
 	public String SolvingQuiz(String quiz_title, String quiz_answer_1, String quiz_answer_2, String quiz_answer_3,
-			String quiz_answer_4, String quiz_final_answer) {
+			String quiz_answer_4, String quiz_final_answer, int quiz_difficulty) {
 		return quiz_title + ", " + quiz_answer_1 + ", "
 				+ quiz_answer_2 + ", " + quiz_answer_3 + ", " + quiz_answer_4
-				+ ", " + quiz_final_answer;	
+				+ ", " + quiz_final_answer + ", " + quiz_difficulty;
+			
 	}
+	
 	
 	
 	@Override

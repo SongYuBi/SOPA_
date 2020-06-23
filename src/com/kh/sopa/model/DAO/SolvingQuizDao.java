@@ -58,9 +58,9 @@ public class SolvingQuizDao {
 		//������ ������ �Է���  ArrayList<Quiz> ����
 		ArrayList<Quiz_VO> quizList = new ArrayList<Quiz_VO>();
 
-		quizList.add(new Quiz_VO("H2O��?", "�ֽ�", "��", "Ŀ��", "�ݶ�", "��"));
-		quizList.add(new Quiz_VO("��ü���� ���α׷��� �ƴ� ����?", "�ڹ�", "���̽�", "c#", "c���", "c���"));
-		quizList.add(new Quiz_VO("���� �� ������?", "���", "���", "����Ʈ��", "����", "���"));
+		quizList.add(new Quiz_VO("H2O��?", "�ֽ�", "��", "Ŀ��", "�ݶ�", "��", 10));
+		quizList.add(new Quiz_VO("��ü���� ���α׷��� �ƴ� ����?", "�ڹ�", "���̽�", "c#", "c���", "c���", 20));
+		quizList.add(new Quiz_VO("���� �� ������?", "���", "���", "����Ʈ��", "����", "���", 20));
 
 		System.out.println(quizList);
 		
