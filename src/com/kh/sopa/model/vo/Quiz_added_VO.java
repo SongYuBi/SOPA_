@@ -4,16 +4,16 @@ package com.kh.sopa.model.vo;
 public class Quiz_added_VO implements java.io.Serializable {
 
 	private String added_title;			//문제이름
-	private String added_subject;		//주제
+//	private String added_subject;		//주제는 세트에서 추가됨
 	private String added_answer_1;		//1번답
 	private String added_answer_2;		//2번답
 	private String added_answer_3;		//3번답
 	private String added_answer_4;		//4번답
-	private String added_final_answer;		//최종 정답을 int로 받습니다 1,2,3,4 주석값 오류 repositories에서 깨짐
+	private String added_final_answer;	//최종 정답은 String으로 비교
 	private int added_difficulty;		//난이도 상급10 중급20 하급30
 	private int added_cookie;			//문제당 지급 쿠키
 	private String added_image;			//문제에 추가할 이미지
-	private int added_people;			//참여인원
+//	private int added_people;			//참여인원은 세트에서 추가됨
  
 	
 	public Quiz_added_VO() {
@@ -21,12 +21,11 @@ public class Quiz_added_VO implements java.io.Serializable {
 	}
 
 
-	public Quiz_added_VO(String added_title, String added_subject, String added_answer_1, String added_answer_2,
-			String added_answer_3, String added_answer_4, String added_final_answer, int added_difficulty,
-			int added_cookie, String added_image, int added_people) {
+	public Quiz_added_VO(String added_title, String added_answer_1, String added_answer_2, String added_answer_3,
+			String added_answer_4, String added_final_answer, int added_difficulty, int added_cookie,
+			String added_image) {
 		super();
 		this.added_title = added_title;
-		this.added_subject = added_subject;
 		this.added_answer_1 = added_answer_1;
 		this.added_answer_2 = added_answer_2;
 		this.added_answer_3 = added_answer_3;
@@ -35,7 +34,6 @@ public class Quiz_added_VO implements java.io.Serializable {
 		this.added_difficulty = added_difficulty;
 		this.added_cookie = added_cookie;
 		this.added_image = added_image;
-		this.added_people = added_people;
 	}
 
 
@@ -46,16 +44,6 @@ public class Quiz_added_VO implements java.io.Serializable {
 
 	public void setAdded_title(String added_title) {
 		this.added_title = added_title;
-	}
-
-
-	public String getAdded_subject() {
-		return added_subject;
-	}
-
-
-	public void setAdded_subject(String added_subject) {
-		this.added_subject = added_subject;
 	}
 
 
@@ -139,26 +127,14 @@ public class Quiz_added_VO implements java.io.Serializable {
 	}
 
 
-	public int getAdded_people() {
-		return added_people;
-	}
-
-
-	public void setAdded_people(int added_people) {
-		this.added_people = added_people;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Quiz_added_VO [added_title=" + added_title + ", added_subject=" + added_subject + ", added_answer_1="
-				+ added_answer_1 + ", added_answer_2=" + added_answer_2 + ", added_answer_3=" + added_answer_3
-				+ ", added_answer_4=" + added_answer_4 + ", added_final_answer=" + added_final_answer
-				+ ", added_difficulty=" + added_difficulty + ", added_cookie=" + added_cookie + ", added_image="
-				+ added_image + ", added_people=" + added_people + "]";
+		return "Quiz_added_VO [added_title=" + added_title + ", added_answer_1=" + added_answer_1 + ", added_answer_2="
+				+ added_answer_2 + ", added_answer_3=" + added_answer_3 + ", added_answer_4=" + added_answer_4
+				+ ", added_final_answer=" + added_final_answer + ", added_difficulty=" + added_difficulty
+				+ ", added_cookie=" + added_cookie + ", added_image=" + added_image + "]";
 	}
 	
-
-
+	
 	
 }

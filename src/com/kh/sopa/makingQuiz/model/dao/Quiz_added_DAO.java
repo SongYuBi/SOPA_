@@ -1,5 +1,6 @@
 package com.kh.sopa.makingQuiz.model.dao;
 
+
 import java.awt.peer.TrayIconPeer;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,19 +19,19 @@ public class Quiz_added_DAO {
 	
 	public Quiz_added_DAO() {}
 	
-	public ArrayList<Quiz_added_VO> readQuizList2(){
+	public ArrayList<Quiz_added_VO> readQuizTitle(){
 		ObjectInputStream ois = null;
 		ArrayList<Quiz_added_VO> list = null;
 		String subject = null;
 		ArrayList<Quiz_added_VO> list2 = null;
-		
+
 		try {
 			ois = new ObjectInputStream(new FileInputStream("Quiz.dat"));
 			
 			list = (ArrayList<Quiz_added_VO>)ois.readObject();
 			
 			for (int i = 0; i < list.size(); i++) {
-			subject = list.get(i).getAdded_subject();
+			subject = list.get(i).getAdded_title();
 			
 			}
 			
