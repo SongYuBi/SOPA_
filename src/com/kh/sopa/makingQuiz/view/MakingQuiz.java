@@ -1,14 +1,14 @@
 package com.kh.sopa.makingQuiz.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -17,18 +17,20 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.kh.sopa.makingQuiz.model.controller.MakingQuizManager;
-import com.kh.sopa.makingQuiz.model.controller.ToggleSwitch;
 import com.kh.sopa.makingQuiz.model.dao.Quiz_added_DAO;
 import com.kh.sopa.makingQuiz.vo.ResultPrinter;
 import com.kh.sopa.model.vo.Quiz_added_VO;
 
 
-public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
+public class MakingQuiz extends JFrame implements ActionListener, ItemListener, MouseListener {
 	MakingQuizManager mqm = new MakingQuizManager();
 	Quiz_added_VO qav = new Quiz_added_VO();
 	Quiz_added_DAO qad = new Quiz_added_DAO();
@@ -40,7 +42,6 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 	private JPanel answer_3;
 	private JPanel answer_4;
 
-	
 	private JTextField title;
 	private JTextField cookie;
 	private JTextField ansText_1;
@@ -74,13 +75,17 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 	private JButton button_2;
 	private JButton button_3;
 	private JButton button_4;
+	private JButton button_5;
 	
-	//난이도를 라디오버튼 클릭시 값 저장
+//	난이도를 라디오버튼 클릭시 값 저장
 	private String finalAnswer = null;
 	private int levelResult = 0;
 //	ArrayList<String> aResult = new ArrayList<>();
 //	private String [] answerResult = new String [4];
 	
+	private JTable listQuiz;
+	private JScrollPane scrollList;
+	private DefaultTableModel model;
 	
 	
 
@@ -93,7 +98,7 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		allPanel.setLayout(null);
 		setContentPane(allPanel);		
 		
-//		리스트 패널, 세트리스트와 문제리스트가 위치합니다
+//		전체 리스트 패널, 세트리스트와 문제리스트가 위치합니다
 		JPanel listPanel = new JPanel();
 		listPanel.setBounds(7, 60, 340, 440);
 		listPanel.setLayout(null);
@@ -105,10 +110,45 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		listSet.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 //		리스트, 문제를 만들면 등록되는 리스트입니다
-		JList listQuiz = new JList(); //qad.readQuizList().toArray()
-		listQuiz.setBounds(170, 7, 160, 340);
-		listQuiz.setBackground(Color.LIGHT_GRAY);
-		listQuiz.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+//		JList listQuiz = new JList(); //qad.readQuizList().toArray()
+//		listQuiz.setBounds(170, 7, 160, 340);
+//		listQuiz.setBackground(Color.LIGHT_GRAY);
+//		listQuiz.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);	
+
+		String[][] row = {
+			    { "A", "B" },
+			    { "C", "D" },
+			    { "C", "D" },
+			    { "C", "D" },
+			    { "C", "D" },
+			    { "C", "D" },
+
+			    
+			};
+		
+		String[] col = { "C 1", "C 2" };
+//		
+////		문제 리스트 패널, 문제 리스트에 위치합니다
+		JPanel quizList = new JPanel();
+		quizList.setBounds(170, 7, 160, 340);
+		quizList.setBackground(Color.GRAY);
+//		quizList.setLayout(new BorderLayout());
+		listPanel.add(quizList);
+//
+//		model = new DefaultTableModel(row, col);
+//		listQuiz = new JTable(model);
+////		listQuiz.addMouseListener(this);
+////		listQuiz.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+//		scrollList = new JScrollPane(listQuiz);
+//		
+//		scrollList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//		quizList.add(listQuiz);
+//		listQuiz.add(scrollList);
+
+	
+		
+		
+		
 		
 
 		
@@ -118,10 +158,17 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		button_3.setBounds(170, 350, 160, 40);
 		button_3.addActionListener(this);
 		
-//		버튼, 삭제, 문제리스트에서 선택한 문제를 삭제합니다
-		button_4 = new JButton("\uB9AC\uC2A4\uD2B8\uC11C \uC0AD\uC81C!");
+//		버튼, 삭제, 문제 리스트에서 선택한 문제를 삭제합니다
+		button_4 = new JButton("\uC0AD\uC81C");
 		button_4.setFont(new Font("굴림", Font.PLAIN, 18));
-		button_4.setBounds(170, 395, 160, 40);
+		button_4.setBounds(250, 395, 80, 40);
+		
+//		버튼, 수정, 문제 리스트에서 선택한 문제를 수정합니다
+		button_5 = new JButton("\uC218\uC815");
+		button_5.setFont(new Font("굴림", Font.PLAIN, 18));
+		button_5.setBounds(170, 395, 80, 40);
+
+
 		
 //		버튼, 세트로 만듬, 문제 리스트의 문제들을 세트로 만듭니다
 		button_2 = new JButton("\uC138\uD2B8\uB85C \uCD94\uAC00!");
@@ -248,7 +295,7 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		level_3.setBounds(15, 120, 120, 30);
 		level_3.addItemListener(this);
 		
-		//라디오 버튼 선택 해제용
+//		라디오 버튼 선택 해제용
 		level_4 = new JRadioButton();
 
 //		난이도, 그룹화 라디오 버튼
@@ -257,10 +304,8 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		levelGroup.add(level_2);
 		levelGroup.add(level_3);
 		levelGroup.add(level_4);
-		this.add(level_4);
+		getContentPane().add(level_4);
 		
-
-	
 
 		
 //		답 패널, 답이 위치합니다
@@ -354,10 +399,8 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 //		ansRadio_4.setBackground(Color.GREEN);
 		ansRadio_4.addItemListener(this);
 		
-		//라디오 버튼 선택 해제용
+//		라디오 버튼 선택 해제용
 		ansRadio_5 = new JRadioButton();
-
-//		ㄹㄹㄹㄹㄹ
 		
 //		정답, 그룹화 라디오 버튼
 		ButtonGroup ansGroup = new ButtonGroup();
@@ -366,32 +409,29 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		ansGroup.add(ansRadio_3);
 		ansGroup.add(ansRadio_4);
 		ansGroup.add(ansRadio_5);
-		this.add(ansRadio_5);
+		getContentPane().add(ansRadio_5);
 		
 
-	
 //		이미지추가 패널
 		JPanel imagePanel = new JPanel();
 		imagePanel.setBackground(Color.LIGHT_GRAY);
 		imagePanel.setBounds(7, 90, 483, 345);
-
 		
-
 //		메인 패널에 올라가는 개별 패널입니다
 //		allPanel.add(SystemBar);
 		allPanel.add(listPanel);
 		allPanel.add(quizPanel);
 		allPanel.add(answerPanel);
 		
-
 //		리스트 패널에 올라가는 버튼과 리스트입니다
 		listPanel.add(listSet);
-		listPanel.add(listQuiz);
+//		listPanel.add(listQuiz);
 		listPanel.add(button_2);
 		listPanel.add(button_3);
 		listPanel.add(button_4);
-			
+		listPanel.add(button_5);
 		
+			
 //		문제 패널에 올라가는 버튼과 리스트 입니다 패널내 하위패널은 들여쓰기되어 있습니다
 		quizPanel.add(titleSet);
 			quizPanel.add(quizTitleSet);
@@ -437,9 +477,9 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 		
 		this.setResizable(false);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
+
 
 	//난이도, 선택한 라디오 버튼에 따라 변수에 값 저장
 	@Override
@@ -469,64 +509,82 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 	//리스트에 추가해요 버튼을 누르면 Quiz_added_VO에 setter값으로 저장
 	@Override	
 	public void actionPerformed(ActionEvent a) {
-		
-			
 		if(a.getSource()==button_3) {
-			
-		qav.setAdded_title(title.getText());
-		qav.setAdded_cookie(Integer.parseInt(cookie.getText()));
-		qav.setAdded_difficulty(levelResult);
-		qav.setAdded_answer_1(ansText_1.getText());
-		qav.setAdded_answer_2(ansText_2.getText());
-		qav.setAdded_answer_3(ansText_3.getText());
-		qav.setAdded_answer_4(ansText_4.getText());
-		qav.setAdded_final_answer(finalAnswer);
-		qav.setAdded_subject(null);
-		qav.setAdded_image(null);
-		qav.setAdded_people(0);
+			qav.setAdded_title(title.getText());
+			qav.setAdded_answer_1(ansText_1.getText());
+			qav.setAdded_answer_2(ansText_2.getText());
+			qav.setAdded_answer_3(ansText_3.getText());
+			qav.setAdded_answer_4(ansText_4.getText());
+			qav.setAdded_final_answer(finalAnswer);
+			qav.setAdded_cookie(Integer.parseInt(cookie.getText()));
+			qav.setAdded_difficulty(levelResult);
+			qav.setAdded_image(null);
+//			qav.setAdded_subject(null);
+//			qav.setAdded_people(0);
 		
 //			2차 스위치
 //			if(ansSwitch_1.isActivated()) {
 //				aResult.add("ans1");
 //			}
-//			
 //			if(ansSwitch_2.isActivated()) {
 //				aResult.add("ans2");
 //			}
-//			
 //			if(ansSwitch_3.isActivated()) {
 //				aResult.add("ans3");
 //			}
-//			
 //			if(ansSwitch_4.isActivated()) {
 //				aResult.add("ans4");
 //			}
-//
 //			String listString = String.join(", ", aResult);
-//			
-//			qav.setAdded_final_answer(listString);
-
 		}
 		
-		//위에서 setter 삽입 후 출력 클래스로 넘김
+//		위에서 setter 삽입 후 출력 클래스로 넘김
 		mqm.insertQuiz(qav);
 		
 //		하나의 문제 등록 후 필드 초기화
-		titleSet.setText(null);
-		title.setText(null);
-		cookie.setText(null);
-		level_4.setSelected(true);
-		ansRadio_5.setSelected(true);
+//		titleSet.setText(null);			//세트 이름 초기화는 필요 없음
+		title.setText(null);			//문제 이름 초기화
 		ansText_1.setText(null);
 		ansText_2.setText(null);
 		ansText_3.setText(null);
 		ansText_4.setText(null);
-//		aResult.clear();
+		ansRadio_5.setSelected(true);	//정답 라디오 버튼 초기화
+		cookie.setText(null);			//쿠키 개수 초기화
+		level_4.setSelected(true);		//난이도 라디오 버튼 초기화
+//		aResult.clear();				//스위치형 정답 (2차구현)
 
+//		콘솔로 Quiz에 추가된 퀴즈를 출력함
+		rp.printAllQuiz(qad.readQuizList());
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
-		//읽어오는 테스트 코드
-		mqm.selectAllQuiz();
+	}
 
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 
