@@ -59,9 +59,10 @@ public class SolvingQuizDao {
 		//문제와 정답을 입력할  ArrayList<Quiz> 생성
 		ArrayList<Quiz_VO> quizList = new ArrayList<Quiz_VO>();
 
-		quizList.add(new Quiz_VO("H2O란?", "주스", "물", "커피", "콜라", "물"));
-		quizList.add(new Quiz_VO("객체지향 프로그램이 아닌 것은?", "자바", "파이썬", "c#", "c언어", "c언어"));
-		quizList.add(new Quiz_VO("다음 중 과일은?", "사과", "당근", "스마트폰", "감자", "사과"));
+		quizList.add(new Quiz_VO("H2O란?", "주스", "물", "커피", "콜라", "물", 10));
+		quizList.add(new Quiz_VO("객체지향 프로그램이 아닌 것은?", "자바", "파이썬", "c#", "c언어", "c언어", 20));
+		quizList.add(new Quiz_VO("다음 중 과일은?", "사과", "당근", "스마트폰", "감자", "사과", 20));
+
 
 		System.out.println(quizList);
 		
