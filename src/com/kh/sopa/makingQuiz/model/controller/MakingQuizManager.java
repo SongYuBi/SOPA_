@@ -25,7 +25,7 @@ public class MakingQuizManager {
 
 		for (int i = 0; i < set.size(); i++) {
 			if (set.get(i).getQuiz_set_info() != null) {
-				System.out.println("Ãß°¡ÇÒ ¹®Á¦ ¾øÀ½");
+				System.out.println("ì¶”ê°€í•  ë¬¸ì œ ì—†ìŒ");
 				break;
 			} else if (set.get(i).getQuiz_set_info() == null) {
 				set.get(i).setQuiz_set_info(quiz_set_info);

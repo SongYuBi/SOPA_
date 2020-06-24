@@ -18,10 +18,10 @@ public class Run {
 				System.out.println(list.get(i));
 			}
 		}else {
-			System.out.println("¹®Á¦ ÆÄÀÏÀ» »ı¼ºÇØ¾ß ÇÕ´Ï´Ù");
+			System.out.println("ë¬¸ì œ íŒŒì¼ì„ ìƒì„±í•´ì•¼ í•©ë‹ˆë‹¤");
 		}
 		
-		System.out.println("°æ²¾¼±");
+		System.out.println("ê²½ê¼ì„ ");
 		
 		ArrayList<Quiz_VO> set = qd.readQs();
 		if(set != null) {
@@ -29,7 +29,7 @@ public class Run {
 				System.out.println(set.get(i));
 			}
 		}else {
-			System.out.println("¼¼Æ® ÆÄÀÏÀ» »ı¼ºÇØ¾ß ÇÕ´Ï´Ù.");
+			System.out.println("ì„¸íŠ¸ íŒŒì¼ì„ ìƒì„±í•´ì•¼ í•©ë‹ˆë‹¤.");
 		}
 	
 	}

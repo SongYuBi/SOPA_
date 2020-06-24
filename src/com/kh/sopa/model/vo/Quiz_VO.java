@@ -4,18 +4,18 @@ import java.io.Serializable;
 
 //
 public class Quiz_VO implements java.io.Serializable {
-	private String quiz_set_info;		//臾몄젣 �꽭�듃 �젙蹂�
-	private String quiz_title;			//臾몄젣 �젣紐�
-	private String quiz_subject;		//臾몄젣 二쇱젣
-	private String quiz_answer_1;		//�떟 1踰�
-	private String quiz_answer_2;		//�떟 2踰�
-	private String quiz_answer_3;		//�떟 3踰�
-	private String quiz_answer_4;		//�떟 4踰�
-	private String quiz_final_answer;	//臾몄젣�뿉�꽌�쓽 �젙�떟 
-	private int quiz_difficulty;		//�궃�씠�룄 (10珥� 20珥� 30珥� �떒�쐞濡� �뱾媛��땲源� �씪�떒 �젙�닔�삎�쑝濡� �꽔�뿀�뒿�땲
-	private int quiz_cookie;			//寃뚯엫 �궡�뿉�꽌�쓽 �옱�솕
-	private String quiz_image;			//�씠誘몄� 寃쎈줈
-	private int quiz_people;			//�씤�썝 �닔
+	private String quiz_set_info;		//세트 이름
+	private String quiz_title;			//문제 이름
+	private String quiz_subject;		//주제
+	private String quiz_answer_1;		//답1
+	private String quiz_answer_2;		//답2
+	private String quiz_answer_3;		//답3
+	private String quiz_answer_4;		//답4
+	private String quiz_final_answer;	//선택한 정답
+	private int quiz_difficulty;		//난이도 (10 20 30) 
+	private int quiz_cookie;			//문제당 쿠키
+	private String quiz_image;			//추가한 이미지
+	private int quiz_people;			//참여 인원
 	
 	public Quiz_VO(){
 		
