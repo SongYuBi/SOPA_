@@ -1,14 +1,13 @@
 package com.kh.sopa.makingQuiz.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -25,51 +24,51 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.kh.sopa.makingQuiz.model.controller.MakingQuizManager;
-import com.kh.sopa.makingQuiz.model.dao.Quiz_added_DAO;
-import com.kh.sopa.makingQuiz.vo.ResultPrinter;
-import com.kh.sopa.model.vo.Quiz_added_VO;
+import com.kh.sopa.makingQuiz.model.dao.Quiz_DAO;
+import com.kh.sopa.model.vo.Quiz_VO;
 
-
-public class MakingQuiz extends JFrame implements ActionListener, ItemListener, MouseListener {
+public class MakingQuiz extends JFrame implements ActionListener, ItemListener {
 	MakingQuizManager mqm = new MakingQuizManager();
-	Quiz_added_VO qav = new Quiz_added_VO();
-	Quiz_added_DAO qad = new Quiz_added_DAO();
-	ResultPrinter rp = new ResultPrinter();
+	Quiz_DAO qd = new Quiz_DAO();
+	Quiz_VO qv = new Quiz_VO();
 	
-	private JPanel allPanel;
-	private JPanel answer_1;
-	private JPanel answer_2;
-	private JPanel answer_3;
-	private JPanel answer_4;
-
+	private JPanel	mqPanel;
+	private JPanel	aPanel_1;
+	private JPanel	aPanel_2;
+	private JPanel	aPanel_3;
+	private JPanel	aPanel_4;
+	
+	private JTextField set_info;
 	private JTextField title;
+	private JTextField subject;
+	private JTextField answer_1;
+	private JTextField answer_2;
+	private JTextField answer_3;
+	private JTextField answer_4;
+	private String final_answer;
+	private int difficulty_result;
 	private JTextField cookie;
-	private JTextField ansText_1;
-	private JTextField ansText_2;
-	private JTextField ansText_3;
-	private JTextField ansText_4;
+	private JTextField image;
+	private JTextField people;
+
+	
 	
 	private JRadioButton ansRadio_1;
 	private JRadioButton ansRadio_2;
 	private JRadioButton ansRadio_3;
 	private JRadioButton ansRadio_4;
-	private JRadioButton ansRadio_5; //ansRadio_5¥¬ º±≈√ «ÿ¡¶øÎ
+	private JRadioButton ansRadio_5; //ansRadio_5Îäî ÏÑ†ÌÉù Ìï¥Ï†úÏö©
 	
-//	2¬˜ Ω∫¿ßƒ°
+//	2Ï∞® Ïä§ÏúÑÏπò
 //	private ToggleSwitch ansSwitch_1;
 //	private ToggleSwitch ansSwitch_2;
 //	private ToggleSwitch ansSwitch_3;
 //	private ToggleSwitch ansSwitch_4;
 	
-	private JTextField titleSet;
-	private JTextField categorySet;
-	private JTextField peopleSet;
-	private JTextField levelSet;
-	
 	private JRadioButton level_1;
 	private JRadioButton level_2;
 	private JRadioButton level_3;
-	private JRadioButton level_4; //level_4¥¬ º±≈√ «ÿ¡¶øÎ
+	private JRadioButton level_4; //level_4Îäî ÏÑ†ÌÉù Ìï¥Ï†úÏö©
 	
 	private JButton button_1;
 	private JButton button_2;
@@ -77,188 +76,232 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener, 
 	private JButton button_4;
 	private JButton button_5;
 	
-//	≥≠¿Ãµµ∏¶ ∂Ûµø¿πˆ∆∞ ≈¨∏ØΩ√ ∞™ ¿˙¿Â
-	private String finalAnswer = null;
-	private int levelResult = 0;
 //	ArrayList<String> aResult = new ArrayList<>();
 //	private String [] answerResult = new String [4];
-	
+
 	private JTable listQuiz;
 	private JScrollPane scrollList;
-	private DefaultTableModel model;
+
 	
+	public String streamQList() {
+		Quiz_DAO qd = new Quiz_DAO();
+		ArrayList<Quiz_VO> list = qd.readQuizList();
+		String qlist = null;
+		
+		for(int i = 0; i < list.size(); i++) {
+			qlist += list.get(i).getQuiz_title();
+		}
+		return qlist;
+	}
 	
 
 	public MakingQuiz() {
+//		Quiz_VO q = new Quiz_VO();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
-		allPanel = new JPanel();
-		allPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		allPanel.setLayout(null);
-		setContentPane(allPanel);		
+		mqPanel = new JPanel();
+		mqPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		mqPanel.setLayout(null);
+		setContentPane(mqPanel);		
 		
-//		¿¸√º ∏ÆΩ∫∆Æ ∆–≥Œ, ºº∆Æ∏ÆΩ∫∆ÆøÕ πÆ¡¶∏ÆΩ∫∆Æ∞° ¿ßƒ°«’¥œ¥Ÿ
-		JPanel listPanel = new JPanel();
-		listPanel.setBounds(7, 60, 340, 440);
-		listPanel.setLayout(null);
+//		Ï†ÑÏ≤¥ Î¶¨Ïä§Ìä∏ Ìå®ÎÑê, ÏÑ∏Ìä∏Î¶¨Ïä§Ìä∏ÏôÄ Î¨∏Ï†úÎ¶¨Ïä§Ìä∏Í∞Ä ÏúÑÏπòÌï©ÎãàÎã§
+		JPanel lPanel = new JPanel();
+		lPanel.setBounds(7, 60, 340, 440);
+		lPanel.setLayout(null);
 		
-//		∏ÆΩ∫∆Æ, ºº∆Æ∏¶ ∏∏µÈ∏È µÓ∑œµ«¥¬ ∏ÆΩ∫∆Æ¿‘¥œ¥Ÿ
-		JList listSet = new JList();
-		listSet.setBounds(7, 7, 160, 340);
-		listSet.setBackground(Color.LIGHT_GRAY);
-		listSet.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		Î¶¨Ïä§Ìä∏, ÏÑ∏Ìä∏Î•º ÎßåÎì§Î©¥ Îì±Î°ùÎêòÎäî Î¶¨Ïä§Ìä∏ÏûÖÎãàÎã§
+		JList lSet = new JList();
+		lSet.setBounds(7, 7, 160, 340);
+		lSet.setBackground(Color.LIGHT_GRAY);
+		lSet.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-//		∏ÆΩ∫∆Æ, πÆ¡¶∏¶ ∏∏µÈ∏È µÓ∑œµ«¥¬ ∏ÆΩ∫∆Æ¿‘¥œ¥Ÿ
+//		Î¶¨Ïä§Ìä∏, Î¨∏Ï†úÎ•º ÎßåÎì§Î©¥ Îì±Î°ùÎêòÎäî Î¶¨Ïä§Ìä∏ÏûÖÎãàÎã§
 //		JList listQuiz = new JList(); //qad.readQuizList().toArray()
 //		listQuiz.setBounds(170, 7, 160, 340);
 //		listQuiz.setBackground(Color.LIGHT_GRAY);
 //		listQuiz.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);	
 
-		String[][] row = {
-			    { "A", "B" },
-			    { "C", "D" },
-			    { "C", "D" },
-			    { "C", "D" },
-			    { "C", "D" },
-			    { "C", "D" },
-
-			    
-			};
 		
-		String[] col = { "C 1", "C 2" };
+		
+//		Î¨∏Ï†ú Î¶¨Ïä§Ìä∏Ïóê Îã¥ÏùÑ datÏóêÏÑú ÏùΩÏñ¥Ïò® ÎÇ¥Ïö© Ï§ë,
+//		Î¨∏Ï†ú Ï†úÎ™©Í≥º ÎÇúÏù¥ÎèÑÎ•º tableÍ∞íÏúºÎ°ú Í∞ÄÏ†∏ÏôÄÏÑú
+//		JTableÏóê Í∞íÏùÑ Ï∂úÎ†•Ìï®
+		
+		
+////	Î¨∏Ï†ú Î¶¨Ïä§Ìä∏ Ìå®ÎÑê, Î¨∏Ï†ú Î¶¨Ïä§Ìä∏Í∞Ä Ïò¨ÎùºÏòµÎãàÎã§
+		JPanel qListPanel = new JPanel();
+		qListPanel.setBounds(170, 7, 160, 340);
+		qListPanel.setBackground(Color.GRAY);
+//		lPanel.add(qListPanel);
+		
+		
+		
+//		Î¨∏Ï†úÎ¶¨Ïä§Ìä∏
+		String [] atitle = {"Ï∂îÍ∞ÄÌïú Î¨∏Ï†ú"};
+	    String alist = null;
+	    String adif = null;
+	    
+	    ArrayList<Quiz_VO> list = qd.readQuizList();
+	    
+	    for(int i = 0; i < list.size(); i++) {
+	    	alist += (list.get(i).getQuiz_title() + "#");
+	    	adif += (list.get(i).getQuiz_difficulty() + "#");
+	    }	
+	    
+	    String[] quiz_t = alist.split("#");
+	    String[] quiz_d = adif.split("#");
+//	    
+//	    
+//	    for(int i = 0; i < list.size(); i++) {
+//	    	quiz_t = 
+//	    }
+	    //1Ï∞®Ïõê Î∞∞Ïó¥ ÎëêÍ∞úÎ°ú Ï∞®ÏõêÎ∞∞Ïó¥ ÎëêÍ∞ú
+	 
+//		DefaultTableModel model =  new DefaultTableModel(, atitle);
+		
+//		JTable tableList = new JTable(model);
 //		
-////		πÆ¡¶ ∏ÆΩ∫∆Æ ∆–≥Œ, πÆ¡¶ ∏ÆΩ∫∆Æø° ¿ßƒ°«’¥œ¥Ÿ
-		JPanel quizList = new JPanel();
-		quizList.setBounds(170, 7, 160, 340);
-		quizList.setBackground(Color.GRAY);
-//		quizList.setLayout(new BorderLayout());
-		listPanel.add(quizList);
+//		scrollList = new JScrollPane(tableList);
+//		scrollList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//		scrollList.setBounds(170, 7, 160, 340);
+//		
+//		lPanel.add(scrollList);
+
+
+//		ArrayList<Quiz_VO> list = qd.readQuizList();
+//		String quizTitle;
+//		String quizDiffi;
+//		Object [][] TD = list.add()
+//		String [] col = {"Î¨∏Ï†ú","ÎÇúÏù¥ÎèÑ"};
+//		
+//		for(int i = 0; i < list.size(); i++) {
+//			quizTitle += list.get(i).getQuiz_title();
+//			quizDiffi += list.get(i).getQuiz_difficulty();
+//		}
 //
-//		model = new DefaultTableModel(row, col);
+////
+//		model = new DefaultTableModel(quizTitle, col);
 //		listQuiz = new JTable(model);
-////		listQuiz.addMouseListener(this);
-////		listQuiz.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+//		listQuiz.addMouseListener();
+//		listQuiz.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 //		scrollList = new JScrollPane(listQuiz);
 //		
-//		scrollList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 //		quizList.add(listQuiz);
 //		listQuiz.add(scrollList);
-
-	
+//
+//	
 		
 		
 		
 		
 
 		
-//		πˆ∆∞, √ﬂ∞°, πÆ¡¶ ∏ÆΩ∫∆Æø° ¿€º∫µ» πÆ¡¶∏¶ √ﬂ∞°«’¥œ¥Ÿ
+//		Î≤ÑÌäº, Ï∂îÍ∞Ä, Î¨∏Ï†ú Î¶¨Ïä§Ìä∏Ïóê ÏûëÏÑ±Îêú Î¨∏Ï†úÎ•º Ï∂îÍ∞ÄÌï©ÎãàÎã§
 		button_3 = new JButton("\uB9AC\uC2A4\uD2B8\uC5D0 \uCD94\uAC00!");
-		button_3.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+		button_3.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
 		button_3.setBounds(170, 350, 160, 40);
 		button_3.addActionListener(this);
 		
-//		πˆ∆∞, ªË¡¶, πÆ¡¶ ∏ÆΩ∫∆Æø°º≠ º±≈√«— πÆ¡¶∏¶ ªË¡¶«’¥œ¥Ÿ
+//		Î≤ÑÌäº, ÏÇ≠Ï†ú, Î¨∏Ï†ú Î¶¨Ïä§Ìä∏ÏóêÏÑú ÏÑ†ÌÉùÌïú Î¨∏Ï†úÎ•º ÏÇ≠Ï†úÌï©ÎãàÎã§
 		button_4 = new JButton("\uC0AD\uC81C");
-		button_4.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+		button_4.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
 		button_4.setBounds(250, 395, 80, 40);
 		
-//		πˆ∆∞, ºˆ¡§, πÆ¡¶ ∏ÆΩ∫∆Æø°º≠ º±≈√«— πÆ¡¶∏¶ ºˆ¡§«’¥œ¥Ÿ
+//		Î≤ÑÌäº, ÏàòÏ†ï, Î¨∏Ï†ú Î¶¨Ïä§Ìä∏ÏóêÏÑú ÏÑ†ÌÉùÌïú Î¨∏Ï†úÎ•º ÏàòÏ†ïÌï©ÎãàÎã§
 		button_5 = new JButton("\uC218\uC815");
-		button_5.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+		button_5.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
 		button_5.setBounds(170, 395, 80, 40);
-
-
 		
-//		πˆ∆∞, ºº∆Æ∑Œ ∏∏µÎ, πÆ¡¶ ∏ÆΩ∫∆Æ¿« πÆ¡¶µÈ¿ª ºº∆Æ∑Œ ∏∏µÏ¥œ¥Ÿ
+//		Î≤ÑÌäº, ÏÑ∏Ìä∏Î°ú ÎßåÎì¨, Î¨∏Ï†ú Î¶¨Ïä§Ìä∏Ïùò Î¨∏Ï†úÎì§ÏùÑ ÏÑ∏Ìä∏Î°ú ÎßåÎì≠ÎãàÎã§
 		button_2 = new JButton("\uC138\uD2B8\uB85C \uCD94\uAC00!");
-		button_2.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+		button_2.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
 		button_2.setBounds(7, 351, 160, 40);
+		button_2.addActionListener(this);
 		
 
 		
 		
-//		πÆ¡¶ ∆–≥Œ, πÆ¡¶∏¶ ∏∏µÂ¥¬ ∆–≥Œ ¿‘¥œ¥Ÿ
-		JPanel quizPanel = new JPanel();
-		quizPanel.setBounds(354, 60, 658, 440);
-		quizPanel.setLayout(null);
+//		Î¨∏Ï†ú Ìå®ÎÑê, Î¨∏Ï†úÎ•º ÎßåÎìúÎäî Ìå®ÎÑê ÏûÖÎãàÎã§
+		JPanel qPanel = new JPanel();
+		qPanel.setBounds(354, 60, 658, 440);
+		qPanel.setLayout(null);
 		
-		
-//		πˆ∆∞, πÊ¿ª ∏∏µÎ, ºº∆Æ∏¶ º±≈√«— ªÛ≈¬ø°º≠ πˆ∆∞¿ª ¥©∏®¥œ¥Ÿ
+//		Î≤ÑÌäº, Î∞©ÏùÑ ÎßåÎì¨, ÏÑ∏Ìä∏Î•º ÏÑ†ÌÉùÌïú ÏÉÅÌÉúÏóêÏÑú Î≤ÑÌäºÏùÑ ÎàÑÎ¶ÖÎãàÎã§
 		button_1 = new JButton("\uBC29\uC744 \uB9CC\uB4E4\uC5B4\uC694");
-		button_1.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+		button_1.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
 		button_1.setBounds(498, 6, 153, 78);
 
-//		≈ÿΩ∫∆Æ « µÂ, 1ºº∆Æ πÊ¡¶∏Ò¿ª ¿‘∑¬πﬁΩ¿¥œ¥Ÿ
-		titleSet = new JTextField();
-		titleSet.setBounds(70, 7, 420, 35);
-		titleSet.setColumns(10);
 		
-//		≈ÿΩ∫∆Æ, πÆ¡¶ ∆–≥Œø° ¿ßƒ°«œ∞Ì, πÊ¡¶∏Ò¿Ã∂Û∞Ì ¿˚«Ù¿÷Ω¿¥œ¥Ÿ
-		JLabel quizTitleSet = new JLabel("\uBC29\uC81C\uBAA9");
-		quizTitleSet.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-		quizTitleSet.setBounds(7, 7, 58, 30);
+//		ÌÖçÏä§Ìä∏ ÌïÑÎìú, 1ÏÑ∏Ìä∏ ÏÑ∏Ìä∏ Ï†úÎ™©ÏùÑ ÏûÖÎ†•Î∞õÏäµÎãàÎã§
+		set_info = new JTextField();
+		set_info.setBounds(70, 7, 420, 35);
+		set_info.setColumns(10);
 		
+//		ÌÖçÏä§Ìä∏, Î¨∏Ï†ú Ìå®ÎÑêÏóê ÏúÑÏπòÌïòÍ≥†, Î∞©Ï†úÎ™©Ïù¥ÎùºÍ≥† Ï†ÅÌòÄÏûàÏäµÎãàÎã§
+		JLabel qTitleSet = new JLabel("\uBC29\uC81C\uBAA9");
+		qTitleSet.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
+		qTitleSet.setBounds(7, 7, 58, 30);
+
 		
-//		≈ÿΩ∫∆Æ « µÂ, 1πÆ¡¶ πÆ¡¶∏¶ ¿‘∑¬πﬁΩ¿¥œ¥Ÿ
+//		ÌÖçÏä§Ìä∏ ÌïÑÎìú, 1Î¨∏Ï†ú Î¨∏Ï†úÎ•º ÏûÖÎ†•Î∞õÏäµÎãàÎã§
 		title = new JTextField();
 		title.setBounds(70, 49, 420, 35);
 		title.setColumns(10);
 		
-//		≈ÿΩ∫∆Æ, πÆ¡¶ ∆–≥Œø° ¿ßƒ°«œ∞Ì, πÆ¡¶∂Û∞Ì ¿˚«Ù¿÷Ω¿¥œ¥Ÿ
-		JLabel quizTitle = new JLabel("\uBB38\uC81C");
-		quizTitle.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-		quizTitle.setBounds(7, 49, 43, 30);
+//		ÌÖçÏä§Ìä∏, Î¨∏Ï†ú Ìå®ÎÑêÏóê ÏúÑÏπòÌïòÍ≥†, Î¨∏Ï†úÎùºÍ≥† Ï†ÅÌòÄÏûàÏäµÎãàÎã§
+		JLabel qTitle = new JLabel("\uBB38\uC81C");
+		qTitle.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
+		qTitle.setBounds(7, 49, 43, 30);
+
+		
+//		Î¨∏Ï†ú Ìå®ÎÑêÏùò Ï£ºÏ†ú Ìå®ÎÑê, Ï£ºÏ†úÎ•º ÏûÖÎ†•Ìï©ÎãàÎã§
+		JPanel sPanel = new JPanel();
+		sPanel.setBounds(498, 90, 153, 78);
+		sPanel.setLayout(null);
+		
+//		ÌÉÄÏù¥ÌãÄ, Ï£ºÏ†úÎùºÍ≥† Ï†ÅÌòÄÏûàÏäµÎãàÎã§
+		JLabel sTitle = new JLabel("\uC8FC\uC81C");
+		sTitle.setBounds(60, 0, 43, 30);
+		sTitle.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
+		
+//		ÌÖçÏä§Ìä∏ÌïÑÎìú, 1ÏÑ∏Ìä∏ Ï£ºÏ†úÎ•º ÏûÖÎ†•Î∞õÎäî ÌÖçÏä§Ìä∏ ÌïÑÎìú ÏûÖÎãàÎã§
+		subject = new JTextField();
+		subject.setBounds(7, 35, 139, 35);
+		subject.setColumns(10);
 
 		
 		
-//		πÆ¡¶ ∆–≥Œ¿« ¡÷¡¶ ∆–≥Œ, ¡÷¡¶∏¶ ¿‘∑¬«’¥œ¥Ÿ
-		JPanel categoryPanel = new JPanel();
-		categoryPanel.setBounds(498, 90, 153, 78);
-		categoryPanel.setLayout(null);
 		
-//		≈∏¿Ã∆≤, ¡÷¡¶∂Û∞Ì ¿˚«Ù¿÷Ω¿¥œ¥Ÿ
-		JLabel categoryTitle = new JLabel("\uC8FC\uC81C");
-		categoryTitle.setBounds(60, 0, 43, 30);
-		categoryTitle.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+//		Î¨∏Ï†ú Ìå®ÎÑêÏùò Ï∞∏Ïó¨ Ïù∏Ïõê Ìå®ÎÑê, Ï∞∏Ïó¨Ïù∏Ïõê Ìå®ÎÑêÏûÖÎãàÎã§
+		JPanel pPanel = new JPanel();
+		pPanel.setBounds(498, 174, 153, 50);
+		pPanel.setLayout(null);
 		
-//		≈ÿΩ∫∆Æ« µÂ, 1ºº∆Æ ¡÷¡¶∏¶ ¿‘∑¬πﬁ¥¬ ≈ÿΩ∫∆Æ « µÂ ¿‘¥œ¥Ÿ
-		categorySet = new JTextField();
-		categorySet.setBounds(7, 35, 139, 35);
-		categorySet.setColumns(10);
-
+//		ÌÉÄÏù¥ÌãÄ, Î™ÖÏù¥ÎùºÍ≥† Ï†ÅÌòÄÏûàÏäµÎãàÎã§.
+		JLabel pTitle = new JLabel("\uBA85");
+		pTitle.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
+		pTitle.setBounds(105, 10, 43, 30);
 		
-		
-		
-//		πÆ¡¶ ∆–≥Œ¿« ¬¸ø© ¿Œø¯ ∆–≥Œ, ¬¸ø©¿Œø¯ ∆–≥Œ¿‘¥œ¥Ÿ
-		JPanel peoplePanel = new JPanel();
-		peoplePanel.setBounds(498, 174, 153, 50);
-		peoplePanel.setLayout(null);
-		
-//		≈∏¿Ã∆≤, ∏Ì¿Ã∂Û∞Ì ¿˚«Ù¿÷Ω¿¥œ¥Ÿ.
-		JLabel peopleTitle = new JLabel("\uBA85");
-		peopleTitle.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-		peopleTitle.setBounds(105, 10, 43, 30);
-		
-//		≈ÿΩ∫∆Æ« µÂ, 1ºº∆Æ¿« ¬¸ø©¿Œø¯ ºˆ∏¶ ¿‘∑¬πﬁ¥¬ ≈ÿΩ∫∆Æ « µÂ ¿‘¥œ¥Ÿ
-		peopleSet = new JTextField();
-		peopleSet.setColumns(10);
-		peopleSet.setBounds(7, 7, 90, 35);
+//		ÌÖçÏä§Ìä∏ÌïÑÎìú, 1ÏÑ∏Ìä∏Ïùò Ï∞∏Ïó¨Ïù∏Ïõê ÏàòÎ•º ÏûÖÎ†•Î∞õÎäî ÌÖçÏä§Ìä∏ ÌïÑÎìú ÏûÖÎãàÎã§
+		people = new JTextField();
+		people.setColumns(10);
+		people.setBounds(7, 7, 90, 35);
 		
 
 		
 		
-//		πÆ¡¶ ∆–≥Œ¿« ƒÌ≈∞ ∆–≥Œ, ƒÌ≈∞∆–≥Œ ¿‘¥œ¥Ÿ
-		JPanel cookiePanel = new JPanel();
-		cookiePanel.setBounds(498, 228, 153, 50);
-		cookiePanel.setLayout(null);
+//		Î¨∏Ï†ú Ìå®ÎÑêÏùò Ïø†ÌÇ§ Ìå®ÎÑê, Ïø†ÌÇ§Ìå®ÎÑê ÏûÖÎãàÎã§
+		JPanel cPanel = new JPanel();
+		cPanel.setBounds(498, 228, 153, 50);
+		cPanel.setLayout(null);
 		
-//		≈∏¿Ã∆≤, ƒÌ≈∞∂Û∞Ì ¿˚«Ù¿÷Ω¿¥œ¥Ÿ
-		JLabel cookieTitle = new JLabel("\uCFE0\uD0A4");
-		cookieTitle.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-		cookieTitle.setBounds(105, 10, 43, 30);
+//		ÌÉÄÏù¥ÌãÄ, Ïø†ÌÇ§ÎùºÍ≥† Ï†ÅÌòÄÏûàÏäµÎãàÎã§
+		JLabel cTitle = new JLabel("\uCFE0\uD0A4");
+		cTitle.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
+		cTitle.setBounds(105, 10, 43, 30);
 
-//		≈ÿΩ∫∆Æ« µÂ, 1πÆ¡¶ ƒÌ≈∞ ∞≥ºˆ∏¶ ¿‘∑¬πﬁΩ¿¥œ¥Ÿ
+//		ÌÖçÏä§Ìä∏ÌïÑÎìú, 1Î¨∏Ï†ú Ïø†ÌÇ§ Í∞úÏàòÎ•º ÏûÖÎ†•Î∞õÏäµÎãàÎã§
 		cookie = new JTextField();
 		cookie.setColumns(10);
 		cookie.setBounds(7, 7, 90, 35);
@@ -266,214 +309,219 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener, 
 		
 		
 		
-//		πÆ¡¶ ∆–≥Œ¿« ≥≠¿Ãµµ ∆–≥Œ, ≥≠¿Ãµµ ∆–≥Œ ¿‘¥œ¥Ÿ
-		JPanel levelPanel = new JPanel();
-		levelPanel.setBounds(498, 285, 153, 150);
-		levelPanel.setLayout(null);
+//		Î¨∏Ï†ú Ìå®ÎÑêÏùò ÎÇúÏù¥ÎèÑ Ìå®ÎÑê, ÎÇúÏù¥ÎèÑ Ìå®ÎÑê ÏûÖÎãàÎã§
+		JPanel lvPanel = new JPanel();
+		lvPanel.setBounds(498, 285, 153, 150);
+		lvPanel.setLayout(null);
 	
-//		≈∏¿Ã∆≤, ≥≠¿Ãµµ∂Û∞Ì ¿˚«Ù¿÷Ω¿¥œ¥Ÿ
-		JLabel levelTitle = new JLabel("\uB09C\uC774\uB3C4 (\uCD08)");
-		levelTitle.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-		levelTitle.setBounds(30, 7, 90, 30);
+//		ÌÉÄÏù¥ÌãÄ, ÎÇúÏù¥ÎèÑÎùºÍ≥† Ï†ÅÌòÄÏûàÏäµÎãàÎã§
+		JLabel lvTitle = new JLabel("\uB09C\uC774\uB3C4 (\uCD08)");
+		lvTitle.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
+		lvTitle.setBounds(30, 7, 90, 30);
 		
-//		∂Ûµø¿ πˆ∆∞, ªÛ±ﬁ, ≥≠¿Ãµµ ∆–≥Œø° √ﬂ∞°
+//		ÎùºÎîîÏò§ Î≤ÑÌäº, ÏÉÅÍ∏â, ÎÇúÏù¥ÎèÑ Ìå®ÎÑêÏóê Ï∂îÍ∞Ä
 		level_1 = new JRadioButton(" \uC0C1\uAE09 (10)");
-		level_1.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+		level_1.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
 		level_1.setBounds(15, 40, 120, 30);
 		level_1.addItemListener(this);
 		
 
-//		∂Ûµø¿ πˆ∆∞, ¡ﬂ±ﬁ, ≥≠¿Ãµµ ∆–≥Œø° √ﬂ∞°
+//		ÎùºÎîîÏò§ Î≤ÑÌäº, Ï§ëÍ∏â, ÎÇúÏù¥ÎèÑ Ìå®ÎÑêÏóê Ï∂îÍ∞Ä
 		level_2 = new JRadioButton(" \uC911\uAE09 (20)");
-		level_2.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+		level_2.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
 		level_2.setBounds(15, 80, 120, 30);
 		level_2.addItemListener(this);
 		
-//		∂Ûµø¿ πˆ∆∞, «œ±ﬁ, 
+//		ÎùºÎîîÏò§ Î≤ÑÌäº, ÌïòÍ∏â, 
 		level_3 = new JRadioButton(" \uD558\uAE09 (30)");
-		level_3.setFont(new Font("±º∏≤", Font.PLAIN, 18));
+		level_3.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 18));
 		level_3.setBounds(15, 120, 120, 30);
 		level_3.addItemListener(this);
 		
-//		∂Ûµø¿ πˆ∆∞ º±≈√ «ÿ¡¶øÎ
+//		ÎùºÎîîÏò§ Î≤ÑÌäº ÏÑ†ÌÉù Ìï¥Ï†úÏö©
 		level_4 = new JRadioButton();
 
-//		≥≠¿Ãµµ, ±◊∑Ï»≠ ∂Ûµø¿ πˆ∆∞
-		ButtonGroup levelGroup = new ButtonGroup();
-		levelGroup.add(level_1);
-		levelGroup.add(level_2);
-		levelGroup.add(level_3);
-		levelGroup.add(level_4);
+//		ÎÇúÏù¥ÎèÑ, Í∑∏Î£πÌôî ÎùºÎîîÏò§ Î≤ÑÌäº
+		ButtonGroup lvGroup = new ButtonGroup();
+		lvGroup.add(level_1);
+		lvGroup.add(level_2);
+		lvGroup.add(level_3);
+		lvGroup.add(level_4);
 		getContentPane().add(level_4);
 		
 
 		
-//		¥‰ ∆–≥Œ, ¥‰¿Ã ¿ßƒ°«’¥œ¥Ÿ
-		JPanel answerPanel = new JPanel();
-		answerPanel.setBounds(7, 504, 1005, 210);
-		answerPanel.setLayout(null);
+//		Îãµ Ìå®ÎÑê, ÎãµÏù¥ ÏúÑÏπòÌï©ÎãàÎã§
+		JPanel aPanel = new JPanel();
+		aPanel.setBounds(7, 504, 1005, 210);
+		aPanel.setLayout(null);
 		
-//		1π¯ ∆–≥Œ ¿‘¥œ¥Ÿ
-		answer_1 = new JPanel();
-		answer_1.setLayout(null);
-		answer_1.setBackground(Color.RED);
-		answer_1.setBounds(10, 7, 485, 98);
+//		1Î≤à Ìå®ÎÑê ÏûÖÎãàÎã§
+		aPanel_1 = new JPanel();
+		aPanel_1.setLayout(null);
+		aPanel_1.setBackground(Color.RED);
+		aPanel_1.setBounds(10, 7, 485, 98);
 
-//		≈ÿΩ∫∆Æ« µÂ, 1π¯¥‰, 1π¯ ∆–≥Œø° µÈæÓ∞©¥œ¥Ÿ
-		ansText_1 = new JTextField();
-		ansText_1.setColumns(10);
-		ansText_1.setBounds(73, 38, 400, 50);
+//		ÌÖçÏä§Ìä∏ÌïÑÎìú, 1Î≤àÎãµ, 1Î≤à Ìå®ÎÑêÏóê Îì§Ïñ¥Í∞ëÎãàÎã§
+		answer_1 = new JTextField();
+		answer_1.setColumns(10);
+		answer_1.setBounds(73, 38, 400, 50);
 		
-////	2¬˜	Ω∫¿ßƒ°, 1π¯ ¥‰¿« ¡§¥‰ ø©∫Œ∏¶ √º≈©«’¥œ¥Ÿ
+////	2Ï∞®	Ïä§ÏúÑÏπò, 1Î≤à ÎãµÏùò Ï†ïÎãµ Ïó¨Î∂ÄÎ•º Ï≤¥ÌÅ¨Ìï©ÎãàÎã§
 //		ansSwitch_1 = new ToggleSwitch();
 //		ansSwitch_1.setBounds(432, 7, 41, 21);
 		
-		ansRadio_1 = new JRadioButton("¡§¥‰");
-		ansRadio_1.setFont(new Font("±º∏≤", Font.PLAIN, 17));
+		ansRadio_1 = new JRadioButton("Ï†ïÎãµ");
+		ansRadio_1.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 17));
 		ansRadio_1.setBounds(412, 5, 60, 30);
 //		ansRadio_1.setBackground(Color.RED);
 		ansRadio_1.addItemListener(this);
 
 		
-//		2π¯ ∆–≥Œ ¿‘¥œ¥Ÿ
-		answer_2 = new JPanel();
-		answer_2.setBounds(510, 7, 485, 98);
-		answer_2.setBackground(Color.ORANGE);
-		answer_2.setLayout(null);
+//		2Î≤à Ìå®ÎÑê ÏûÖÎãàÎã§
+		aPanel_2 = new JPanel();
+		aPanel_2.setBounds(510, 7, 485, 98);
+		aPanel_2.setBackground(Color.ORANGE);
+		aPanel_2.setLayout(null);
 		
-//		≈ÿΩ∫∆Æ « µÂ, 2π¯¥‰, 2π¯ ∆–≥Œø° µÈæÓ∞©¥œ¥Ÿ
-		ansText_2 = new JTextField();
-		ansText_2.setColumns(10);
-		ansText_2.setBounds(73, 38, 400, 50);
+//		ÌÖçÏä§Ìä∏ ÌïÑÎìú, 2Î≤àÎãµ, 2Î≤à Ìå®ÎÑêÏóê Îì§Ïñ¥Í∞ëÎãàÎã§
+		answer_2 = new JTextField();
+		answer_2.setColumns(10);
+		answer_2.setBounds(73, 38, 400, 50);
 		
-////	2¬˜	Ω∫¿ßƒ°, 2π¯ ¥‰¿« ¡§¥‰ ø©∫Œ∏¶ √º≈©«’¥œ¥Ÿ
+////	2Ï∞®	Ïä§ÏúÑÏπò, 2Î≤à ÎãµÏùò Ï†ïÎãµ Ïó¨Î∂ÄÎ•º Ï≤¥ÌÅ¨Ìï©ÎãàÎã§
 //		ansSwitch_2 = new ToggleSwitch();
 //		ansSwitch_2.setBounds(432, 7, 41, 21);
 		
-		ansRadio_2 = new JRadioButton("¡§¥‰");
-		ansRadio_2.setFont(new Font("±º∏≤", Font.PLAIN, 17));
+		ansRadio_2 = new JRadioButton("Ï†ïÎãµ");
+		ansRadio_2.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 17));
 		ansRadio_2.setBounds(412, 5, 60, 30);
 //		ansRadio_2.setBackground(Color.ORANGE);
 		ansRadio_2.addItemListener(this);
 
 			
-//		3π¯ ∆–≥Œ ¿‘¥œ¥Ÿ
-		answer_3 = new JPanel();
-		answer_3.setLayout(null);
-		answer_3.setBackground(Color.CYAN);
-		answer_3.setBounds(10, 107, 485, 98);
+//		3Î≤à Ìå®ÎÑê ÏûÖÎãàÎã§
+		aPanel_3 = new JPanel();
+		aPanel_3.setLayout(null);
+		aPanel_3.setBackground(Color.CYAN);
+		aPanel_3.setBounds(10, 107, 485, 98);
 
-//		≈ÿΩ∫∆Æ « µÂ, 3π¯¥‰, 3π¯ ∆–≥Œø° µÈæÓ∞©¥œ¥Ÿ
-		ansText_3 = new JTextField();
-		ansText_3.setColumns(10);
-		ansText_3.setBounds(73, 38, 400, 50);
+//		ÌÖçÏä§Ìä∏ ÌïÑÎìú, 3Î≤àÎãµ, 3Î≤à Ìå®ÎÑêÏóê Îì§Ïñ¥Í∞ëÎãàÎã§
+		answer_3 = new JTextField();
+		answer_3.setColumns(10);
+		answer_3.setBounds(73, 38, 400, 50);
 		
-////	2¬˜	Ω∫¿ßƒ°, 3π¯ ¥‰¿« ¡§¥‰ ø©∫Œ∏¶ √º≈©«’¥œ¥Ÿ
+////	2Ï∞®	Ïä§ÏúÑÏπò, 3Î≤à ÎãµÏùò Ï†ïÎãµ Ïó¨Î∂ÄÎ•º Ï≤¥ÌÅ¨Ìï©ÎãàÎã§
 //		ansSwitch_3 = new ToggleSwitch();
 //		ansSwitch_3.setBounds(432, 7, 41, 21);
 		
-		ansRadio_3 = new JRadioButton("¡§¥‰");
-		ansRadio_3.setFont(new Font("±º∏≤", Font.PLAIN, 17));
+		ansRadio_3 = new JRadioButton("Ï†ïÎãµ");
+		ansRadio_3.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 17));
 		ansRadio_3.setBounds(412, 5, 60, 30);
 //		ansRadio_3.setBackground(Color.CYAN);
 		ansRadio_3.addItemListener(this);
 		
-//		4π¯ ∆–≥Œ ¿‘¥œ¥Ÿ
-		answer_4 = new JPanel();
-		answer_4.setLayout(null);
-		answer_4.setBackground(Color.GREEN);
-		answer_4.setBounds(510, 107, 485, 98);
+//		4Î≤à Ìå®ÎÑê ÏûÖÎãàÎã§
+		aPanel_4 = new JPanel();
+		aPanel_4.setLayout(null);
+		aPanel_4.setBackground(Color.GREEN);
+		aPanel_4.setBounds(510, 107, 485, 98);
 		
-//		≈ÿΩ∫∆Æ « µÂ, 4π¯¥‰, 4π¯ ∆–≥Œø° µÈæÓ∞©¥œ¥Ÿ
-		ansText_4 = new JTextField();
-		ansText_4.setColumns(10);
-		ansText_4.setBounds(73, 38, 400, 50);
+//		ÌÖçÏä§Ìä∏ ÌïÑÎìú, 4Î≤àÎãµ, 4Î≤à Ìå®ÎÑêÏóê Îì§Ïñ¥Í∞ëÎãàÎã§
+		answer_4 = new JTextField();
+		answer_4.setColumns(10);
+		answer_4.setBounds(73, 38, 400, 50);
 		
-////	2¬˜	Ω∫¿ßƒ°, 4π¯ ¥‰¿« ¡§¥‰ ø©∫Œ∏¶ √º≈©«’¥œ¥Ÿ
+////	2Ï∞®	Ïä§ÏúÑÏπò, 4Î≤à ÎãµÏùò Ï†ïÎãµ Ïó¨Î∂ÄÎ•º Ï≤¥ÌÅ¨Ìï©ÎãàÎã§
 //		ansSwitch_4 = new ToggleSwitch();
 //		ansSwitch_4.setBounds(432, 7, 41, 21);
 		
-		ansRadio_4 = new JRadioButton("¡§¥‰");
-		ansRadio_4.setFont(new Font("±º∏≤", Font.PLAIN, 17));
+		ansRadio_4 = new JRadioButton("Ï†ïÎãµ");
+		ansRadio_4.setFont(new Font("Íµ¥Î¶º", Font.PLAIN, 17));
 		ansRadio_4.setBounds(412, 5, 60, 30);
 //		ansRadio_4.setBackground(Color.GREEN);
 		ansRadio_4.addItemListener(this);
 		
-//		∂Ûµø¿ πˆ∆∞ º±≈√ «ÿ¡¶øÎ
+//		ÎùºÎîîÏò§ Î≤ÑÌäº ÏÑ†ÌÉù Ìï¥Ï†úÏö©
 		ansRadio_5 = new JRadioButton();
 		
-//		¡§¥‰, ±◊∑Ï»≠ ∂Ûµø¿ πˆ∆∞
-		ButtonGroup ansGroup = new ButtonGroup();
-		ansGroup.add(ansRadio_1);
-		ansGroup.add(ansRadio_2);
-		ansGroup.add(ansRadio_3);
-		ansGroup.add(ansRadio_4);
-		ansGroup.add(ansRadio_5);
+//		Ï†ïÎãµ, Í∑∏Î£πÌôî ÎùºÎîîÏò§ Î≤ÑÌäº
+		ButtonGroup aRGroup = new ButtonGroup();
+		aRGroup.add(ansRadio_1);
+		aRGroup.add(ansRadio_2);
+		aRGroup.add(ansRadio_3);
+		aRGroup.add(ansRadio_4);
+		aRGroup.add(ansRadio_5);
 		getContentPane().add(ansRadio_5);
 		
 
-//		¿ÃπÃ¡ˆ√ﬂ∞° ∆–≥Œ
-		JPanel imagePanel = new JPanel();
-		imagePanel.setBackground(Color.LIGHT_GRAY);
-		imagePanel.setBounds(7, 90, 483, 345);
+//		Ïù¥ÎØ∏ÏßÄÏ∂îÍ∞Ä Ìå®ÎÑê
+		JPanel iPanel = new JPanel();
+		iPanel.setBackground(Color.LIGHT_GRAY);
+		iPanel.setBounds(7, 90, 483, 345);
 		
-//		∏ﬁ¿Œ ∆–≥Œø° ø√∂Û∞°¥¬ ∞≥∫∞ ∆–≥Œ¿‘¥œ¥Ÿ
-//		allPanel.add(SystemBar);
-		allPanel.add(listPanel);
-		allPanel.add(quizPanel);
-		allPanel.add(answerPanel);
+//		Î©îÏù∏ Ìå®ÎÑêÏóê Ïò¨ÎùºÍ∞ÄÎäî Í∞úÎ≥Ñ Ìå®ÎÑêÏûÖÎãàÎã§
+		mqPanel.add(lPanel);
+		mqPanel.add(qPanel);
+		mqPanel.add(aPanel);
 		
-//		∏ÆΩ∫∆Æ ∆–≥Œø° ø√∂Û∞°¥¬ πˆ∆∞∞˙ ∏ÆΩ∫∆Æ¿‘¥œ¥Ÿ
-		listPanel.add(listSet);
+//		Î¶¨Ïä§Ìä∏ Ìå®ÎÑêÏóê Ïò¨ÎùºÍ∞ÄÎäî Î≤ÑÌäºÍ≥º Î¶¨Ïä§Ìä∏ÏûÖÎãàÎã§
+		lPanel.add(lSet);
 //		listPanel.add(listQuiz);
-		listPanel.add(button_2);
-		listPanel.add(button_3);
-		listPanel.add(button_4);
-		listPanel.add(button_5);
+		lPanel.add(button_2);
+		lPanel.add(button_3);
+		lPanel.add(button_4);
+		lPanel.add(button_5);
 		
 			
-//		πÆ¡¶ ∆–≥Œø° ø√∂Û∞°¥¬ πˆ∆∞∞˙ ∏ÆΩ∫∆Æ ¿‘¥œ¥Ÿ ∆–≥Œ≥ª «œ¿ß∆–≥Œ¿∫ µÈø©æ≤±‚µ«æÓ ¿÷Ω¿¥œ¥Ÿ
-		quizPanel.add(titleSet);
-			quizPanel.add(quizTitleSet);
-		quizPanel.add(title);
-			quizPanel.add(quizTitle);
+//		Î¨∏Ï†ú Ìå®ÎÑêÏóê Ïò¨ÎùºÍ∞ÄÎäî Î≤ÑÌäºÍ≥º Î¶¨Ïä§Ìä∏ ÏûÖÎãàÎã§ Ìå®ÎÑêÎÇ¥ ÌïòÏúÑÌå®ÎÑêÏùÄ Îì§Ïó¨Ïì∞Í∏∞ÎêòÏñ¥ ÏûàÏäµÎãàÎã§
+		qPanel.add(set_info);
+			qPanel.add(qTitleSet);
 		
-		quizPanel.add(button_1);
-		quizPanel.add(categoryPanel);
-			categoryPanel.add(categoryTitle);
-			categoryPanel.add(categorySet);	
-		quizPanel.add(peoplePanel);
-			peoplePanel.add(peopleTitle);
-			peoplePanel.add(peopleSet);
-		quizPanel.add(cookiePanel);		
-			cookiePanel.add(cookieTitle);
-			cookiePanel.add(cookie);
-		quizPanel.add(levelPanel);
-			levelPanel.add(levelTitle);
-			levelPanel.add(level_1);
-			levelPanel.add(level_2);
-			levelPanel.add(level_3);
-		quizPanel.add(imagePanel);
+		qPanel.add(title);
+			qPanel.add(qTitle);
+		
+		qPanel.add(button_1);
+		
+		qPanel.add(sPanel);
+			sPanel.add(sTitle);
+			sPanel.add(subject);	
+		
+		qPanel.add(pPanel);
+			pPanel.add(pTitle);
+			pPanel.add(people);
+			
+		qPanel.add(cPanel);		
+			cPanel.add(cTitle);
+			cPanel.add(cookie);
+			
+		qPanel.add(lvPanel);
+			lvPanel.add(lvTitle);
+			lvPanel.add(level_1);
+			lvPanel.add(level_2);
+			lvPanel.add(level_3);
+			
+		qPanel.add(iPanel);
 
 
-//		¥‰ ∆–≥Œø° ø√∂Û∞°¥¬ ∆–≥Œ∞˙ ≈ÿΩ∫∆Æ « µÂ ¿‘¥œ¥Ÿ
-//		Ω∫¿ßƒ° 2¬˜ ±∏«ˆ
-		answerPanel.add(answer_1);
-				answer_1.add(ansText_1);
-//				answer_1.add(ansSwitch_1);
-				answer_1.add(ansRadio_1);
-		answerPanel.add(answer_2);
-				answer_2.add(ansText_2);
-//				answer_2.add(ansSwitch_2);
-				answer_2.add(ansRadio_2);
-		answerPanel.add(answer_3);
-				answer_3.add(ansText_3);
-//				answer_3.add(ansSwitch_3);
-				answer_3.add(ansRadio_3);
-		answerPanel.add(answer_4);
-				answer_4.add(ansText_4);
-//				answer_4.add(ansSwitch_4);
-				answer_4.add(ansRadio_4);
+//		Îãµ Ìå®ÎÑêÏóê Ïò¨ÎùºÍ∞ÄÎäî Ìå®ÎÑêÍ≥º ÌÖçÏä§Ìä∏ ÌïÑÎìú ÏûÖÎãàÎã§
+//		Ïä§ÏúÑÏπò 2Ï∞® Íµ¨ÌòÑ
+		aPanel.add(aPanel_1);
+				aPanel_1.add(answer_1);
+//				aPanel_1.add(ansSwitch_1);
+				aPanel_1.add(ansRadio_1);
+		aPanel.add(aPanel_2);
+				aPanel_2.add(answer_2);
+//				aPanel_2.add(ansSwitch_2);
+				aPanel_2.add(ansRadio_2);
+		aPanel.add(aPanel_3);
+				aPanel_3.add(answer_3);
+//				aPanel_3.add(ansSwitch_3);
+				aPanel_3.add(ansRadio_3);
+		aPanel.add(aPanel_4);
+				aPanel_4.add(answer_4);
+//				aPanel_4.add(ansSwitch_4);
+				aPanel_4.add(ansRadio_4);
 		
 		this.setResizable(false);
 		this.setVisible(true);
@@ -481,48 +529,88 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener, 
 	}
 
 
-	//≥≠¿Ãµµ, º±≈√«— ∂Ûµø¿ πˆ∆∞ø° µ˚∂Û ∫Øºˆø° ∞™ ¿˙¿Â
+	//ÎÇúÏù¥ÎèÑ, ÏÑ†ÌÉùÌïú ÎùºÎîîÏò§ Î≤ÑÌäºÏóê Îî∞Îùº Î≥ÄÏàòÏóê Í∞í Ï†ÄÏû•
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getSource()==level_1) {
-			levelResult = 10;
+			difficulty_result = 10;
 		} else if(e.getSource()==level_2) {
-			levelResult = 20;
+			difficulty_result = 20;
 		} else if(e.getSource()==level_3) {
-			levelResult = 30;
+			difficulty_result = 30;
 		}
 		
-	//¡§¥‰, º±≈√«— ∂Ûµø¿ πˆ∆∞ø° µ˚∂Û ∫Øºˆø° ∞™ ¿˙¿Â
+	//Ï†ïÎãµ, ÏÑ†ÌÉùÌïú ÎùºÎîîÏò§ Î≤ÑÌäºÏóê Îî∞Îùº Î≥ÄÏàòÏóê Í∞í Ï†ÄÏû•
 		if(e.getSource()==ansRadio_1) {
-			finalAnswer = ansText_1.getText();
+			final_answer = answer_1.getText();
 		} else if(e.getSource()==ansRadio_2) {
-			finalAnswer = ansText_2.getText();
+			final_answer = answer_2.getText();
 		} else if(e.getSource()==ansRadio_3) {
-			finalAnswer = ansText_3.getText();
+			final_answer = answer_3.getText();
 		} else if(e.getSource()==ansRadio_4) {
-			finalAnswer = ansText_4.getText();
+			final_answer = answer_4.getText();
 		}
 
 	}	
 	
 	
-	//∏ÆΩ∫∆Æø° √ﬂ∞°«ÿø‰ πˆ∆∞¿ª ¥©∏£∏È Quiz_added_VOø° setter∞™¿∏∑Œ ¿˙¿Â
+	//Î¶¨Ïä§Ìä∏Ïóê Ï∂îÍ∞ÄÌï¥Ïöî Î≤ÑÌäºÏùÑ ÎàÑÎ•¥Î©¥ Quiz_added_VOÏóê setterÍ∞íÏúºÎ°ú Ï†ÄÏû•
 	@Override	
 	public void actionPerformed(ActionEvent a) {
-		if(a.getSource()==button_3) {
-			qav.setAdded_title(title.getText());
-			qav.setAdded_answer_1(ansText_1.getText());
-			qav.setAdded_answer_2(ansText_2.getText());
-			qav.setAdded_answer_3(ansText_3.getText());
-			qav.setAdded_answer_4(ansText_4.getText());
-			qav.setAdded_final_answer(finalAnswer);
-			qav.setAdded_cookie(Integer.parseInt(cookie.getText()));
-			qav.setAdded_difficulty(levelResult);
-			qav.setAdded_image(null);
+		Quiz_VO qv = new Quiz_VO();
+		try {
+		if(a.getSource()==button_2) {
+			qv.setQuiz_set_info(set_info.getText());
+//			qv.setQuiz_title(title.getText());
+			qv.setQuiz_subject(subject.getText());
+//			qv.setQuiz_answer_1(answer_1.getText());
+//			qv.setQuiz_answer_2(answer_2.getText());
+//			qv.setQuiz_answer_3(answer_3.getText());
+//			qv.setQuiz_answer_4(answer_4.getText());
+//			qv.setQuiz_final_answer(final_answer);
+//			qv.setQuiz_cookie(Integer.parseInt(cookie.getText()));
+//			qv.setQuiz_difficulty(difficulty_result);
+//			qv.setQuiz_image(null);
+			qv.setQuiz_people(Integer.parseInt(people.getText()));
+			
+			
+			
+			mqm.insertSet(set_info.getText(), subject.getText(), Integer.parseInt(people.getText()));
+//			mqm.insertSet(set_info.getText(), subject.getText(), Integer.parseInt(people.getText()));
+
+//			ÌïòÎÇòÏùò Î¨∏Ï†ú Îì±Î°ù ÌõÑ ÌïÑÎìú Ï¥àÍ∏∞Ìôî
+			set_info.setText(null);			//ÏÑ∏Ìä∏ Ïù¥Î¶Ñ Ï¥àÍ∏∞ÌôîÎäî ÌïÑÏöî ÏóÜÏùå
+			title.setText(null);			//Î¨∏Ï†ú Ïù¥Î¶Ñ Ï¥àÍ∏∞Ìôî
+			subject.setText(null);
+			answer_1.setText(null);
+			answer_2.setText(null);
+			answer_3.setText(null);
+			answer_4.setText(null);
+			ansRadio_5.setSelected(true);	//Ï†ïÎãµ ÎùºÎîîÏò§ Î≤ÑÌäº Ï¥àÍ∏∞Ìôî
+			final_answer = null;
+			level_4.setSelected(true);		//ÎÇúÏù¥ÎèÑ ÎùºÎîîÏò§ Î≤ÑÌäº Ï¥àÍ∏∞Ìôî
+			cookie.setText(null);			//Ïø†ÌÇ§ Í∞úÏàò Ï¥àÍ∏∞Ìôî
+			image.setText(null);
+			people.setText(null);
+//			aResult.clear();				//Ïä§ÏúÑÏπòÌòï Ï†ïÎãµ (2Ï∞®Íµ¨ÌòÑ)
+		}
+		
+		else if(a.getSource()==button_3) {
+			qv.setQuiz_set_info(null);
+			qv.setQuiz_title(title.getText());
+			qv.setQuiz_subject(null);
+			qv.setQuiz_answer_1(answer_1.getText());
+			qv.setQuiz_answer_2(answer_2.getText());
+			qv.setQuiz_answer_3(answer_3.getText());
+			qv.setQuiz_answer_4(answer_4.getText());
+			qv.setQuiz_final_answer(final_answer);
+			qv.setQuiz_cookie(Integer.parseInt(cookie.getText()));
+			qv.setQuiz_difficulty(difficulty_result);
+			qv.setQuiz_image(null);
+			qv.setQuiz_people(0);	
 //			qav.setAdded_subject(null);
 //			qav.setAdded_people(0);
-		
-//			2¬˜ Ω∫¿ßƒ°
+//			2Ï∞® Ïä§ÏúÑÏπò
 //			if(ansSwitch_1.isActivated()) {
 //				aResult.add("ans1");
 //			}
@@ -536,55 +624,28 @@ public class MakingQuiz extends JFrame implements ActionListener, ItemListener, 
 //				aResult.add("ans4");
 //			}
 //			String listString = String.join(", ", aResult);
+			mqm.insertQuiz(qv);
+			
+//			set_info.setText(null);			//ÏÑ∏Ìä∏ Ïù¥Î¶Ñ Ï¥àÍ∏∞ÌôîÎäî ÌïÑÏöî ÏóÜÏùå
+			title.setText(null);			//Î¨∏Ï†ú Ïù¥Î¶Ñ Ï¥àÍ∏∞Ìôî
+//			subject.setText(null);
+			answer_1.setText(null);
+			answer_2.setText(null);
+			answer_3.setText(null);
+			answer_4.setText(null);
+			ansRadio_5.setSelected(true);	//Ï†ïÎãµ ÎùºÎîîÏò§ Î≤ÑÌäº Ï¥àÍ∏∞Ìôî
+			final_answer = null;
+			level_4.setSelected(true);		//ÎÇúÏù¥ÎèÑ ÎùºÎîîÏò§ Î≤ÑÌäº Ï¥àÍ∏∞Ìôî
+			cookie.setText(null);			//Ïø†ÌÇ§ Í∞úÏàò Ï¥àÍ∏∞Ìôî
+			image.setText(null);
+//			people.setText(null);
+		} 
+		
+	}catch(NullPointerException e) {
+		System.out.println("Î¨∏Ï†úÏóê ÌïÑÏöîÌïú ÏûÖÎ†• Í∞íÏùÄ Î¨∏Ï†ú, ÎÇúÏù¥ÎèÑ, Ïø†ÌÇ§, Îãµ1, Îãµ2, Îãµ3, Îãµ4, Ï†ïÎãµ ÎùºÎîîÏò§ Î≤ÑÌäºÏûÖÎãàÎã§.");
+		System.out.println("ÏÑ∏Ìä∏Ïóê ÌïÑÏöîÌïú ÏûÖÎ†• Í∞íÏùÄ Î∞©Ï†úÎ™©Í≥º Ï£ºÏ†ú, Ï∞∏Ïó¨Ïù∏ÏõêÏûÖÎãàÎã§. ");
+//		e.printStackTrace();
 		}
-		
-//		¿ßø°º≠ setter ª¿‘ »ƒ √‚∑¬ ≈¨∑°Ω∫∑Œ ≥—±Ë
-		mqm.insertQuiz(qav);
-		
-//		«œ≥™¿« πÆ¡¶ µÓ∑œ »ƒ « µÂ √ ±‚»≠
-//		titleSet.setText(null);			//ºº∆Æ ¿Ã∏ß √ ±‚»≠¥¬ « ø‰ æ¯¿Ω
-		title.setText(null);			//πÆ¡¶ ¿Ã∏ß √ ±‚»≠
-		ansText_1.setText(null);
-		ansText_2.setText(null);
-		ansText_3.setText(null);
-		ansText_4.setText(null);
-		ansRadio_5.setSelected(true);	//¡§¥‰ ∂Ûµø¿ πˆ∆∞ √ ±‚»≠
-		cookie.setText(null);			//ƒÌ≈∞ ∞≥ºˆ √ ±‚»≠
-		level_4.setSelected(true);		//≥≠¿Ãµµ ∂Ûµø¿ πˆ∆∞ √ ±‚»≠
-//		aResult.clear();				//Ω∫¿ßƒ°«¸ ¡§¥‰ (2¬˜±∏«ˆ)
-
-//		ƒ‹º÷∑Œ Quizø° √ﬂ∞°µ» ƒ˚¡Ó∏¶ √‚∑¬«‘
-		rp.printAllQuiz(qad.readQuizList());
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }
 
