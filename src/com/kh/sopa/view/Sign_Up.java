@@ -25,6 +25,9 @@ import com.kh.sopa.model.vo.User_VO;
 
 
 
+
+
+
 public class Sign_Up extends JFrame{
 	
 	//회원 가입
@@ -83,7 +86,7 @@ public class Sign_Up extends JFrame{
 		sign_id.setBounds(390, 340, 200, 40);
 		sign_id.setFont(new Font("바탕", Font.ITALIC, 12));
 		sign.add(sign_id);
-		uv.setUser_id(sign_id.getText());
+		
 		
 		
 		
@@ -92,7 +95,7 @@ public class Sign_Up extends JFrame{
 		sign_pw.setBounds(390, 380, 200, 40);
 		sign_pw.setFont(new Font("바탕", Font.ITALIC, 12));
 		sign.add(sign_pw);
-		uv.setUser_pw(sign_pw.getText());
+		
 		
 		
 		//비밀번호 확인 입력창
@@ -101,11 +104,11 @@ public class Sign_Up extends JFrame{
 		check_pw.setFont(new Font("바탕", Font.ITALIC, 12));
 		sign.add(check_pw);
 		
+		
 		//전화번호 입력창
 		sign_phone = new JTextField(10);
-		sign_phone.setBounds(390, 420, 200, 40);
+		sign_phone.setBounds(390, 460, 200, 40);
 		sign_phone.setFont(new Font("바탕", Font.ITALIC, 12));
-		sign_phone.setText("" + uv.getUser_phone_number());
 		sign.add(sign_phone);
 		
 		
@@ -139,21 +142,33 @@ public class Sign_Up extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-				if(sign_pw != check_pw) {
-					JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 재 입력을 다시 입력해주세요");
-
-				} 
 				
+				if(sign_pw.getText().equals(check_pw.getText())) {
+				JOptionPane.showMessageDialog(null, "가입을 축하합니다", "정상입력", JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("입력값이 다릅니다");
+			} else {
+				JOptionPane.showMessageDialog(null, "입력값이 다릅니다", "입력오류", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+				
+				//값을 받고 이동
+				uv.setUser_id(sign_id.getText());
+				System.out.println(uv.getUser_id());
+				uv.setUser_pw(sign_pw.getText());
+				System.out.println(uv.getUser_pw());
+				uv.setUser_phone_number(sign_phone.getText());
+				System.out.println(uv.getUser_phone_number());
+					
+				System.out.println(uv.getUser_phone_number() + "  " + uv.getUser_pw()  + "  " + uv.getUser_id()  + "버튼");
+		
+				lc = new LoginController();
+				lc.user_make(uv);
 				new Login_Panel();
 				dispose();
-							
 			}
 		});
-		
-	
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-		
 }

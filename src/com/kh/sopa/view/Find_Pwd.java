@@ -13,10 +13,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.kh.sopa.controller.LoginController;
+
+
+
 public class Find_Pwd extends JFrame{
 	private JPanel contentPane, find_pwd;
 	private JLabel sopa, text;
-	private JTextField user_id, user_phone;
+	private static JTextField user_id;
+	private static JTextField user_phone;
 	private JButton back, check;
 	private Login_Panel lp;
 	
@@ -102,9 +107,11 @@ public class Find_Pwd extends JFrame{
 			
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(user_id.getText());
+				System.out.println(user_phone.getText());
 
-
-				lp = new Login_Panel();
+				LoginController lc = new LoginController();
+				lc.findPw();
 				super.mouseClicked(arg0);
 			}
 		});
@@ -114,4 +121,15 @@ public class Find_Pwd extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 }
+	
+		public static String getId() {
+			
+			return user_id.getText();
+			
+		}
+		
+		public static String getPhone() {
+			
+			return user_phone.getText();
+		}
 }
