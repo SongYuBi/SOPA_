@@ -7,19 +7,15 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-import com.kh.sopa.model.vo.Quiz_VO;
-import com.kh.sopa.model.vo.User_VO;
-import com.kh.sopa.view.Main_Frame;
 import com.kh.sopa.controller.ObjectIO;
+import com.kh.sopa.model.vo.Quiz_VO;
 
 public class StandRoomPanelTest extends JPanel{
 	String user = "";
 	JFrame mainFrame = null;
+	
 	public StandRoomPanelTest() { }
 	public StandRoomPanelTest(JFrame mf, String user) {
 		this.user = user;

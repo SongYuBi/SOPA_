@@ -20,10 +20,10 @@ public class Sever_view extends JFrame {
 
 	public Sever_view() throws IOException {
 		setBounds(200, 100, 400, 600);
-		setTitle("¼­¹ö ºÎºÐ");
+		setTitle("ì„œë²„");
 
 		jta.setEditable(false);
-		jta.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 18));
+		jta.setFont(new Font("ê³ ë”•ì²´", Font.PLAIN, 18));
 		jta.setBackground(new Color(230, 255, 230));
 
 		add(jta, BorderLayout.CENTER);

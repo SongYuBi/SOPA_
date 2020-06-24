@@ -7,14 +7,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.kh.sopa.model.vo.User_VO;
 
-//À¯Àú°ü·Ã µ¥ÀÌÅÍ ¾×¼¼½º ¿ÀºêÁ§Æ® 
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® 
 public class User_DAO {
 	
-	//È¸¿ø °¡ÀÔ °´Ã¼ »ý¼º
+	//È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	
 	public ArrayList<User_VO> userOutput(ArrayList<User_VO> out) {
 		
@@ -46,7 +45,7 @@ public class User_DAO {
 	
 	}
 	
-	//ÆÄÀÏ ÀÐ±â
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½
 	public ArrayList<User_VO> userInput() {
 		ObjectInputStream oip = null;
 		ArrayList<User_VO> list = null;
@@ -56,7 +55,7 @@ public class User_DAO {
 			
 			list = (ArrayList<User_VO>)oip.readObject();
 		} catch (FileNotFoundException e) {
-			System.out.println("¿¡·¯");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½");
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -76,10 +75,38 @@ public class User_DAO {
 		return list;
 		
 	}
+	public void insertUser(User_VO user) {
+		ObjectOutputStream oos = null;
 		
-		//È¸¿ø ¾ÆÀÌµð Ã£±â
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream("User_Info"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try  {
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public User_VO createUser() {
+		User_VO vo = new User_VO();
 		
+		vo.setUser_id("user_text_id01");
+		vo.setUser_pw("1234");
+		vo.setUser_phone_number("010-2222-1111");
+		vo.setUser_1st(1);
+		vo.setUser_2nd(2);
+		vo.setUser_3rd(3);
+		vo.setUser_all_quiz(25);
+		vo.setUser_correct_quiz(22);
 		
-		//È¸¿ø ºñ¹Ð¹øÈ£ Ã£±â
-
+		insertUser(vo);
+		
+		return vo;
+	}
 }

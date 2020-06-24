@@ -1,5 +1,6 @@
 package com.kh.sopa.view;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,26 +16,34 @@ import javax.swing.border.EmptyBorder;
 import com.kh.sopa.model.DAO.SolvingQuizDao;
 import com.kh.sopa.model.vo.Quiz_VO;
 
-public class SolvingQuiz extends JFrame {
+public class SolvingQuiz extends JFrame implements ActionListener {
 
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ SolvingQuizDao(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å² ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	
+	long start = System.currentTimeMillis();
+	// ½ÃÀÛÀü¿¡ SolvingQuizDao(ÆÄÀÏ ÀÔÃâ·Â Å¬·¡½º) ÇÑ ¹ø ½ÇÇà ½ÃÅ² ÈÄ ½ÇÇà
+
 	private SolvingQuizDao qd = new SolvingQuizDao();
 	private ArrayList<Quiz_VO> quizList2 = qd.readQuizList();
+	
 	private JPanel contentPane;
-	
-	//ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ Ç¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	private JButton btn_quiz_answer_1;
+	private JButton btn_quiz_answer_2;
+	private JButton btn_quiz_answer_3;
+	private JButton btn_quiz_answer_4;
+
+	// ¼¼Æ®¿¡¼­ Ç¬ ¹®Á¦ ¼ö
 	private int solved_qnumInSet = 0;
-	//ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	// ¼¼Æ®¿¡¼­ ¸ÂÃá ¹®Á¦ ¼ö
 	private int correct_qnumInSet = 0;
+
+	// ³­ÀÌµµº° ÃÊ¸¦ ´ã¾ÆÁÙ ¹è¿­
+	private int[] sec = new int[quizList2.size()];
+	private int cnt;
+	private int correct_num = 0;
+
+	// Ç¬ ¹®Á¦±îÁö ÃÊÀÇ ÇÕ
+	private double sum = 0;
 	
-	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½Ýºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±â°ª ï¿½ï¿½ï¿½ï¿½
-	private int cnt = 0;
-
-
 	public SolvingQuiz() {
-		
-		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
@@ -45,102 +54,99 @@ public class SolvingQuiz extends JFrame {
 		contentPane.setBackground(new Color(254, 228, 167));
 		setContentPane(contentPane);
 
-		// ï¿½ï¿½Ü¹ï¿½
+		// »ó´Ü¹Ù
 		JPanel timePanel = new JPanel();
 		timePanel.setLayout(null);
 		timePanel.setLocation(40, 10);
 		timePanel.setSize(940, 50);
 		timePanel.setBackground(Color.WHITE);
 
-		// ï¿½ï¿½Ü¹ï¿½ ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½å¸£ï¿½ï¿½ ï¿½ï¿½
+		// »ó´Ü¹Ù À§ ½Ã°£ Èå¸£´Â ¶óº§
 		JLabel timeLabel = new JLabel();
 		timeLabel.setHorizontalAlignment(JLabel.CENTER);
 		timeLabel.setBounds(50, 5, 850, 40);
-		timeLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 18));
+		timeLabel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 18));
 
-		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½Ø¿ï¿½ ï¿½ï¿½Æ°
+		// »ó´Ü ¿À¸¥ÂÊÀÇ ±×¸¸ÇØ¿ä ¹öÆ°
 		JButton stopBtn = new JButton();
 		stopBtn.setBounds(840, 0, 100, 50);
 		stopBtn.setBorderPainted(false);
 		stopBtn.setBackground(new Color(255, 179, 0));
-		
-		// ï¿½×¸ï¿½ï¿½Ø¿ï¿½ ï¿½ï¿½
-		JLabel stopLabel = new JLabel("ï¿½×¸ï¿½ï¿½Ø¿ï¿½<<");
 
-		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½
+		// ±×¸¸ÇØ¿ä ¶óº§
+		JLabel stopLabel = new JLabel("±×¸¸ÇØ¿ä<<");
 
+		// ¹®Á¦ ¼ö Ç¥±â ¶óº§
 		JLabel quiz_num_lb = new JLabel();
 		quiz_num_lb.setHorizontalAlignment(JLabel.CENTER);
 		quiz_num_lb.setBounds(440, 410, 150, 45);
 		quiz_num_lb.setOpaque(true);
 		quiz_num_lb.setBackground(new Color(252, 209, 108));
-		quiz_num_lb.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 25));
+		quiz_num_lb.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 25));
 
-		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½
-/*		JLabel answer_num_lb = new JLabel();
-		answer_num_lb.setHorizontalAlignment(JLabel.CENTER);
-		answer_num_lb.setText("ï¿½ï¿½ï¿½ï¿½ 0 / 20");
-		answer_num_lb.setBounds(820, 410, 160, 45);
-		answer_num_lb.setOpaque(true);
-		answer_num_lb.setBackground(new Color(252, 209, 108));
-		answer_num_lb.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 25));*/
+		// ÀÀ´ä ¼ö Ç¥±â ¶óº§
+		/*
+		 * JLabel answer_num_lb = new JLabel();
+		 * answer_num_lb.setHorizontalAlignment(JLabel.CENTER);
+		 * answer_num_lb.setText("ÀÀ´ä 0 / 20"); answer_num_lb.setBounds(820, 410, 160,
+		 * 45); answer_num_lb.setOpaque(true); answer_num_lb.setBackground(new
+		 * Color(252, 209, 108)); answer_num_lb.setFont(new Font("¸¼Àº °íµñ", Font.BOLD,
+		 * 25));
+		 */
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½
-		
+		// ¹®Á¦ÃâÁ¦ ÆÐ³Î
 		JPanel quizPanel = new JPanel();
 		quizPanel.setLayout(null);
 		quizPanel.setBounds(40, 70, 940, 330);
 		quizPanel.setBackground(Color.WHITE);
-		
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		// ¹®Á¦°¡ ÀûÇôÁú ¶óº§
 		JLabel quizLabel = new JLabel();
 		quizLabel.setHorizontalAlignment(JLabel.CENTER);
 		quizLabel.setBounds(80, 10, 800, 300);
-		quizLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 25));
+		quizLabel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 25));
 		/*
-		 * quizLabel.setOpaque(true); //ï¿½ï¿½Å©ï¿½ï¿½ È®ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ö¾îº¸ï¿½ï¿½
+		 * quizLabel.setOpaque(true); //¶óº§Å©±â È®ÀÎ¿ë »ö±ò³Ö¾îº¸±â
 		 * quizLabel.setBackground(Color.YELLOW);
 		 */
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°
+		// ¹®Á¦¹öÆ°
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° 1
-		JButton btn_quiz_answer_1 = new JButton();
+		// ¹®Á¦¹öÆ° 1
+		btn_quiz_answer_1 = new JButton();
 		btn_quiz_answer_1.setBorderPainted(false);
 		btn_quiz_answer_1.setBounds(40, 475, 455, 110);
 		btn_quiz_answer_1.setBackground(new Color(226, 91, 69));
-		
-		btn_quiz_answer_1.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 25));
+		btn_quiz_answer_1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 25));
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° 2
-		JButton btn_quiz_answer_2 = new JButton();
+		// ¹®Á¦¹öÆ° 2
+		btn_quiz_answer_2 = new JButton();
 		btn_quiz_answer_2.setBorderPainted(false);
 		btn_quiz_answer_2.setBounds(525, 475, 455, 110);
 		btn_quiz_answer_2.setBackground(new Color(225, 131, 87));
-		btn_quiz_answer_2.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 25));
+		btn_quiz_answer_2.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 25));
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° 3
-		JButton btn_quiz_answer_3 = new JButton();
+		// ¹®Á¦¹öÆ° 3
+		btn_quiz_answer_3 = new JButton();
 		btn_quiz_answer_3.setBorderPainted(false);
 		btn_quiz_answer_3.setBounds(40, 600, 455, 110);
 		btn_quiz_answer_3.setBackground(new Color(137, 213, 201));
-		btn_quiz_answer_3.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 25));
+		btn_quiz_answer_3.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 25));
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° 4
-		JButton btn_quiz_answer_4 = new JButton();
+		// ¹®Á¦¹öÆ° 4
+		btn_quiz_answer_4 = new JButton();
 		btn_quiz_answer_4.setBorderPainted(false);
 		btn_quiz_answer_4.setBounds(525, 600, 455, 110);
 		btn_quiz_answer_4.setBackground(new Color(172, 201, 101));
-		btn_quiz_answer_4.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 25));
+		btn_quiz_answer_4.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 25));
 
-		// ï¿½Ð³ï¿½, ï¿½ï¿½ , ï¿½ï¿½Æ° ï¿½ï¿½ ï¿½ß°ï¿½
+		// ÆÐ³Î, ¶óº§ , ¹öÆ° µî Ãß°¡
 
 		timePanel.add(timeLabel);
 		timePanel.add(stopBtn);
 		stopBtn.add(stopLabel);
 		contentPane.add(quiz_num_lb);
-/*		contentPane.add(answer_num_lb);*/
+		/* contentPane.add(answer_num_lb); */
 		quizPanel.add(quizLabel);
 
 		this.add(btn_quiz_answer_1);
@@ -149,71 +155,61 @@ public class SolvingQuiz extends JFrame {
 		this.add(btn_quiz_answer_4);
 		this.add(timePanel);
 		this.add(quizPanel);
+
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// ï¿½×¸ï¿½ï¿½Ø¿ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½È¯
+		// ±×¸¸ÇØ¿ä ¹öÆ° ´©¸£¸é È­¸é ÀüÈ¯
 		stopBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// ï¿½Ó½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+				// ÀÓ½Ã Å¬·¡½º ÀÌµ¿
 				new ExtraPanel().setVisible(true);
 				dispose();
 			}
+
 		});
 
-		
 		int timesec = 0;
 		int quiz_num_ing = 1;
 
-		
-		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½
-		int[] sec = new int[quizList2.size()];
+		// ¹®Á¦ ³­ÀÌµµº° ÃÊ°¡ ´ã±â´Â ¹è¿­ »ý¼º
 		for (int i = 0; i < quizList2.size(); i++) {
 			sec[i] = quizList2.get(i).getQuiz_difficulty();
 		}
 
+		// º¸±â ¹öÆ°º° ¾×¼Ç ¼³Á¤ ¿©ºÎ ÀÔ·Â
+				btn_quiz_answer_1.addActionListener(this);
+				btn_quiz_answer_2.addActionListener(this);
+				btn_quiz_answer_3.addActionListener(this);
+				btn_quiz_answer_4.addActionListener(this);
+
 		
-		//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+		int correct_num_sum = 0;
+		// ´ã±ä ¹®Á¦¸¦ ¹Ýº¹¹® ÅëÇØ¼­ µ¹¸²
 		for (cnt = 0; cnt < quizList2.size(); cnt++) {
-						
-			// ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+			// ³­ÀÌµµº° ½Ã°£À» º¯¼ö¿¡ ´ãÀ½
 			timesec = sec[cnt];
-			
-			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ / ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+			// ÁøÇàÇÑ ¹®Á¦ ¼ö / ÀüÃ¼ ¹®Á¦¼ö
 			quiz_num_lb.setText((quiz_num_ing + cnt) + " / " + quizList2.size());
-			
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½óº§¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ö±ï¿½
+
+			// ¹®Á¦ÃâÁ¦ ¶óº§¿¡ ¹®Á¦ ³Ö¾îÁÖ±â
 			quizLabel.setText(quizList2.get(cnt).getQuiz_title());
-			
-			
-			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ö±ï¿½
+
+			// º¸±â ¹öÆ°¿¡ º¸±â ³Ö¾îÁÖ±â
 			btn_quiz_answer_1.setText(quizList2.get(cnt).getQuiz_answer_1());
 			btn_quiz_answer_2.setText(quizList2.get(cnt).getQuiz_answer_2());
 			btn_quiz_answer_3.setText(quizList2.get(cnt).getQuiz_answer_3());
 			btn_quiz_answer_4.setText(quizList2.get(cnt).getQuiz_answer_4());
 
-
-			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½×¼ï¿½
-
-			// ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½
-			btn_quiz_answer_1.addActionListener(new MyEvent(btn_quiz_answer_1, cnt));
-
-			// ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½
-			btn_quiz_answer_2.addActionListener(new MyEvent(btn_quiz_answer_2, cnt));
-
-			// ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½
-			btn_quiz_answer_3.addActionListener(new MyEvent(btn_quiz_answer_3, cnt));
-
-			// ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½
-			btn_quiz_answer_4.addActionListener(new MyEvent(btn_quiz_answer_4, cnt));
-
 			while (true) {
 
 				try {
-					timeLabel.setText("" + timesec + "ï¿½ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½ï¿½Ï´ï¿½");
+					timeLabel.setText("" + timesec + "ÃÊ ³²¾Ò½À´Ï´Ù");
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
@@ -225,49 +221,100 @@ public class SolvingQuiz extends JFrame {
 					break;
 				}
 			}
+			//´ÙÀ½ ¹®Á¦ ³Ñ¾î°¥ ¶§ ´Ù½Ã ¹öÆ° È°¼ºÈ­
+			btn_quiz_answer_1.setEnabled(true);
+			btn_quiz_answer_2.setEnabled(true);
+			btn_quiz_answer_3.setEnabled(true);
+			btn_quiz_answer_4.setEnabled(true);	
+
+			
+						
 		}
+		
+		//¸ÂÃá ¹®Á¦¼ö È®ÀÎ 
+		correct_num_sum += correct_num;
+		System.out.println("¸ÂÃá ¹®Á¦ ¼ö : " + correct_num_sum);
+		
 	}
 
-	
-	class MyEvent implements ActionListener {
-		private JButton btn_quiz_answer_1;
-		private JButton btn_quiz_answer_2;
-		private JButton btn_quiz_answer_3;
-		private JButton btn_quiz_answer_4;
-		private int cnt = 0;
+	// º¸±â ¹öÆ° º° ¾×¼Ç
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btn_quiz_answer_1 || e.getSource() == btn_quiz_answer_2
+				|| e.getSource() == btn_quiz_answer_3 || e.getSource() == btn_quiz_answer_4) {
+			
+			//º¸±â°¡ ¼±ÅÃµÇ¸é ´õÀÌ»ó ¼±ÅÃÇÒ ¼ö ¾øµµ·Ï ÇÔ
+				btn_quiz_answer_1.setEnabled(false);
+				btn_quiz_answer_2.setEnabled(false);
+				btn_quiz_answer_3.setEnabled(false);
+				btn_quiz_answer_4.setEnabled(false);
+				
+			if (e.getSource() == btn_quiz_answer_1) {
+				if (btn_quiz_answer_1.getText().equals(quizList2.get(cnt).getQuiz_final_answer())) {
+					System.out.println("Á¤´ä");
+					correct_num++;
+				} else {
+					System.out.println("¿À´ä");
+				}
+			} else if (e.getSource() == btn_quiz_answer_2) {
+				if (btn_quiz_answer_2.getText().equals(quizList2.get(cnt).getQuiz_final_answer())) {
+					System.out.println("Á¤´ä");
+					correct_num++;
+				} else {
+					System.out.println("¿À´ä");
+				}
+			} else if (e.getSource() == btn_quiz_answer_3) {
+				if (btn_quiz_answer_3.getText().equals(quizList2.get(cnt).getQuiz_final_answer())) {
+					System.out.println("Á¤´ä");
+					correct_num++;
+				} else {
+					System.out.println("¿À´ä");
+				}
 
-		public MyEvent(JButton button, int cnt) {
-			this.btn_quiz_answer_1 = btn_quiz_answer_1;
-			this.btn_quiz_answer_2 = btn_quiz_answer_2;
-			this.btn_quiz_answer_3 = btn_quiz_answer_3;
-			this.btn_quiz_answer_4 = btn_quiz_answer_4;
-			this.cnt = cnt;
+			} else if (e.getSource() == btn_quiz_answer_4) {
+				if (btn_quiz_answer_4.getText().equals(quizList2.get(cnt).getQuiz_final_answer())) {
+					System.out.println("Á¤´ä");
+					correct_num++;
+				} else {
+					System.out.println("¿À´ä");
+				}
+			}
 		}
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (btn_quiz_answer_1.getText().equals(quizList2.get(cnt).getQuiz_final_answer())) {
-				// ï¿½ï¿½ï¿½ï¿½
-				System.out.println("ï¿½ï¿½ï¿½ï¿½");
-			} 
+	//ÃÑ Ç¬ ¹®Á¦¼ö = ¼¼Æ® »çÀÌÁî ³Ñ±â±â , ÃÑ ¸ÂÃá ¹®Á¦ ¼ö = user  Á¤º¸·Î ³Ñ±â±â
+		
+	//¹®Á¦º° ÃÊ ´õÇÏ±â
+		if (cnt != 0) {
+			// Áö±Ý Çª´Â ¹®Á¦ ÀÌÀüÀÇ ¹®Á¦µé¿¡ ÇÒ´çµÈ ÃÊÀÇ ÇÕ
+			// sec[] ¹è¿­ : ¹®Á¦ ³­ÀÌµµº° ÃÊÀÇ ¹è¿­
+			double pre_sec = 0;
 
-			if (btn_quiz_answer_2.getText().equals(quizList2.get(cnt).getQuiz_final_answer())) {
-				System.out.println("ï¿½ï¿½ï¿½ï¿½");
-			} 
+			for (int i = 0; i < cnt; i++) {
+				pre_sec += sec[i];
+			}
 
-			if (btn_quiz_answer_3.getText().equals(quizList2.get(cnt).getQuiz_final_answer())) {
-				System.out.println("ï¿½ï¿½ï¿½ï¿½");
-			} 
+			long Click = System.currentTimeMillis();
+			// µÎ¹øÂ° ¹®Á¦ºÎÅÍÀÇ ÃÊ°ª º¯¼ö ¼±¾ð ¹× ÃÊ±âÈ­
+			double clickTime = Double.parseDouble(String.format("%.2f", ((Click - start) / 1000.0) - pre_sec));
+			sum += clickTime;
+			System.out.println((cnt + 1) + "¹øÂ° ¹®Á¦ ¸¶¿ì½º Å¬¸¯ÇÑ ½Ã°£ : " + clickTime);
+			System.out.println("Áö±Ý±îÁö Ç¬ ¹®Á¦µéÀÇ ÃÊ ÇÕ  : " + sum);
 
-			if (btn_quiz_answer_4.getText().equals(quizList2.get(cnt).getQuiz_final_answer())) {
-				System.out.println("ï¿½ï¿½ï¿½ï¿½");
-			} 	
-			//Ç¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ++
+		} else {
+			long Click = System.currentTimeMillis();
+			// Ã¹¹øÂ° ¹®Á¦ÀÇ ÃÊ°ª º¯¼ö ¼±¾ð ¹× ÃÊ±âÈ­
+			double clickTime = Double.parseDouble(String.format("%.2f", ((Click - start) / 1000.0)));
+			System.out.println((cnt + 1) + "¹øÂ° ¹®Á¦ ¸¶¿ì½º Å¬¸¯ÇÑ ½Ã°£ : " + clickTime);
+			sum += clickTime;
+			System.out.println("Áö±Ý±îÁö Ç¬ ¹®Á¦µéÀÇ ÃÊ ÇÕ : " + sum);
 
 		}
+		
 	}
 
 	public static void main(String[] args) {
 		new SolvingQuiz();
 	}
+
 }
+
