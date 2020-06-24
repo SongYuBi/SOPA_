@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.kh.sopa.view.Main_Frame;
+import com.kh.sopa.model.vo.User_VO;
 import com.kh.sopa.view.Stand_Room;
 
 
@@ -24,8 +24,8 @@ public class Client_Contorller {
 	}
 	
 	// Client_id =  user_id
-	public void connect(String client_id) {
-		String ip = "192.168.0.2";
+	public void connect(User_VO vo) {
+		String ip = "192.168.130.32";
 		int port = 8080;
 		try {
 			socket = new Socket(ip, port);
@@ -34,14 +34,23 @@ public class Client_Contorller {
 			out = new DataOutputStream(socket.getOutputStream());
 			in = new DataInputStream(socket.getInputStream());
 
-			out.writeUTF(client_id);
+			out.writeUTF(vo.getUser_id());
+			out.writeUTF(vo.getUser_pw());
+			out.writeUTF(vo.getUser_phone_number());
+			out.writeInt(vo.getUser_cookie());
+			out.writeInt(vo.getUser_1st());
+			out.writeInt(vo.getUser_2nd());
+			out.writeInt(vo.getUser_3rd());
+			out.writeInt(vo.getUser_all_quiz());
+			out.writeInt(vo.getUser_correct_quiz());
+			
 			System.out.println("Client : ID 전송 완료");
-			gui.label_userid(client_id);
-			String line;
+			gui.label_userid(vo.getUser_id());
 			
 			while (in != null) {
-				System.out.println("클라이언트에서 받아 " + msg);
 				msg = in.readUTF();
+				System.out.println("클라이언트에서 받아 : msg" + msg);
+				
 				gui.appendMsg(msg);
 			}
 
@@ -53,17 +62,17 @@ public class Client_Contorller {
 		}
 	}
 
-	public void sendMessage(String msg) {
+	public void sendMessage(String user_id) {
 		try {
-			out.writeUTF(msg);
-			System.out.println("클라이언트에서 서버로 "+msg);
+			out.writeUTF(user_id);
+//			out.flush();
 		} catch (IOException e) {
 			System.out.println("메시지 전송 오류");
 			e.printStackTrace();
 		}
 	}
 	
-	//닉네 setter
+	//닉네임 setter
 		public void setNicknames(String client_id) {
 			this.client_id = client_id;
 		}
