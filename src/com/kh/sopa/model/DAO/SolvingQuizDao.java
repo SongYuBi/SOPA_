@@ -11,29 +11,29 @@ import java.util.ArrayList;
 
 import com.kh.sopa.model.vo.Quiz_VO;
 
-//���� Ǯ�� �� ����� ���� Ŭ����
+//占쏙옙占쏙옙 풀占쏙옙 占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙 클占쏙옙占쏙옙
 public class SolvingQuizDao {
 	
 	
-	//����, ���� ���� �о���� Ŭ����
+	//占쏙옙占쏙옙, 占쏙옙占쏙옙 占쏙옙占쏙옙 占싻억옙占쏙옙占� 클占쏙옙占쏙옙
 	public ArrayList<Quiz_VO> readQuizList() {
 
 		InputStream in = null;
 		BufferedInputStream bin = null;
 		ObjectInputStream ois = null;
 		
-		//�о�� ������ �ٽ� ���� �迭 ����
+		//占싻억옙占� 占쏙옙占쏙옙占쏙옙 占쌕쏙옙 占쏙옙占쏙옙 占썼열 占쏙옙占쏙옙
 		ArrayList<Quiz_VO> quizList2 = null;
 		
 		try {
 
-			in = new FileInputStream("quiz.txt");
+			in = new FileInputStream("solvingquiz.txt");
 			bin = new BufferedInputStream(in);
 			ois = new ObjectInputStream(bin);
 
 			quizList2 = (ArrayList<Quiz_VO>) ois.readObject();
 
-			//������ ������ �迭�� �� ����ƴ��� Ȯ�ο� for��
+			//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占썼열占쏙옙 占쏙옙 占쏙옙占쏙옙틈占쏙옙占� 확占싸울옙 for占쏙옙
 			for (Quiz_VO obj : quizList2) {
 				System.out.println(obj);
 			}
@@ -52,16 +52,16 @@ public class SolvingQuizDao {
 		return quizList2;
 	}
 	
-	//���� Ǯ�� Ȯ�ο� ���� ���� Ŭ����
+	//占쏙옙占쏙옙 풀占쏙옙 확占싸울옙 占쏙옙占쏙옙 占쏙옙占쏙옙 클占쏙옙占쏙옙
 	public void fileSave() {
 
-		//������ ������ �Է���  ArrayList<Quiz> ����
+		//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉뤄옙占쏙옙  ArrayList<Quiz> 占쏙옙占쏙옙
 		ArrayList<Quiz_VO> quizList = new ArrayList<Quiz_VO>();
 
-		quizList.add(new Quiz_VO("H2O��?", "�ֽ�", "��", "Ŀ��", "�ݶ�", "��", 10));
-		quizList.add(new Quiz_VO("��ü���� ���α׷��� �ƴ� ����?", "�ڹ�", "���̽�", "c#", "c���", "c���", 20));
-		quizList.add(new Quiz_VO("���� �� ������?", "���", "���", "����Ʈ��", "����", "���", 20));
-
+		quizList.add(new Quiz_VO("H2O란?", "주스", "물", "커피", "콜라", "물", 10));
+		quizList.add(new Quiz_VO("객체지향 프로그램이 아닌 것은?", "자바", "파이썬", "c#", "c언어", "c언어", 20));
+		quizList.add(new Quiz_VO("다음 중 과일은?", "사과", "당근", "스마트폰", "감자", "사과", 20));
+		
 		System.out.println(quizList);
 		
 		
@@ -69,8 +69,8 @@ public class SolvingQuizDao {
 		ObjectOutputStream oos = null;
 
 		try {
-			fos = new FileOutputStream("quiz.txt");
-			oos = new ObjectOutputStream(new FileOutputStream("quiz.txt"));
+			fos = new FileOutputStream("solvingquiz.txt");
+			oos = new ObjectOutputStream(new FileOutputStream("solvingquiz.txt"));
 
 			oos.writeObject(quizList);
 			oos.flush();
