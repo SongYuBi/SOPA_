@@ -1,6 +1,5 @@
 package com.kh.sopa.controller;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,7 +32,7 @@ public class LoginController {
 	
 		
 
-	//È¸¿ø °¡ÀÔ °´Ã¼ »ı¼º
+	//íšŒì› ê°€ì… ê°ì²´ ìƒì„±
 	public void user_make(User_VO uv) {
 		
 		 ud = new User_DAO();
@@ -42,7 +41,7 @@ public class LoginController {
 		}
 	
 	
-	//È¸¿ø ¾ÆÀÌµğ Ã£±â
+	//íšŒì› ì•„ì´ë”” ì°¾ê¸°
 	public void fine_user() {
 		User_VO uv = null;
 		ud = new User_DAO();
@@ -64,6 +63,6 @@ public class LoginController {
 	
 	
 	
-	//È¸¿ø ºñ¹Ğ¹øÈ£ Ã£±â
+	//íšŒì› ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
 
 }

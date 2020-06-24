@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.kh.sopa.controller.LoginController;
+import com.kh.sopa.model.DAO.User_DAO;
+import com.kh.sopa.model.vo.User_VO;
 
 
 
@@ -26,14 +28,17 @@ public class Find_Id extends JFrame{
    private Login_Panel lp;
    JFrame mainFrame;
    JPanel thisPage;
+   private User_VO uv;
+   private LoginController lc;
+   private User_DAO ud;
   
    
-   // ¾ÆÀÌµğ Ã£±â
+   // ì•„ì´ë”” ì°¾ê¸°
    public Find_Id() {
 	  
 	   
       JPanel contentPane;
-      setTitle("¾ÆÀÌµğ Ã£±â");
+      setTitle("ì•„ì´ë”” ì°¾ê¸°");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 1024, 768);
       contentPane = new JPanel();
@@ -41,39 +46,39 @@ public class Find_Id extends JFrame{
       contentPane.setLayout(new BorderLayout(0, 0));
       setContentPane(contentPane);
       
-      //¾ÆÀÌµğ Ã£±â ÆĞ³Î
+      //ì•„ì´ë”” ì°¾ê¸° íŒ¨ë„
       find_id = new JPanel();
       find_id.setBounds(0, 0, 1024, 768);
       find_id.setBackground(new Color(252, 228, 167)); 
       find_id.setLayout(null);
       super.add(find_id);
 
-      //sopa ¶óº§
+      //sopa ë¼ë²¨
       sopa = new JLabel("S.O.P.A");
       sopa.setBounds(390, 250, 124, 78);
-      sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+      sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
       find_id.add(sopa);
       
-      //¾ÆÀÌµğ¸¦ Ã£°í ½Í¾î¿ä ¶óº§
-      text = new JLabel("¾ÆÀÌµğ¸¦ Ã£°í ½Í¾î¿ä");
+      //ì•„ì´ë””ë¥¼ ì°¾ê³  ì‹¶ì–´ìš” ë¼ë²¨
+      text = new JLabel("ì•„ì´ë””ë¥¼ ì°¾ê³  ì‹¶ì–´ìš”");
       text.setBounds(390, 400, 124, 78);
-      text.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+      text.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
       find_id.add(text);
       
-      //ÀüÈ­¹øÈ£ ÀÔ·ÂÃ¢
+      //ì „í™”ë²ˆí˜¸ ì…ë ¥ì°½
       phone = new JTextField(20);
       phone.setBounds(390, 480, 200, 40);
-      phone.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+      phone.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
       find_id.add(phone);
       
-      //µÚ·Î°¡¿ä ¹öÆ°
-      back = new JButton("µÚ·Î°¡¿ä");
+      //ë’¤ë¡œê°€ìš” ë²„íŠ¼
+      back = new JButton("ë’¤ë¡œê°€ìš”");
       back.setBounds(390, 550, 110, 20);
-      back.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+      back.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
       find_id.add(back);
       back.addMouseListener(new MouseAdapter() {
          
-         // 1.Å¬¸¯ -> ·Î±×ÀÎÈ­¸é
+         // 1.í´ë¦­ -> ë¡œê·¸ì¸í™”ë©´
          @Override 
          public void mouseClicked(MouseEvent arg0) {
             
@@ -84,22 +89,21 @@ public class Find_Id extends JFrame{
       });
       
       
-      //È®ÀÎ ¹öÆ°
-      check = new JButton("È®ÀÎ");
+      //í™•ì¸ ë²„íŠ¼
+      check = new JButton("í™•ì¸");
       check.setBounds(600, 550, 110, 20);
-      check.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+      check.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
       find_id.add(check);
       check.addMouseListener(new MouseAdapter() {
          
          
-         //1. ÀüÈ­¹øÈ£ µ¿ÀÏ ¿©ºÎ Ã¼Å© 
-         //1-1. ¾øÀ½ : Àü¹ø ¾ø´Ù ¶ç¿ò
-         //1-2. ÀÖÀ½ : ¾ÆÀÌµğ ¶ì¿ò
-         //2. ·Î±×ÀÎÀ¸·Î µ¹¾Æ°¡±â
+         //1. ì „í™”ë²ˆí˜¸ ë™ì¼ ì—¬ë¶€ ì²´í¬ 
+         //1-1. ì—†ìŒ : ì „ë²ˆ ì—†ë‹¤ ë„ì›€
+         //1-2. ìˆìŒ : ì•„ì´ë”” ë ì›€
+         //2. ë¡œê·¸ì¸ìœ¼ë¡œ ëŒì•„ê°€ê¸°
          @Override 
          public void mouseClicked(MouseEvent arg0) {
         	 
-        	LoginController lc;
         	System.out.println(phone.getText());
         	lc = new LoginController();
         	lc.fine_user();
@@ -117,7 +121,7 @@ public class Find_Id extends JFrame{
    }
    
    public static String getText() {
-	   System.out.println(phone.getText() + "°ªÅ×½ºÆ®");
+	   System.out.println(phone.getText() + "ê°’í…ŒìŠ¤íŠ¸");
 	   return phone.getText();
    }
    

@@ -1,5 +1,6 @@
 package com.kh.sopa.model.DAO;
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,7 +23,7 @@ import com.kh.sopa.view.Sign_Up;
 
 
 
-//À¯Àú°ü·Ã µ¥ÀÌÅÍ ¾×¼¼½º ¿ÀºêÁ§Æ® 
+//ìœ ì €ê´€ë ¨ ë°ì´í„° ì•¡ì„¸ìŠ¤ ì˜¤ë¸Œì íŠ¸ 
 public class User_DAO {
 
 	private Sign_Up su;
@@ -32,7 +33,7 @@ public class User_DAO {
 	
 	
 
-		//È¸¿ø °¡ÀÔ¿ë µ¥ÀÌÅÍ ÀúÀå
+		//íšŒì› ê°€ì…ìš© ë°ì´í„° ì €ì¥
 		public void userOutput(User_VO uv) {
 			FileOutputStream fos = null;
 			ObjectOutputStream oos = null;
@@ -47,7 +48,7 @@ public class User_DAO {
 			ArrayList<User_VO> write = new ArrayList ();	
 			write.add(new User_VO(nid, npw, npn, 0, 0, 0, 0, 0, 0));
 			
-			System.out.println(write + "°ª ÀçÈ®ÀÎ");
+			System.out.println(write + "ê°’ ì¬í™•ì¸");
 			
 			try {
 				
@@ -57,8 +58,8 @@ public class User_DAO {
 				oos.writeObject(write);
 							
 				for(int i = 0; i < write.size(); i++) {
-					System.out.println(write.get(i).getUser_id() + "  " + write.get(i).getUser_pw() + "  " + write.get(i).getUser_phone_number() + "  " + write.size() + "È®ÀÎ");
-					System.out.println("´ÙÀ½ÁÙ");
+					System.out.println(write.get(i).getUser_id() + "  " + write.get(i).getUser_pw() + "  " + write.get(i).getUser_phone_number() + "  " + write.size() + "í™•ì¸");
+					System.out.println("ë‹¤ìŒì¤„");
 				}
 				oos.flush();
 				fos.flush();
@@ -81,7 +82,7 @@ public class User_DAO {
 		}
 	}
 		
-		//ÆÄÀÏ ÀĞ±â
+		//íŒŒì¼ ì½ê¸°
 		public void userInput(User_VO uv) {
 			FileInputStream fis = null;
 			ObjectInputStream ois = null;
@@ -93,8 +94,8 @@ public class User_DAO {
 				ArrayList<User_VO> read  = (ArrayList<User_VO>)ois.readObject();
 
 					for(int i = 0; i < read.size(); i++) {
-						System.out.println(read.get(i).getUser_id() + read.get(i).getUser_pw() + read.get(i).getUser_phone_number() + "È®ÀÎ");
-						System.out.println("´ÙÀ½ÁÙ");
+						System.out.println(read.get(i).getUser_id() + read.get(i).getUser_pw() + read.get(i).getUser_phone_number() + "í™•ì¸");
+						System.out.println("ë‹¤ìŒì¤„");
 					}
 			
 			} catch (FileNotFoundException e) {
@@ -115,13 +116,13 @@ public class User_DAO {
 			}
 		}
 		
-			//¾ÆÀÌµğ Ã£±â
+			//ì•„ì´ë”” ì°¾ê¸°
 			public void findId(User_VO uv) {
 				FileInputStream fis = null;
 				ObjectInputStream ois = null;
 				ArrayList<User_VO> read = null;
 				
-				String fineNum; //¹Ş¾Æ¿Â ¹øÈ£ °ª
+				String fineNum; //ë°›ì•„ì˜¨ ë²ˆí˜¸ ê°’
 				
 				
 				try {
@@ -131,8 +132,8 @@ public class User_DAO {
 					read  = (ArrayList<User_VO>)ois.readObject();
 					for(int i = 0; i < read.size(); i ++) {
 					
-						System.out.println(read.get(i).getUser_phone_number() + "/n" + "È®ÀÎ");
-						System.out.println("´ÙÀ½ÁÙ");
+						System.out.println(read.get(i).getUser_phone_number() + "/n" + "í™•ì¸");
+						System.out.println("ë‹¤ìŒì¤„");
 					
 						
 						String get;
@@ -144,16 +145,16 @@ public class User_DAO {
 						
 						
 						if(get.equals(find)) {
-							JOptionPane.showMessageDialog(null, "¾ÆÀÌµğ´Â " + fid, "ID¸¦ Ã£¾Ò½À´Ï´Ù.", JOptionPane.INFORMATION_MESSAGE);
-							System.out.println("ÀÖ¾î¿©" + fid);
+							JOptionPane.showMessageDialog(null, "ì•„ì´ë””ëŠ” " + fid, "IDë¥¼ ì°¾ì•˜ìŠµë‹ˆë‹¤.", JOptionPane.INFORMATION_MESSAGE);
+							System.out.println("ìˆì–´ì—¬" + fid);
 						}
 						if(!get.equals(find)) {
-							System.out.println("¾ø¾î¿ä");
-							JOptionPane.showMessageDialog(null, "°°Àº ¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.", "ID°¡ ¾ø½À´Ï´Ù.", JOptionPane.ERROR_MESSAGE);
+							System.out.println("ì—†ì–´ìš”");
+							JOptionPane.showMessageDialog(null, "ê°™ì€ ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.", "IDê°€ ì—†ìŠµë‹ˆë‹¤.", JOptionPane.ERROR_MESSAGE);
 						}
 						}
 					
-						//Áßº¹ °ª Ã£±â
+						//ì¤‘ë³µ ê°’ ì°¾ê¸°
 					
 						
 						
@@ -175,7 +176,7 @@ public class User_DAO {
 				}
 }
 			
-			//ºñ¹Ğ¹øÈ£ Ã£±â
+			//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
 			
 			public void findPw() {
 				FileInputStream fis;
@@ -210,15 +211,15 @@ public class User_DAO {
 						
 						if(getId.equals(dataId)){
 							if(getPhone.equals(dataPhone)) {
-								JOptionPane.showMessageDialog(null, "Ã£À¸½Ã´Â ºñ¹Ğ¹øÈ£´Â "+dataPw, "ºñ¹Ğ¹øÈ£ Ã£À½", JOptionPane.INFORMATION_MESSAGE);
-								System.out.println("´Ù °°³×" + dataPw);
+								JOptionPane.showMessageDialog(null, "ì°¾ìœ¼ì‹œëŠ” ë¹„ë°€ë²ˆí˜¸ëŠ” "+dataPw, "ë¹„ë°€ë²ˆí˜¸ ì°¾ìŒ", JOptionPane.INFORMATION_MESSAGE);
+								System.out.println("ë‹¤ ê°™ë„¤" + dataPw);
 							} else {
-								JOptionPane.showMessageDialog(null, "ÀüÈ­¹øÈ£°¡ ´Ù¸¨´Ï´Ù.", "ºñ¹Ğ¹øÈ£ ¿À·ù", JOptionPane.ERROR_MESSAGE);
-								System.out.println("Àü¹øÀÌ ´Ù¸§");
+								JOptionPane.showMessageDialog(null, "ì „í™”ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.", "ë¹„ë°€ë²ˆí˜¸ ì˜¤ë¥˜", JOptionPane.ERROR_MESSAGE);
+								System.out.println("ì „ë²ˆì´ ë‹¤ë¦„");
 							}
 						} else  {
-							JOptionPane.showMessageDialog(null, "¾ÆÀÌµğ°¡ ´Ù¸¨´Ï´Ù.", "ºñ¹Ğ¹øÈ£ ¿À·ù", JOptionPane.ERROR_MESSAGE);
-							System.out.println("¾ÆÀÌµğ°¡ ´Ù¸§");
+							JOptionPane.showMessageDialog(null, "ì•„ì´ë””ê°€ ë‹¤ë¦…ë‹ˆë‹¤.", "ë¹„ë°€ë²ˆí˜¸ ì˜¤ë¥˜", JOptionPane.ERROR_MESSAGE);
+							System.out.println("ì•„ì´ë””ê°€ ë‹¤ë¦„");
 						}
 						
 						}

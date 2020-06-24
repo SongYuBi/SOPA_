@@ -28,9 +28,10 @@ import com.kh.sopa.model.vo.User_VO;
 
 
 
+
 public class Sign_Up extends JFrame{
 	
-	//È¸¿ø °¡ÀÔ
+	//íšŒì› ê°€ì…
 	
 	private Login_Panel lp;
 	private JPanel contentPane, sign;
@@ -48,7 +49,7 @@ public class Sign_Up extends JFrame{
 	public Sign_Up() {
 		super();
 		JPanel contentPane;
-		setTitle("È¸¿ø°¡ÀÔ");
+		setTitle("íšŒì›ê°€ì…");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		contentPane = new JPanel();
@@ -57,7 +58,7 @@ public class Sign_Up extends JFrame{
 		setContentPane(contentPane);
 	
 		
-		// °¡ÀÔÇÏ±â ÆĞ³Î
+		// ê°€ì…í•˜ê¸° íŒ¨ë„
 		sign = new JPanel();
 		sign.setBounds(0, 0, 1024, 768);
 		sign.setBackground(Color.white);
@@ -65,62 +66,62 @@ public class Sign_Up extends JFrame{
 		super.add(sign);
 		
 				
-		//sopa ¶óº§
+		//sopa ë¼ë²¨
 		sopa = new JLabel("S.O.P.A");
 		sopa.setBounds(430, 100, 300, 200);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 50));
+		sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 50));
 		sign.add(sopa);
 
 		
 		
-		//sopa °èÁ¤À» ¸¸µé¾î¿ä ¶óº§
-		text = new JLabel("°èÁ¤À» ¸¸µé¾î¿ä");
+		//sopa ê³„ì •ì„ ë§Œë“¤ì–´ìš” ë¼ë²¨
+		text = new JLabel("ê³„ì •ì„ ë§Œë“¤ì–´ìš”");
 		text.setBounds(430, 200, 200, 100);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 20));
+		sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 20));
 		sign.add(text);
 
 		
 		
-		//¾ÆÀÌµğ ÀÔ·ÂÃ¢
+		//ì•„ì´ë”” ì…ë ¥ì°½
 		sign_id = new JTextField(10);
 		sign_id.setBounds(390, 340, 200, 40);
-		sign_id.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		sign_id.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		sign.add(sign_id);
 		
 		
 		
 		
-		//ºñ¹Ğ¹øÈ£ ÀÔ·ÂÃ¢
+		//ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ì°½
 		sign_pw = new JTextField(10);
 		sign_pw.setBounds(390, 380, 200, 40);
-		sign_pw.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		sign_pw.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		sign.add(sign_pw);
 		
 		
 		
-		//ºñ¹Ğ¹øÈ£ È®ÀÎ ÀÔ·ÂÃ¢
+		//ë¹„ë°€ë²ˆí˜¸ í™•ì¸ ì…ë ¥ì°½
 		check_pw = new JTextField(10);
 		check_pw.setBounds(390, 420, 200, 40);
-		check_pw.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		check_pw.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		sign.add(check_pw);
 		
 		
-		//ÀüÈ­¹øÈ£ ÀÔ·ÂÃ¢
+		//ì „í™”ë²ˆí˜¸ ì…ë ¥ì°½
 		sign_phone = new JTextField(10);
 		sign_phone.setBounds(390, 460, 200, 40);
-		sign_phone.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		sign_phone.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		sign.add(sign_phone);
 		
 		
 		
-		//µÚ·Î°¡±â ¹öÆ°
-		back = new JButton("µÚ·Î°¡±â");
+		//ë’¤ë¡œê°€ê¸° ë²„íŠ¼
+		back = new JButton("ë’¤ë¡œê°€ê¸°");
 		back.setBounds(390, 500, 110, 20);
-		back.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 12));
+		back.setFont(new Font("ë°”íƒ•", Font.ITALIC, 12));
 		sign.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			
-			// 1.Å¬¸¯ -> ·Î±×ÀÎ È­¸é
+			// 1.í´ë¦­ -> ë¡œê·¸ì¸ í™”ë©´
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
 
@@ -132,10 +133,10 @@ public class Sign_Up extends JFrame{
 		
 
 		
-		//È¸¿ø°¡ÀÔ ¹öÆ°
-		login_button = new JButton("È¸¿ø°¡ÀÔ");
+		//íšŒì›ê°€ì… ë²„íŠ¼
+		login_button = new JButton("íšŒì›ê°€ì…");
 		login_button.setBounds(500, 500, 110, 20);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 20));
+		sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 20));
 		sign.add(login_button);
 		login_button.addActionListener(new ActionListener() {
 			
@@ -144,14 +145,14 @@ public class Sign_Up extends JFrame{
 			
 				
 				if(sign_pw.getText().equals(check_pw.getText())) {
-				JOptionPane.showMessageDialog(null, "°¡ÀÔÀ» ÃàÇÏÇÕ´Ï´Ù", "Á¤»óÀÔ·Â", JOptionPane.INFORMATION_MESSAGE);
-				System.out.println("ÀÔ·Â°ªÀÌ ´Ù¸¨´Ï´Ù");
+				JOptionPane.showMessageDialog(null, "ê°€ì…ì„ ì¶•í•˜í•©ë‹ˆë‹¤", "ì •ìƒì…ë ¥", JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("ì…ë ¥ê°’ì´ ë‹¤ë¦…ë‹ˆë‹¤");
 			} else {
-				JOptionPane.showMessageDialog(null, "ÀÔ·Â°ªÀÌ ´Ù¸¨´Ï´Ù", "ÀÔ·Â¿À·ù", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ì…ë ¥ê°’ì´ ë‹¤ë¦…ë‹ˆë‹¤", "ì…ë ¥ì˜¤ë¥˜", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 				
-				//°ªÀ» ¹Ş°í ÀÌµ¿
+				//ê°’ì„ ë°›ê³  ì´ë™
 				uv.setUser_id(sign_id.getText());
 				System.out.println(uv.getUser_id());
 				uv.setUser_pw(sign_pw.getText());
@@ -159,7 +160,7 @@ public class Sign_Up extends JFrame{
 				uv.setUser_phone_number(sign_phone.getText());
 				System.out.println(uv.getUser_phone_number());
 					
-				System.out.println(uv.getUser_phone_number() + "  " + uv.getUser_pw()  + "  " + uv.getUser_id()  + "¹öÆ°");
+				System.out.println(uv.getUser_phone_number() + "  " + uv.getUser_pw()  + "  " + uv.getUser_id()  + "ë²„íŠ¼");
 		
 				lc = new LoginController();
 				lc.user_make(uv);
