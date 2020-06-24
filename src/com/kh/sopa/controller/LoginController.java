@@ -1,9 +1,11 @@
 package com.kh.sopa.controller;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,10 @@ import com.kh.sopa.view.Find_Pwd;
 import com.kh.sopa.view.Login_Panel;
 import com.kh.sopa.view.Sign_Up;
 
+
+
+
+
 public class LoginController {
 	private User_VO uv;
 	private User_DAO ud;
@@ -22,36 +28,41 @@ public class LoginController {
 	private Sign_Up su;
 	private Find_Id fi;
 	private Find_Pwd fp;
+	
+	
+		//
 
+	//íšŒì› ê°€ì… ê°ì²´ ìƒì„±
+	public void user_make(User_VO uv) {
 		
+		 ud = new User_DAO();
+		 ud.userOutput(uv);
+		
+		}
+	
+	
+	//íšŒì› ì•„ì´ë”” ì°¾ê¸°
+	public void fine_user() {
+		User_VO uv = null;
+		ud = new User_DAO();
+		ud.findId(uv);
+		
+	
+	}
 
-	//È¸¿ø °¡ÀÔ °´Ã¼ »ı¼º
-	public void user_make() {
-		
-		
-		//±â·ÏÁ¶È¸
-				ArrayList<User_VO> list = ud.userInput();
-				//³»¿ªÈ®ÀÎ
-				if(list == null) {
-					list = new ArrayList<User_VO>();
-					
-				}
-				
-				//Ãß°¡
-				list.add(uv);
-				
-				ud.userOutput(list);
-				
-		
-		
+
+	public void findPw() {
+
+		User_DAO ud;
+		ud = new User_DAO();
+		ud.findPw();
 	}
 	
 	
 	
 	
-	//È¸¿ø ¾ÆÀÌµğ Ã£±â
 	
 	
-	//È¸¿ø ºñ¹Ğ¹øÈ£ Ã£±â
+	//íšŒì› ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
 
 }

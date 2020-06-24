@@ -1,5 +1,6 @@
 package com.kh.sopa.view;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -13,17 +14,22 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.kh.sopa.controller.LoginController;
+
+
+
 public class Find_Pwd extends JFrame{
 	private JPanel contentPane, find_pwd;
 	private JLabel sopa, text;
-	private JTextField user_id, user_phone;
+	private static JTextField user_id;
+	private static JTextField user_phone;
 	private JButton back, check;
 	private Login_Panel lp;
 	
 	public Find_Pwd() {
 		super();
 		JPanel contentPane;
-		setTitle("ºñ¹Ğ¹øÈ£ Ã£±â");
+		setTitle("ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		contentPane = new JPanel();
@@ -31,49 +37,49 @@ public class Find_Pwd extends JFrame{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		//ºñ¹Ğ¹øÈ£ Ã£±â ÆĞ³Î
+		//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° íŒ¨ë„
 		find_pwd = new JPanel();
 		find_pwd.setBounds(0, 0, 1024, 768);
 		find_pwd.setBackground(new Color(252, 228, 167));  
 		find_pwd.setLayout(null);
 		super.add(find_pwd);
 		
-		//sopa ¶óº§
+		//sopa ë¼ë²¨
 		sopa = new JLabel("S.O.P.A");
 		sopa.setBounds(390, 250, 124, 78);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		find_pwd.add(sopa);
 		
 		
-		//ºñ¹Ğ¹øÈ£¸¦ ¹Ù²Ù°í ½Í¾î¿ä ¶óº§
-		text = new JLabel("ºñ¹Ğ¹øÈ£¸¦ ¹Ù²Ù°í ½Í¾î¿ä");
+		//ë¹„ë°€ë²ˆí˜¸ë¥¼ ë°”ê¾¸ê³  ì‹¶ì–´ìš” ë¼ë²¨
+		text = new JLabel("ë¹„ë°€ë²ˆí˜¸ë¥¼ ë°”ê¾¸ê³  ì‹¶ì–´ìš”");
 		text.setBounds(390, 300, 124, 78);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		find_pwd.add(text);
 		
 		
-		//¾ÆÀÌµğ ÀÔ·ÂÃ¢
+		//ì•„ì´ë”” ì…ë ¥ì°½
 		user_id = new JTextField(10);
 		user_id.setBounds(390, 420, 124, 78);
-		user_id.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		user_id.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		find_pwd.add(user_id);
 		
 		
-		//ÀüÈ­¹øÈ£ ÀÔ·ÂÃ¢
+		//ì „í™”ë²ˆí˜¸ ì…ë ¥ì°½
 		user_phone = new JTextField(10);
 		user_phone.setBounds(390, 460, 124, 78);
 		find_pwd.add(user_phone);
-		user_phone.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		user_phone.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		
 		
-		//µÚ·Î°¡¿ä ¹öÆ°
-		back = new JButton("µÚ·Î°¡±â");
+		//ë’¤ë¡œê°€ìš” ë²„íŠ¼
+		back = new JButton("ë’¤ë¡œê°€ê¸°");
 		back.setBounds(390, 500, 124, 78);
-		sopa.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		sopa.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		find_pwd.add(back);
 		back.addMouseListener(new MouseAdapter() {
 			
-			// 1.Å¬¸¯ -> ·Î±×ÀÎ È­¸é
+			// 1.í´ë¦­ -> ë¡œê·¸ì¸ í™”ë©´
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
 
@@ -82,29 +88,31 @@ public class Find_Pwd extends JFrame{
 				super.mouseClicked(arg0);
 			}
 		});
+		//
 		
-		
-		//È®ÀÎ ¹öÆ°
-		check = new JButton("È®ÀÎ");
+		//í™•ì¸ ë²„íŠ¼
+		check = new JButton("í™•ì¸");
 		check.setBounds(600, 500, 124, 78);
-		check.setFont(new Font("¹ÙÅÁ", Font.ITALIC, 10));
+		check.setFont(new Font("ë°”íƒ•", Font.ITALIC, 10));
 		find_pwd.add(check);
 		check.addMouseListener(new MouseAdapter() {
 			
 			
-			//1. ¾ÆÀÌµğ µ¿ÀÏ ¿©ºÎ Ã¼Å© 
-			//1-1. ¾øÀ½ : ¾ÆÀÌµğ ¾ø´Ù ¶ç¿ò
-			//1-2. ÀÖÀ½ : ÀüÈ­¹øÈ£ Ã¼Å©
-			//2. ÀüÈ­¹øÈ£ µ¿ÀÏ ¿©ºÎ Ã¼Å©
-			//2-1. ¾øÀ½ : ÀüÈ­¹øÈ£ ´Ù¸£´Ù ¶ç¿ò
-			//2-2. ÀÖÀ½ : ºñ¹ø ¼öÁ¤ È¤Àº »õ·Î¿î ºñ¹ø ¶ç¿ì±â
-			//3. ·Î±×ÀÎÀ¸·Î µ¹¾Æ°¡±â
+			//1. ì•„ì´ë”” ë™ì¼ ì—¬ë¶€ ì²´í¬ 
+			//1-1. ì—†ìŒ : ì•„ì´ë”” ì—†ë‹¤ ë„ì›€
+			//1-2. ìˆìŒ : ì „í™”ë²ˆí˜¸ ì²´í¬
+			//2. ì „í™”ë²ˆí˜¸ ë™ì¼ ì—¬ë¶€ ì²´í¬
+			//2-1. ì—†ìŒ : ì „í™”ë²ˆí˜¸ ë‹¤ë¥´ë‹¤ ë„ì›€
+			//2-2. ìˆìŒ : ë¹„ë²ˆ ìˆ˜ì • í˜¹ì€ ìƒˆë¡œìš´ ë¹„ë²ˆ ë„ìš°ê¸°
+			//3. ë¡œê·¸ì¸ìœ¼ë¡œ ëŒì•„ê°€ê¸°
 			
 			@Override 
 			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(user_id.getText());
+				System.out.println(user_phone.getText());
 
-
-				lp = new Login_Panel();
+				LoginController lc = new LoginController();
+				lc.findPw();
 				super.mouseClicked(arg0);
 			}
 		});
@@ -114,4 +122,15 @@ public class Find_Pwd extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 }
+	
+		public static String getId() {
+			
+			return user_id.getText();
+			
+		}
+		
+		public static String getPhone() {
+			
+			return user_phone.getText();
+		}
 }
