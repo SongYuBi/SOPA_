@@ -1,6 +1,7 @@
 package com.kh.sopa.test;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.kh.sopa.controller.Client_Controller;
 import com.kh.sopa.controller.ObjectIO;
 import com.kh.sopa.model.vo.User_VO;
 import com.kh.sopa.view.Login_Panel;
@@ -23,8 +25,10 @@ public class SubPanel extends JPanel {
 	JPanel mainPanel = null;
 	JPanel thisPage = null;
 	
-	
+	JTextArea chatArea = null;
+	JTextField messageArea = null;
 	// socket, system message
+	Client_Controller client = new Client_Controller();
 	
 	
 	
@@ -115,6 +119,7 @@ public class SubPanel extends JPanel {
 				int resp = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "로그아웃", 
 							JOptionPane.YES_NO_CANCEL_OPTION);
 				if (resp == 0) {
+					client.sendSystemMessage("logout/" + tmp.getUser_id());
 					JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
 					mainFrame.remove(mainPanel);
 					mainFrame.remove(thisPage);
@@ -148,6 +153,7 @@ public class SubPanel extends JPanel {
 				int resp = JOptionPane.showConfirmDialog(null,  "종료 하시겠습니까?", "종료", 
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				if (resp == 0) {
+					client.sendSystemMessage("exit/" + tmp.getUser_id());
 					JOptionPane.showMessageDialog(null, "종료합니다.");
 					mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING));
 				}
@@ -159,13 +165,30 @@ public class SubPanel extends JPanel {
 		this.add(userPanel);
 		
 		// chatting
-		JTextArea chatArea = new JTextArea(50, 50);
+		chatArea = new JTextArea(50, 50);
 		this.add(chatArea);
+		chatArea.setEditable(false);
+		chatArea.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		chatArea.setBounds(270, 0, 380, 250);
 		
-		JTextField messageArea = new JTextField();
+		messageArea = new JTextField();
 		this.add(messageArea);
 		messageArea.setBounds(265, 250, 390, 50);
+		messageArea.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String msg = tmp.getUser_id() + ": " + messageArea.getText() + "\n";
+				System.out.println(msg);
+				// sendMessage -> 서버에 전송
+				client.sendMessage(msg);
+				
+				messageArea.setText("");
+			}
+		});
+		
+		client.setGui(this);
+		client.setNicknames(tmp.getUser_id());
+		client.connect(tmp);
 		
 		// friend list
 		JPanel friendList = new JPanel();
@@ -174,5 +197,13 @@ public class SubPanel extends JPanel {
 		friendList.setBackground(Color.GRAY);
 		this.add(friendList);
 		friendList.setBounds(50, 0, 180, 338);
+	}
+	
+	public void appendMsg(String msg) {
+		chatArea.append(msg);
+	}
+	
+	public void label_userid(String user) {
+		// 서버 나중
 	}
 }

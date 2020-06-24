@@ -109,6 +109,7 @@ public class Login_Panel extends JPanel{
 					}
 				}
 				// 로그인 성공 
+				System.out.println("before login check");
 				if(checkUser) {
 					System.out.println("로그인 성공");
 					mainFrame.remove(thisPage);
@@ -116,6 +117,7 @@ public class Login_Panel extends JPanel{
 					mainFrame.add(srpt);
 //					srpt.setVisible(true);
 					mainFrame.repaint();
+					System.out.println("DWR");
 					mainFrame.setVisible(true);
 				}
 				

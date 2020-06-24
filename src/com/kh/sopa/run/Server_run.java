@@ -3,7 +3,6 @@ package com.kh.sopa.run;
 
 import java.io.IOException;
 
-import com.kh.sopa.view.Main_Frame;
 import com.kh.sopa.view.Sever_view;
 
 public class Server_run {

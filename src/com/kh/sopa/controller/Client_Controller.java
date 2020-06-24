@@ -7,22 +7,34 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.kh.sopa.model.vo.User_VO;
-import com.kh.sopa.view.Stand_Room;
+import com.kh.sopa.test.SubPanel;
 
-
-
-public class Client_Contorller {
+public class Client_Controller {
 	private Socket socket;
 	private DataInputStream in;
 	private DataOutputStream out;
-	private Stand_Room gui;
+	private SubPanel gui;
 	private String msg;
 	private String client_id;
 
-	public void setGui(Stand_Room gui) {
-		this.gui = gui;
-	}
 	
+	private class Clth extends Thread {
+		public void run() {
+			while (in != null) {
+				try {
+					msg = in.readUTF();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("클라이언트에서 받아 : msg " + msg);
+				gui.appendMsg(msg);
+			}
+		}
+	}
+	public void setGui(SubPanel subPanel) {
+		this.gui = subPanel;
+	}
 	// Client_id =  user_id
 	public void connect(User_VO vo) {
 		String ip = "192.168.130.32";
@@ -45,14 +57,11 @@ public class Client_Contorller {
 			out.writeInt(vo.getUser_correct_quiz());
 			
 			System.out.println("Client : ID 전송 완료");
-			gui.label_userid(vo.getUser_id());
+//			gui.label_userid(vo.getUser_id());
 			
-			while (in != null) {
-				msg = in.readUTF();
-				System.out.println("클라이언트에서 받아 : msg" + msg);
-				
-				gui.appendMsg(msg);
-			}
+			
+			// thread start
+			new Clth().start();
 
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -64,7 +73,17 @@ public class Client_Contorller {
 
 	public void sendMessage(String user_id) {
 		try {
-			out.writeUTF(user_id);
+			out.writeUTF("1/" + user_id);
+//			out.flush();
+		} catch (IOException e) {
+			System.out.println("메시지 전송 오류");
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendSystemMessage(String msg) {
+		try {
+			out.writeUTF("0/" + msg);
 //			out.flush();
 		} catch (IOException e) {
 			System.out.println("메시지 전송 오류");
@@ -73,7 +92,7 @@ public class Client_Contorller {
 	}
 	
 	//닉네임 setter
-		public void setNicknames(String client_id) {
-			this.client_id = client_id;
-		}
+	public void setNicknames(String client_id) {
+		this.client_id = client_id;
+	}
 }

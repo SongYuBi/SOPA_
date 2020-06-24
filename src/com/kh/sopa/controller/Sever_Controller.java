@@ -71,7 +71,6 @@ public class Sever_Controller {
 		
 		clientMap.put(user_id, out);
 		sendMessage(message);
-		
 	}
 	
 	
@@ -101,6 +100,7 @@ public class Sever_Controller {
 				
 				System.out.println("Receiver : " + user_id);
 				addClient(user_id, out);
+				System.out.println("접속자수 : " + clientMap.size());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -114,9 +114,20 @@ public class Sever_Controller {
 			try {
 				while (in != null) {
 					msg = in.readUTF();
-					System.out.println("run : "+msg);
-					sendMessage(msg);
+					String[] msg_parse = msg.split("/");
 					
+					System.out.println("run : "+msg_parse[0]);
+					System.out.println("run : "+msg_parse[1]);
+					if ("1".equals(msg_parse[0])) {
+						sendMessage(msg_parse[1]);
+					}
+					else {
+						switch(msg_parse[1]) {
+						case "logout":
+							removeClient(msg_parse[2]);
+							break;
+						}
+					}
 				}
 			} catch (Exception e) {
 				removeClient(user_id);
@@ -128,5 +139,7 @@ public class Sever_Controller {
 		String message= user_id + "님이 나가셨습니다. \n";
 		sendMessage(message);
 		clientMap.remove(user_id);
+		System.out.println("접속자수 : " + clientMap.size());
 	}
+	
 }
