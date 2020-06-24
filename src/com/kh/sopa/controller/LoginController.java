@@ -30,7 +30,7 @@ public class LoginController {
 	private Find_Pwd fp;
 	
 	
-		
+		//
 
 	//회원 가입 객체 생성
 	public void user_make(User_VO uv) {

@@ -88,7 +88,7 @@ public class Find_Pwd extends JFrame{
 				super.mouseClicked(arg0);
 			}
 		});
-		
+		//
 		
 		//확인 버튼
 		check = new JButton("확인");

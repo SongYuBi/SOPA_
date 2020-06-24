@@ -31,7 +31,7 @@ public class Find_Id extends JFrame{
    private User_VO uv;
    private LoginController lc;
    private User_DAO ud;
-  
+  //
    
    // 아이디 찾기
    public Find_Id() {
