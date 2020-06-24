@@ -4,18 +4,18 @@ import java.io.Serializable;
 
 //
 public class Quiz_VO implements java.io.Serializable {
-	private String quiz_set_info;		//문제 세트 정보
-	private String quiz_title;			//문제 제목
-	private String quiz_subject;		//문제 주제
-	private String quiz_answer_1;		//답 1번
-	private String quiz_answer_2;		//답 2번
-	private String quiz_answer_3;		//답 3번
-	private String quiz_answer_4;		//답 4번
-	private String quiz_final_answer;	//문제에서의 정답 
-	private int quiz_difficulty;		//난이도 (10초 20초 30초 단위로 들가니까 일단 정수형으로 넣었습니
-	private int quiz_cookie;			//게임 내에서의 재화
-	private String quiz_image;			//이미지 경로
-	private int quiz_people;			//인원 수
+	private String quiz_set_info;		//臾몄젣 �꽭�듃 �젙蹂�
+	private String quiz_title;			//臾몄젣 �젣紐�
+	private String quiz_subject;		//臾몄젣 二쇱젣
+	private String quiz_answer_1;		//�떟 1踰�
+	private String quiz_answer_2;		//�떟 2踰�
+	private String quiz_answer_3;		//�떟 3踰�
+	private String quiz_answer_4;		//�떟 4踰�
+	private String quiz_final_answer;	//臾몄젣�뿉�꽌�쓽 �젙�떟 
+	private int quiz_difficulty;		//�궃�씠�룄 (10珥� 20珥� 30珥� �떒�쐞濡� �뱾媛��땲源� �씪�떒 �젙�닔�삎�쑝濡� �꽔�뿀�뒿�땲
+	private int quiz_cookie;			//寃뚯엫 �궡�뿉�꽌�쓽 �옱�솕
+	private String quiz_image;			//�씠誘몄� 寃쎈줈
+	private int quiz_people;			//�씤�썝 �닔
 	
 	public Quiz_VO(){
 		
@@ -151,7 +151,7 @@ public class Quiz_VO implements java.io.Serializable {
 	}
 	
 	
-	//���� + ���� + ����� + ���� ���̵�
+	//占쏙옙占쏙옙 + 占쏙옙占쏙옙 + 占쏙옙占쏙옙占� + 占쏙옙占쏙옙 占쏙옙占싱듸옙
 	public String SolvingQuiz(String quiz_title, String quiz_answer_1, String quiz_answer_2, String quiz_answer_3,
 			String quiz_answer_4, String quiz_final_answer, int quiz_difficulty) {
 		return quiz_title + ", " + quiz_answer_1 + ", "
