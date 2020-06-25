@@ -17,7 +17,6 @@ public class Client_Controller {
 	private String msg;
 	private String client_id;
 
-	
 	private class Clth extends Thread {
 		public void run() {
 			while (in != null) {
@@ -32,12 +31,14 @@ public class Client_Controller {
 			}
 		}
 	}
+
 	public void setGui(SubPanel subPanel) {
 		this.gui = subPanel;
 	}
-	// Client_id =  user_id
+
+	// Client_id = user_id
 	public void connect(User_VO vo) {
-		String ip = "192.168.130.32";
+		String ip = "192.168.130.27";
 		int port = 8080;
 		try {
 			socket = new Socket(ip, port);
@@ -55,11 +56,12 @@ public class Client_Controller {
 			out.writeInt(vo.getUser_3rd());
 			out.writeInt(vo.getUser_all_quiz());
 			out.writeInt(vo.getUser_correct_quiz());
-			
+			out.writeInt(vo.getUser_gaming_cookie());
+			out.writeInt(vo.getUser_gaming_correct_quiz());
+			out.writeLong(vo.getUser_gaming_time());
 			System.out.println("Client : ID 전송 완료");
 //			gui.label_userid(vo.getUser_id());
-			
-			
+
 			// thread start
 			new Clth().start();
 
@@ -80,7 +82,7 @@ public class Client_Controller {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void sendSystemMessage(String msg) {
 		try {
 			out.writeUTF("0/" + msg);
@@ -90,8 +92,8 @@ public class Client_Controller {
 			e.printStackTrace();
 		}
 	}
-	
-	//닉네임 setter
+
+	// 닉네임 setter
 	public void setNicknames(String client_id) {
 		this.client_id = client_id;
 	}
